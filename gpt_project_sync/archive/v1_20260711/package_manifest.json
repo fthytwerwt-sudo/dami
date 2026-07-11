@@ -1,0 +1,86 @@
+{
+  "package_version": "v1_20260711",
+  "generated_at": "2026-07-11",
+  "source_repo": "fthytwerwt-sudo/dami",
+  "source_commit": "8aac24714faa18d92f3f5d5ec4eea880b122d44c",
+  "canonical_sources": [
+    "project_system/current/CURRENT_PROJECT_STATE.md",
+    "project_system/current/CURRENT_FORMAL_FACTS.md",
+    "project_system/current/CURRENT_DECISIONS.md",
+    "project_system/current/LATEST_TASK_STATUS.md",
+    "project_system/current/REPOSITORY_SECURITY_STATUS.md",
+    "project_system/00_PROJECT_SYSTEM_INDEX.md",
+    "project_system/01_MECHANISM_REGISTRY.md",
+    "project_system/01_MECHANISM_REGISTRY.json",
+    "project_system/rules/"
+  ],
+  "files": [
+    {
+      "path": "00_UPLOAD_MANIFEST.md",
+      "responsibility": "Explain package version, upload order, file roles, and synchronization truth boundaries.",
+      "content_type": "text/markdown",
+      "static_or_dynamic": "static",
+      "upload_target": "local_package_reference",
+      "sha256": "8f26b1e259f5d9da0b5d187a78f3b345bf919b4b62baf0bf242f1ae70a1a8467"
+    },
+    {
+      "path": "01_GPT_PROJECT_INSTRUCTIONS.md",
+      "responsibility": "Provide long-lived ChatGPT judgment, alignment, handoff, authority, and completion-truth rules.",
+      "content_type": "text/markdown",
+      "static_or_dynamic": "static",
+      "upload_target": "chatgpt_project_instructions",
+      "sha256": "15a12b4dea009f349b18029240d27cf6cd0edfceda9c87f4c48f114e3fc9b4a2"
+    },
+    {
+      "path": "02_PROJECT_COLLABORATION_SYSTEM.md",
+      "responsibility": "Explain the four-layer architecture, roles, mechanism activation decisions, routing, and collaboration loop.",
+      "content_type": "text/markdown",
+      "static_or_dynamic": "static",
+      "upload_target": "chatgpt_project_file",
+      "sha256": "cd2487c4f2aca1013fdbd4b2866b4bf092a355a7b4738bc1db26a8429b6c8836"
+    },
+    {
+      "path": "03_SOURCE_OF_TRUTH_AND_HUMAN_GATES.md",
+      "responsibility": "Define authority separation, source validity, conflict resolution, original-source readback, human gates, and public-repository safety.",
+      "content_type": "text/markdown",
+      "static_or_dynamic": "static",
+      "upload_target": "chatgpt_project_file",
+      "sha256": "b0465c44037f221de1d792245a0638a9924a4fd6274065e66d2f45c8890ab5fd"
+    },
+    {
+      "path": "04_CURRENT_PROJECT_STATE_SNAPSHOT.md",
+      "responsibility": "Provide a regenerable dynamic snapshot derived from canonical project_system/current files.",
+      "content_type": "text/markdown",
+      "static_or_dynamic": "dynamic_snapshot",
+      "upload_target": "chatgpt_project_file",
+      "sha256": "7e31739049a1d0038a205f0ca8053eb0a87a9b3842b06c5d570f743335a2d9ab"
+    },
+    {
+      "path": "05_CODEX_HANDOFF_CONTRACT.md",
+      "responsibility": "Define the minimum complete contract for tasks handed from ChatGPT to Codex.",
+      "content_type": "text/markdown",
+      "static_or_dynamic": "static",
+      "upload_target": "chatgpt_project_file",
+      "sha256": "e6c82b2fa06f8e7efaa3a21fa5173bb632a486b43ff76e682633c19fb03c2a11"
+    },
+    {
+      "path": "package_manifest.json",
+      "responsibility": "Provide machine-readable package metadata, canonical sources, file roles, upload targets, and checksums.",
+      "content_type": "application/json",
+      "static_or_dynamic": "static",
+      "upload_target": "local_package_reference",
+      "sha256": "self_not_applicable"
+    }
+  ],
+  "sha256": {
+    "00_UPLOAD_MANIFEST.md": "8f26b1e259f5d9da0b5d187a78f3b345bf919b4b62baf0bf242f1ae70a1a8467",
+    "01_GPT_PROJECT_INSTRUCTIONS.md": "15a12b4dea009f349b18029240d27cf6cd0edfceda9c87f4c48f114e3fc9b4a2",
+    "02_PROJECT_COLLABORATION_SYSTEM.md": "cd2487c4f2aca1013fdbd4b2866b4bf092a355a7b4738bc1db26a8429b6c8836",
+    "03_SOURCE_OF_TRUTH_AND_HUMAN_GATES.md": "b0465c44037f221de1d792245a0638a9924a4fd6274065e66d2f45c8890ab5fd",
+    "04_CURRENT_PROJECT_STATE_SNAPSHOT.md": "7e31739049a1d0038a205f0ca8053eb0a87a9b3842b06c5d570f743335a2d9ab",
+    "05_CODEX_HANDOFF_CONTRACT.md": "e6c82b2fa06f8e7efaa3a21fa5173bb632a486b43ff76e682633c19fb03c2a11",
+    "package_manifest.json": "self_not_applicable"
+  },
+  "status": "gpt_project_sync_package_generated_pending_user_upload",
+  "ui_uploaded": false
+}

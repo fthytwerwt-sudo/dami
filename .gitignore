@@ -1,0 +1,8 @@
+.DS_Store
+.omx/
+.env
+.env.*
+secrets/
+private/
+project_local/
+foreign_trade_low_gi_plan/

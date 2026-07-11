@@ -1,0 +1,48 @@
+{
+  "validation_version": "v1",
+  "validated_at": "2026-07-11",
+  "source_remote_main": "8aac24714faa18d92f3f5d5ec4eea880b122d44c",
+  "validation_status": "passed_precommit",
+  "mechanism_counts": {
+    "total_registered": 28,
+    "active_direct": 16,
+    "active_adapted": 8,
+    "deferred": 1,
+    "rejected_not_migrated": 3
+  },
+  "checks": {
+    "root_agents_exists": "pass",
+    "root_agents_formal_not_candidate": "pass",
+    "agents_has_no_dynamic_stage": "pass",
+    "mechanism_ids_m01_m28_complete": "pass",
+    "active_mechanism_count_24": "pass",
+    "m19_deferred": "pass",
+    "m24_m26_rejected": "pass",
+    "active_mechanism_rule_links": "pass",
+    "current_formal_facts_business_pollution": "pass",
+    "gpt_instructions_dynamic_fact_pollution": "pass",
+    "gpt_sync_required_files": "pass",
+    "gpt_package_manifest_json": "pass",
+    "all_json_parse": "pass",
+    "absolute_local_path_scan": "pass",
+    "unrelated_repository_name_scan": "pass",
+    "secret_scan": "pass",
+    "sensitive_business_data_scan": "pass",
+    "gitignore_private_paths": "pass",
+    "migration_package_unchanged": "pass",
+    "write_scope": "pass",
+    "git_diff_check": "pass",
+    "current_state_decision_fact_consistency": "pass",
+    "gpt_snapshot_canonical_source_links": "pass",
+    "agents_startup_chain": "pass",
+    "single_formal_entry": "pass",
+    "gpt_latest_archive_byte_match": "pass",
+    "gpt_manifest_sha256": "pass",
+    "repository_public_sensitive_write_gate": "pass"
+  },
+  "not_tested": [
+    "ChatGPT Project UI upload",
+    "first real project task under the system",
+    "business fact, compliance, market, channel, offer, or external execution"
+  ]
+}
