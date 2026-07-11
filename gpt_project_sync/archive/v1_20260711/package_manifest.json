@@ -2,7 +2,7 @@
   "package_version": "v1_20260711",
   "generated_at": "2026-07-11",
   "source_repo": "fthytwerwt-sudo/dami",
-  "source_commit": "8aac24714faa18d92f3f5d5ec4eea880b122d44c",
+  "source_commit": "f2eb1b440fc2c5cc9dc22cee716022e56c9f3988",
   "canonical_sources": [
     "project_system/current/CURRENT_PROJECT_STATE.md",
     "project_system/current/CURRENT_FORMAL_FACTS.md",
@@ -21,7 +21,7 @@
       "content_type": "text/markdown",
       "static_or_dynamic": "static",
       "upload_target": "local_package_reference",
-      "sha256": "8f26b1e259f5d9da0b5d187a78f3b345bf919b4b62baf0bf242f1ae70a1a8467"
+      "sha256": "1cff8ceed9d4bb42ca131100e99ca64a26f6cfc0e686348ef9d44dcd64669b87"
     },
     {
       "path": "01_GPT_PROJECT_INSTRUCTIONS.md",
@@ -53,7 +53,7 @@
       "content_type": "text/markdown",
       "static_or_dynamic": "dynamic_snapshot",
       "upload_target": "chatgpt_project_file",
-      "sha256": "7e31739049a1d0038a205f0ca8053eb0a87a9b3842b06c5d570f743335a2d9ab"
+      "sha256": "d481189ab50d192ed66deb25025a3db8165decf5a254d23615f81c942cd332a6"
     },
     {
       "path": "05_CODEX_HANDOFF_CONTRACT.md",
@@ -73,11 +73,11 @@
     }
   ],
   "sha256": {
-    "00_UPLOAD_MANIFEST.md": "8f26b1e259f5d9da0b5d187a78f3b345bf919b4b62baf0bf242f1ae70a1a8467",
+    "00_UPLOAD_MANIFEST.md": "1cff8ceed9d4bb42ca131100e99ca64a26f6cfc0e686348ef9d44dcd64669b87",
     "01_GPT_PROJECT_INSTRUCTIONS.md": "15a12b4dea009f349b18029240d27cf6cd0edfceda9c87f4c48f114e3fc9b4a2",
     "02_PROJECT_COLLABORATION_SYSTEM.md": "cd2487c4f2aca1013fdbd4b2866b4bf092a355a7b4738bc1db26a8429b6c8836",
     "03_SOURCE_OF_TRUTH_AND_HUMAN_GATES.md": "b0465c44037f221de1d792245a0638a9924a4fd6274065e66d2f45c8890ab5fd",
-    "04_CURRENT_PROJECT_STATE_SNAPSHOT.md": "7e31739049a1d0038a205f0ca8053eb0a87a9b3842b06c5d570f743335a2d9ab",
+    "04_CURRENT_PROJECT_STATE_SNAPSHOT.md": "d481189ab50d192ed66deb25025a3db8165decf5a254d23615f81c942cd332a6",
     "05_CODEX_HANDOFF_CONTRACT.md": "e6c82b2fa06f8e7efaa3a21fa5173bb632a486b43ff76e682633c19fb03c2a11",
     "package_manifest.json": "self_not_applicable"
   },

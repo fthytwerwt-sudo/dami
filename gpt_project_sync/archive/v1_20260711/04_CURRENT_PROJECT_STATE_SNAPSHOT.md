@@ -1,7 +1,7 @@
 # 当前项目状态快照
 
 - `generated_at`: `2026-07-11`
-- `source_commit`: `8aac24714faa18d92f3f5d5ec4eea880b122d44c`
+- `source_commit`: `f2eb1b440fc2c5cc9dc22cee716022e56c9f3988`
 - `snapshot_status`: `dynamic_snapshot_generated_from_canonical_current_files`
 - `package_status`: `gpt_project_sync_package_generated_pending_user_upload`
 - `ui_uploaded`: `false`
@@ -48,10 +48,10 @@
 ### 最新任务与同步状态
 
 - `latest_task`: `collaboration_system_v1_activation`
-- `latest_task_status`: `implementation_and_validation_in_progress`
+- `latest_task_status`: `collaboration_system_v1_active_in_repository`
 - `gpt_project_sync_package_generated`: `true`
 - `gpt_project_synced`: `false`
-- GPT Project 包已在本地生成，等待完成仓库验证后由用户上传。
+- GPT Project 包已在仓库生成并完成首次正式系统回读，等待用户审核和上传。
 - ChatGPT Project UI 上传和生效尚未确认。
 
 ### 仓库安全状态
