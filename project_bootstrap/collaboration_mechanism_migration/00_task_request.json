@@ -1,0 +1,73 @@
+{
+  "task_id": "collaboration_mechanism_migration_20260711",
+  "project_name": "大米低 GI 跨境",
+  "project_stage": "project_bootstrap",
+  "task_status": "ready_for_user_review",
+  "goal": "只读审计旧项目协作机制，提取通用机制，为新项目生成独立的 ChatGPT Project 与 Codex 候选协作底座。",
+  "primary_source_repo": "fthytwerwt-sudo/-",
+  "primary_source_commit_sha": "ebc420f7bf42bd8c6c1d9ed435fd889177aa452c",
+  "secondary_source_scope": {
+    "owner": "fthytwerwt-sudo",
+    "maximum_repositories": 3,
+    "selection_rule": "仅选择含协作规则、AGENTS、项目状态、执行日志或任务机制的仓库交叉验证。"
+  },
+  "allowed_read_scope": [
+    "当前项目目录中的项目说明、事实、日志、同步包和协作机制文件",
+    "主仓库当前 HEAD 的 Git 元数据、文本文件和相关提交历史",
+    "最多 3 个次要仓库的 Git 元数据与相关文本文件"
+  ],
+  "allowed_write_scope": [
+    "project_bootstrap/collaboration_mechanism_migration/"
+  ],
+  "forbidden_actions": [
+    "修改或提交源仓库",
+    "覆盖当前项目已有文件",
+    "激活候选协作机制",
+    "执行市场开发、产品开发、网站搭建、广告投放、客户触达、内容发布或自动化业务动作",
+    "调用付费 API",
+    "读取、打印或写入密钥、Token、Cookie 或认证信息",
+    "下载或扫描大型媒体与构建产物",
+    "把聊天候选方向或旧项目历史结论写成新项目正式事实",
+    "自动 Git commit"
+  ],
+  "done_when": [
+    "主仓库 HEAD SHA 已确认",
+    "源证据地图完成且至少 15 项候选机制有可回查证据",
+    "所有机制具有 KEEP_DIRECTLY、ADAPT、DROP 或 DEFER 唯一裁决",
+    "全部规定候选文件与上传清单生成",
+    "JSON、秘密扫描、领域污染、写入范围和源仓库保护验证通过",
+    "状态仅可提升到 ready_for_user_review"
+  ],
+  "blocked_if": [
+    "blocked_source_repo_unavailable",
+    "blocked_target_root_uncertain",
+    "blocked_existing_mechanism_conflict",
+    "blocked_source_evidence_insufficient",
+    "blocked_write_scope_violation",
+    "blocked_secret_access_required"
+  ],
+  "target_git_state": {
+    "is_git_repository": false,
+    "git_root": null,
+    "branch": null,
+    "status": "not_applicable",
+    "note": "当前目标目录不是 Git 仓库，因此本轮无法用目标仓库 git diff 验证；改用文件系统写入范围清单验证。"
+  },
+  "source_git_state_before": {
+    "local_readonly_copy": "existing_local_copy_path_omitted_from_artifacts",
+    "branch": "main",
+    "head_sha": "ebc420f7bf42bd8c6c1d9ed435fd889177aa452c",
+    "remote_main_sha": "ebc420f7bf42bd8c6c1d9ed435fd889177aa452c",
+    "preexisting_dirty_items": [
+      "public/ (untracked; pre-existing and not read or modified by this task)"
+    ]
+  },
+  "execution_time": "2026-07-11T21:24:31+08:00",
+  "runtime": {
+    "surface": "OpenAI Codex desktop",
+    "model": "not_exposed_by_runtime",
+    "operating_system": "macOS",
+    "shell": "zsh",
+    "timezone": "Asia/Shanghai"
+  }
+}

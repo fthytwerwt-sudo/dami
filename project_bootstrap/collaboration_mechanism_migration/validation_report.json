@@ -1,0 +1,60 @@
+{
+  "validation_status": "passed_with_not_applicable_git_checks",
+  "task_status": "ready_for_user_review",
+  "validated_at": "2026-07-11T21:34:42+08:00",
+  "target_root": "/Users/fan/Documents/底 IG 大米外贸",
+  "artifact_root": "/Users/fan/Documents/底 IG 大米外贸/project_bootstrap/collaboration_mechanism_migration",
+  "checks": {
+    "required_files": {"status": "pass", "required_count": 21, "missing": []},
+    "json_parse": {"status": "pass", "files": ["00_task_request.json", "01_source_evidence_map.json", "02_mechanism_inventory.json", "validation_report.json"]},
+    "source_repo_absolute_path": {"status": "pass", "matches": 0},
+    "credential_value_scan": {"status": "pass", "matches": 0, "note": "禁止规则中出现的通用敏感词不是凭据值；未写入认证输出。"},
+    "domain_pollution_scan": {"status": "pass", "note": "旧领域词只出现在源证据、DROP 裁决、禁止清单和差异报告；未进入生效候选规则。"},
+    "fixed_dependency_scan": {"status": "pass", "note": "固定 RAG 或外部 AI 产品只作为 DROP/not_migrated 证据出现。"},
+    "formal_fact_pollution": {"status": "pass", "note": "ChatGPT Project 指令和 AGENTS 候选版未写入具体国家、渠道、平台或价格结论；正式事实文件为空模板。"},
+    "role_separation": {"status": "pass", "note": "ChatGPT 判断层、Codex 执行层和用户人工决定权分别定义。"},
+    "static_dynamic_separation": {"status": "pass", "note": "静态规则、动态事实、任务执行、证据历史分为四层。"},
+    "source_evidence_check": {"status": "pass", "mechanisms": 28, "missing_required_evidence_fields": 0},
+    "migration_verdict_check": {"status": "pass", "total": 28, "KEEP_DIRECTLY": 16, "ADAPT": 8, "DROP": 3, "DEFER": 1, "invalid_verdicts": 0},
+    "existing_file_overwrite": {"status": "pass", "note": "本轮只新建迁移目录；既有 foreign_trade_low_gi_plan 文件时间未变化。"},
+    "target_git_diff": {"status": "not_applicable", "reason": "目标目录不是 Git 仓库。"},
+    "filesystem_write_scope": {"status": "pass", "note": "所有人工生成的交付文件均位于允许目录；.omx 为运行环境管理状态，不属于交付写入。"},
+    "source_repo_protection": {"status": "pass", "head_before": "ebc420f7bf42bd8c6c1d9ed435fd889177aa452c", "head_after": "ebc420f7bf42bd8c6c1d9ed435fd889177aa452c", "remote_main": "ebc420f7bf42bd8c6c1d9ed435fd889177aa452c", "status_before": ["public/ (untracked, pre-existing)"], "status_after": ["public/ (untracked, unchanged)"]},
+    "tested_not_tested_present": {"status": "pass"},
+    "external_business_actions": {"status": "pass", "performed": []}
+  },
+  "tested": [
+    "当前目录、Git 根和既有文件影响面检查",
+    "主仓库本地 HEAD、远端 main 与任务后 HEAD 三方对读",
+    "当前可访问仓库清单与 3 个次要仓库 HEAD 确认",
+    "全部规定文件存在性",
+    "全部 JSON 解析",
+    "凭据值与旧源仓库绝对路径扫描",
+    "旧领域词和固定技术依赖上下文检查",
+    "静态指令具体市场结论扫描",
+    "证据地图与迁移清单 ID 一致性",
+    "迁移裁决枚举与计数",
+    "源仓库工作树前后状态"
+  ],
+  "not_tested": [
+    "候选规则尚未经过用户审核或激活",
+    "尚未上传或粘贴到 ChatGPT Project UI",
+    "尚未用真实跨境项目任务做运行验证",
+    "既有业务 DOCX 中市场与合规结论未做真实性复核",
+    "目标目录不是 Git 仓库，因此无目标 git diff/commit/push 验证",
+    "未执行任何外部业务、付费 API 或客户触达"
+  ],
+  "blocked_items": [
+    {
+      "status": "human_decision_required",
+      "item": "既有 foreign_trade_low_gi_plan 的确定性市场/渠道表述与本轮 prompt 的未正式确认边界冲突。",
+      "impact": "不阻断候选资料包生成，但阻断把这些表述写入正式事实或据此开展业务。"
+    }
+  ],
+  "status_not_claimed": [
+    "迁移已正式完成",
+    "候选机制已激活",
+    "ChatGPT Project 已同步",
+    "项目已可全面执行业务"
+  ]
+}
