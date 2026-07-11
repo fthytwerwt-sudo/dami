@@ -26,5 +26,11 @@
     "remote_match": false,
     "required_remote_readback_complete": false
   },
+  "implementation_commit_remote_evidence": {
+    "commit": "cd57ee57f31dbab6ed9f1c805b5e9804bff20ba6",
+    "local_head_origin_main_ls_remote_match": true,
+    "required_remote_files_read_ok": true,
+    "evidence_file": "project_system/audit/v2_远端回读_v2_remote_readback.md"
+  },
   "next_safe_step": "执行精确暂存与首个 implementation commit；push/readback 后再写入真实证据。"
 }

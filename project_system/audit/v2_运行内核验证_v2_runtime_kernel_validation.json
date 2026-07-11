@@ -75,7 +75,8 @@
     "latest_path": "gpt_project_sync/latest/",
     "archive_path": "gpt_project_sync/archive/v2_20260712/",
     "package_shape_and_hash_validation": "pass",
-    "source_commit_refresh_after_implementation_commit": "pending_required_before_evidence_commit",
+    "source_commit_refresh_after_implementation_commit": "pass",
+    "source_commit": "cd57ee57f31dbab6ed9f1c805b5e9804bff20ba6",
     "ui_uploaded": false
   },
   "safety": {
@@ -87,9 +88,16 @@
     "protected_migration_package_modified": false
   },
   "format": {
-    "git_diff_check": "pending_final_rerun",
-    "trailing_whitespace_scan": "pending_final_rerun",
+    "implementation_commit_staged_diff_check": "pass",
+    "implementation_commit_scope_and_sensitive_scan": "pass",
+    "evidence_commit_final_rerun": "pending",
     "end_of_file_policy": "one standard newline at most"
   },
-  "status_boundary": "Pre-commit technical validation passed. The closeout runner correctly remains blocked until precise staging, both commits, push, three-way SHA verification, and remote readback complete."
+  "implementation_git_readback": {
+    "commit": "cd57ee57f31dbab6ed9f1c805b5e9804bff20ba6",
+    "local_head_origin_main_ls_remote_match": true,
+    "required_remote_files_read_ok": true,
+    "evidence_file": "project_system/audit/v2_远端回读_v2_remote_readback.md"
+  },
+  "status_boundary": "The implementation commit is remotely verified. The evidence commit and its final remote readback remain required before task completion is claimed."
 }

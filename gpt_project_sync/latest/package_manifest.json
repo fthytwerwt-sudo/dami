@@ -23,7 +23,7 @@
     },
     {
       "path": "05_当前项目状态快照_current_project_state_snapshot.md",
-      "sha256": "b68742677a0caf69a1a70680aec608d03214c736be452ddcf83089ed5b55ca9d"
+      "sha256": "9442a2246b5ebfbf3f61d02eb3d8180048fce037174edf8d89b92d5d74084297"
     },
     {
       "path": "06_Codex交接契约_codex_handoff_contract.md",
@@ -37,6 +37,6 @@
   "generated_on": "2026-07-12",
   "package_version": "v2_20260712",
   "project_id": "low_gi_rice_crossborder",
-  "source_commit": "c254cb5b0fe28b6ec9d50ce550de83a369f6361d",
+  "source_commit": "cd57ee57f31dbab6ed9f1c805b5e9804bff20ba6",
   "ui_uploaded": false
 }

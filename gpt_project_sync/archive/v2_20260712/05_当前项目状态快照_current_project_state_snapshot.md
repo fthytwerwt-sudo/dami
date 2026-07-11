@@ -1,7 +1,7 @@
 # 当前项目状态快照（current project state snapshot）
 
 package_version: `v2_20260712`
-source_commit: `c254cb5b0fe28b6ec9d50ce550de83a369f6361d`
+source_commit: `cd57ee57f31dbab6ed9f1c805b5e9804bff20ba6`
 generated_on: `2026-07-12`
 snapshot_status: `repository_snapshot; dynamic truth remains project_system/current/`
 ui_uploaded: `false`
@@ -109,6 +109,7 @@ New facts require source, verification state, scope, effective date, review date
 
 task: `cross_project_collaboration_system_v2_activation`
 status: `cross_project_collaboration_system_v2_active`
+git_closeout_status: `pending_precise_stage_and_push`
 starting_target_remote_main: `c254cb5b0fe28b6ec9d50ce550de83a369f6361d`
 learning_repo_sha: `ebc420f7bf42bd8c6c1d9ed435fd889177aa452c`
 
@@ -121,7 +122,7 @@ learning_repo_sha: `ebc420f7bf42bd8c6c1d9ed435fd889177aa452c`
 
 ## Status boundaries
 
-- The system is technically active in repository scope only.
+- The system is technically active in the local repository worktree only; precise commit, push, three-way SHA verification and remote readback remain required before Git synchronization is claimed.
 - GPT package generation is not ChatGPT Project UI upload or synchronization.
 - Business execution, market/channel/B2B-B2C decisions, pricing, compliance approval and external actions remain unstarted or unapproved.
 

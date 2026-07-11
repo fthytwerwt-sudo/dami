@@ -2,7 +2,6 @@
 
 task: `cross_project_collaboration_system_v2_activation`
 status: `cross_project_collaboration_system_v2_active`
-git_closeout_status: `pending_precise_stage_and_push`
 starting_target_remote_main: `c254cb5b0fe28b6ec9d50ce550de83a369f6361d`
 learning_repo_sha: `ebc420f7bf42bd8c6c1d9ed435fd889177aa452c`
 
@@ -15,7 +14,7 @@ learning_repo_sha: `ebc420f7bf42bd8c6c1d9ed435fd889177aa452c`
 
 ## Status boundaries
 
-- The system is technically active in the local repository worktree only; precise commit, push, three-way SHA verification and remote readback remain required before Git synchronization is claimed.
+- The system is technically active in repository scope; any Git synchronization claim must be backed by the final task's precise commit, push, three-way SHA verification and remote readback evidence.
 - GPT package generation is not ChatGPT Project UI upload or synchronization.
 - Business execution, market/channel/B2B-B2C decisions, pricing, compliance approval and external actions remain unstarted or unapproved.
 
