@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "route_decision｜路由判断",
+  "description": "仓库写入前的路由判断数据契约。",
+  "type": "object",
+  "required": ["task_type", "responsibility_layer", "must_read_files", "allowed_changes", "forbidden_changes", "external_actions", "human_gates", "engineering_worth_question", "planned_files", "execution_permission"],
+  "properties": {
+    "task_type": {"type": "array", "minItems": 1, "items": {"type": "string"}, "description": "任务类型。"},
+    "responsibility_layer": {"type": "array", "minItems": 1, "items": {"type": "string"}, "description": "责任层级。"},
+    "must_read_files": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["path", "read_status"], "properties": {"path": {"type": "string"}, "read_status": {"enum": ["read_ok", "missing", "unreadable", "not_applicable"]}}}, "description": "必读文件及读取状态。"},
+    "allowed_changes": {"type": "array", "minItems": 1, "items": {"type": "string"}, "description": "允许修改范围。"},
+    "forbidden_changes": {"type": "array", "minItems": 1, "items": {"type": "string"}, "description": "禁止修改范围。"},
+    "external_actions": {"description": "外部动作权限。"},
+    "human_gates": {"type": "array", "description": "人工闸门。"},
+    "engineering_worth_question": {"type": "object", "required": ["worth_engineering", "reason", "engineering_depth", "chosen_gate", "not_chosen_gate"], "properties": {"worth_engineering": {"type": "boolean"}, "reason": {"type": "string"}, "engineering_depth": {"type": "string"}, "chosen_gate": {"type": "string"}, "not_chosen_gate": {"type": "string"}}},
+    "planned_files": {"type": "array", "minItems": 1, "items": {"type": "string"}, "description": "经单文件方案授权的精确待改路径。"},
+    "execution_permission": {"type": "string", "description": "本轮执行权限结论。"}
+  }
+}

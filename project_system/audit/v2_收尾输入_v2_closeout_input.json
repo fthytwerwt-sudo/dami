@@ -1,0 +1,45 @@
+{
+  "evidence_scope": "precommit_readiness_only; this input intentionally records that implementation commit, push, and remote readback are still pending and is not Git-closeout evidence",
+  "completion_relay": {
+    "required_output_inventory": [
+      {"name": "runtime kernel", "required": true, "status": "completed"},
+      {"name": "precommit validation", "required": true, "status": "completed"},
+      {"name": "implementation commit", "required": true, "status": "pending"},
+      {"name": "remote readback", "required": true, "status": "pending"}
+    ],
+    "child_task_graph": ["implement", "validate", "commit", "push", "remote_readback", "evidence_commit"],
+    "remaining_work_check": {"remaining_required": true, "remaining_items": ["precise stage", "implementation commit", "push", "remote readback", "evidence commit"]},
+    "completion_status": "continue",
+    "git_closeout": {"remote_match": false}
+  },
+  "state_transition": {
+    "current_state": "collaboration_system_activation",
+    "target_state": "cross_project_collaboration_system_v2_active",
+    "required_evidence": [
+      {"evidence_type": "fixture_suite", "source_path": "project_system/fixtures/", "readback_status": "read_ok"},
+      {"evidence_type": "preflight", "source_path": "project_system/audit/v2_预检报告_v2_preflight_report.json", "readback_status": "read_ok"}
+    ],
+    "human_gate_required": false,
+    "human_gate_satisfied": false,
+    "business_execution_started": false
+  },
+  "git_closeout": {
+    "staged_paths": [],
+    "authorized_staged_paths": ["AGENTS.md"],
+    "per_file_plan_path": "project_system/audit/v2_单文件细节方案_v2_per_file_detail_plan.json",
+    "broad_stage_used": false,
+    "diff_check_passed": false,
+    "secret_scan_passed": false,
+    "sensitive_scan_passed": false,
+    "commit_sha": "c254cb5b0fe28b6ec9d50ce550de83a369f6361d",
+    "push_succeeded": false,
+    "local_head": "c254cb5b0fe28b6ec9d50ce550de83a369f6361d",
+    "origin_main": "c254cb5b0fe28b6ec9d50ce550de83a369f6361d",
+    "ls_remote_main": "c254cb5b0fe28b6ec9d50ce550de83a369f6361d",
+    "branch": "main",
+    "remote_readback": [],
+    "repository_visibility": "Public",
+    "contains_sensitive_business_data": false,
+    "contains_personal_data": false
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "case_id": "L3_multi_node_system",
+  "description": "多节点协作系统经过 L3、大任务、lane、供料和机制触发的完整预检。",
+  "component_inputs": {
+    "route_decision_builder": {
+      "goal": "实现协作运行内核",
+      "context": "多文件受控系统升级",
+      "source_of_truth": ["AGENTS.md", "current/", "rules/"],
+      "constraints": ["Public 仓库无敏感资料"],
+      "allowed_files": ["AGENTS.md", "project_system/", "scripts/project_system/"],
+      "forbidden_files": ["project_bootstrap/"],
+      "external_actions": "none",
+      "human_gates": ["无业务决定"],
+      "execution_steps": ["preflight", "implement", "validate"],
+      "validation": ["fixtures"],
+      "done_when": "核验通过",
+      "blocked_if": "来源冲突",
+      "output": "JSON report",
+      "task_type": ["mechanism_or_route_fix", "runtime_kernel_implementation"],
+      "responsibility_layer": ["engineering_design_layer", "execution_layer", "validation_layer"],
+      "must_read_files": [
+        {"path": "AGENTS.md", "read_status": "read_ok"},
+        {"path": "project_system/current/CURRENT_PROJECT_STATE.md", "read_status": "read_ok"},
+        {"path": "project_system/current/CURRENT_FORMAL_FACTS.md", "read_status": "read_ok"},
+        {"path": "project_system/current/CURRENT_DECISIONS.md", "read_status": "read_ok"},
+        {"path": "project_system/current/LATEST_TASK_STATUS.md", "read_status": "read_ok"}
+      ],
+      "repository_visibility": "Public",
+      "contains_sensitive_business_data": false,
+      "contains_personal_data": false,
+      "repository_write_requested": true,
+      "implementation_design": "fixture implementation",
+      "impact_check": "fixture impact check",
+      "supply_pack": "fixture supply",
+      "failure_routes": ["scope_repair"],
+      "rollback": "revert precise files",
+      "completion_relay": "fixture completion relay",
+      "git_closeout": "fixture git closeout",
+      "workspace_mode": "single_formal_workspace",
+      "external_workspace_required": false,
+      "worktree_requested": false,
+      "formal_file_count": 12,
+      "engineering_worth_question": {"worth_engineering": true, "reason": "多节点可重复运行", "engineering_depth": "L3_system_line", "chosen_gate": "runtime_kernel", "not_chosen_gate": "L1"},
+      "per_file_plan": {"shared_policy": {"missing_info_policy": "block", "conflict_policy": "block", "blocked_if": "scope"}, "plan_groups": [{"paths": ["AGENTS.md", "project_system/rules/example.md", "scripts/project_system/example.py"], "purpose": "建立多节点机制", "layer": "execution_layer", "inputs": ["task"], "outputs": ["reports"], "core_decisions": ["single writer"], "trigger_conditions": ["L3"], "route_rules": ["preflight"], "examples": ["L3"], "validation": ["fixture"], "user_review_points": "none"}]}
+    },
+    "engineering_depth_router": {
+      "engineering_depth": "L3_system_line",
+      "goal": "多节点运行内核",
+      "current_state": "collaboration_system_activation",
+      "source_summary": "正式规则和原文件回读",
+      "failure_route": "failure_route_resolver",
+      "record_location": "project_system/audit/",
+      "engineering_signals": {"has_state": true, "multi_node": true, "requires_tools": true, "requires_evaluation": true, "has_failure_route": true, "long_running": true},
+      "formal_file_count": 12
+    },
+    "large_task_gate": {"formal_file_count": 12, "affected_categories": ["rules", "scripts", "state", "logs"], "multi_stage_or_role": true, "user_requests_complete_or_parallel": true, "lane_recommendation": "explore_plus_integrate"},
+    "lane_parallel_router": {"lane_recommendation": "explore_plus_integrate", "lanes": [{"name": "source_audit", "mode": "read_only", "owner": "explorer"}, {"name": "integrator", "mode": "write", "owner": "single_integrator"}], "write_owner": "single_integrator", "integration_owner": "single_integrator", "write_required": true},
+    "source_supply_pack_builder": {"task_goal": "多节点运行内核", "current_state": "collaboration_system_activation", "must_read_sources": [{"source_path": "AGENTS.md", "readback_status": "read_ok", "exact_relevant_snippets": ["route gate"]}], "constraints": ["no secrets"], "source_conflicts": [], "missing_information": [], "allowed_actions": ["write rules"], "forbidden_actions": ["external action"]},
+    "mid_task_supply_builder": {"base_supply_pack": {"task_goal": "多节点运行内核"}, "validation_failed": false, "missing_information": [], "source_conflicts": [], "exact_relevant_snippets": []},
+    "mechanism_trigger_router": {"task_type": ["mechanism_or_route_fix", "runtime_kernel_implementation"]}
+  },
+  "expected": {
+    "route_decision_builder": {"status": "pass", "error_codes": []},
+    "engineering_depth_router": {"status": "pass", "error_codes": []},
+    "large_task_gate": {"status": "pass", "error_codes": []},
+    "lane_parallel_router": {"status": "pass", "error_codes": []},
+    "source_supply_pack_builder": {"status": "pass", "error_codes": []},
+    "mid_task_supply_builder": {"status": "pass", "error_codes": []},
+    "mechanism_trigger_router": {"status": "pass", "error_codes": []}
+  }
+}

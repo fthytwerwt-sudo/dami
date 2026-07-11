@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mid_task_supply_pack｜执行中补料包",
+  "description": "在上下文不足、验证失败或冲突时的 fail-closed 补料契约。",
+  "type": "object",
+  "required": ["base_task_goal", "trigger", "missing_information", "validation_failures", "source_conflicts", "exact_relevant_snippets", "continue_allowed", "next_safe_step"],
+  "properties": {
+    "base_task_goal": {"type": "string", "description": "原任务目标。"},
+    "continue_allowed": {"type": "boolean", "description": "是否可继续写入。"},
+    "next_safe_step": {"type": "string", "description": "下一安全动作。"}
+  }
+}

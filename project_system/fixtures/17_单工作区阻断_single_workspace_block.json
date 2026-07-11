@@ -1,0 +1,71 @@
+{
+  "case_id": "single_workspace_block",
+  "description": "统一预检必须拒绝额外正式工作区或 git worktree 请求，即使其他写入契约均完整。",
+  "component_inputs": {
+    "project_task_preflight": {
+      "goal": "验证单工作区闸门",
+      "context": "脱敏路径治理测试",
+      "source_of_truth": ["正式规则"],
+      "constraints": ["不允许外部正式工作区"],
+      "allowed_files": ["project_system/"],
+      "forbidden_files": ["project_bootstrap/"],
+      "external_actions": "none",
+      "human_gates": [],
+      "execution_steps": ["preflight"],
+      "validation": ["fixture"],
+      "done_when": "blocked when workspace is not single",
+      "blocked_if": "external workspace requested",
+      "output": "report",
+      "repository_write_requested": true,
+      "implementation_design": "fixture implementation",
+      "impact_check": "fixture impact check",
+      "supply_pack": "fixture supply",
+      "failure_routes": ["scope_repair"],
+      "rollback": "revert precise file",
+      "completion_relay": "fixture completion relay",
+      "git_closeout": "fixture git closeout",
+      "workspace_mode": "parallel_workspace",
+      "external_workspace_required": true,
+      "worktree_requested": true,
+      "task_type": ["project_file_change"],
+      "responsibility_layer": ["execution_layer", "validation_layer"],
+      "must_read_files": [
+        {"path": "AGENTS.md", "read_status": "read_ok"},
+        {"path": "project_system/current/CURRENT_PROJECT_STATE.md", "read_status": "read_ok"},
+        {"path": "project_system/current/CURRENT_FORMAL_FACTS.md", "read_status": "read_ok"},
+        {"path": "project_system/current/CURRENT_DECISIONS.md", "read_status": "read_ok"},
+        {"path": "project_system/current/LATEST_TASK_STATUS.md", "read_status": "read_ok"}
+      ],
+      "repository_visibility": "Public",
+      "contains_sensitive_business_data": false,
+      "contains_personal_data": false,
+      "engineering_depth": "L1_task_card",
+      "formal_file_count": 1,
+      "lane_recommendation": "serial_only",
+      "lanes": [{"name": "writer", "mode": "write", "owner": "single_integrator"}],
+      "write_owner": "single_integrator",
+      "integration_owner": "single_integrator",
+      "current_state": "collaboration_system_activation",
+      "source_summary": "正式来源已回读",
+      "failure_route": "scope_repair",
+      "record_location": "project_system/audit/",
+      "per_file_plan": {
+        "shared_policy": {"missing_info_policy": "block", "conflict_policy": "block", "blocked_if": "scope"},
+        "plan_groups": [{"paths": ["project_system/rules/example.md"], "purpose": "fixture", "layer": "execution_layer", "inputs": ["task"], "outputs": ["report"], "core_decisions": ["scope"], "trigger_conditions": ["L1"], "route_rules": ["preflight"], "examples": ["fixture"], "validation": ["fixture"], "user_review_points": "none"}]
+      },
+      "supply_pack_input": {
+        "task_goal": "验证单工作区闸门",
+        "current_state": "collaboration_system_activation",
+        "must_read_sources": [{"source_path": "AGENTS.md", "readback_status": "read_ok", "exact_relevant_snippets": ["workspace"]}],
+        "constraints": ["no secrets"],
+        "source_conflicts": [],
+        "missing_information": [],
+        "allowed_actions": ["write"],
+        "forbidden_actions": ["external"]
+      }
+    }
+  },
+  "expected": {
+    "project_task_preflight": {"status": "blocked", "error_codes": ["blocked_external_workspace_required"]}
+  }
+}

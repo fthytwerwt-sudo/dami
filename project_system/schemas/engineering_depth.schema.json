@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "engineering_depth｜工程深度",
+  "description": "L0-L3 工程深度路由器输出。",
+  "type": "object",
+  "required": ["selected_depth", "reason", "five_questions"],
+  "properties": {
+    "selected_depth": {"enum": ["L0_light_chat", "L1_task_card", "L2_node_contract", "L3_system_line"], "description": "工程深度枚举。"},
+    "reason": {"type": "string", "description": "选择原因。"},
+    "engineering_line_layers": {"type": "array", "description": "L3 的 13 层工程线。"},
+    "five_questions": {"type": "object", "required": ["要什么", "到哪了", "吃什么资料", "错了去哪", "留没留记录"], "properties": {"要什么": {"type": "string"}, "到哪了": {"type": "string"}, "吃什么资料": {"type": "string"}, "错了去哪": {"type": "string"}, "留没留记录": {"type": "string"}}, "description": "工程线五问法。"}
+  }
+}

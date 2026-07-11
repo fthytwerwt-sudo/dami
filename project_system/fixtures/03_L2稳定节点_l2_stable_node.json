@@ -1,0 +1,29 @@
+{
+  "case_id": "L2_stable_node",
+  "description": "单一稳定节点使用 L2 节点契约，不升级为 L3。",
+  "component_inputs": {
+    "engineering_depth_router": {
+      "engineering_depth": "L2_node_contract",
+      "goal": "验证单一 JSON 输入输出节点",
+      "current_state": "cross_project_collaboration_system_v2_active",
+      "engineering_signals": {"has_state": true},
+      "formal_file_count": 1,
+      "node_contract": {"inputs": ["JSON"], "outputs": ["JSON"], "validation": ["schema"], "failure_route": "scope_repair"}
+    },
+    "process_boot_builder": {
+      "route_decision_status": "pass",
+      "source_readback_status": "read_ok",
+      "source_conflicts": [],
+      "task_goal": "验证稳定节点",
+      "current_state": "cross_project_collaboration_system_v2_active",
+      "must_read_sources": ["schema"],
+      "supply_summary": "schema 已回读",
+      "failure_route": "scope_repair",
+      "record_location": "project_system/audit/"
+    }
+  },
+  "expected": {
+    "engineering_depth_router": {"status": "pass", "error_codes": []},
+    "process_boot_builder": {"status": "pass", "error_codes": []}
+  }
+}

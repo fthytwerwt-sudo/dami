@@ -1,0 +1,8 @@
+{
+  "case_id": "qualified_blocked_task",
+  "description": "正确的 blocked 任务仍然可以完成 failure-route 映射而不伪称完成。",
+  "component_inputs": {
+    "failure_route_resolver": {"failure_condition": "supply_insufficient"}
+  },
+  "expected": {"failure_route_resolver": {"status": "pass", "error_codes": []}}
+}

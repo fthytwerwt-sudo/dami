@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "pre_task_supply_pack｜执行前供料包",
+  "description": "执行前的可追溯资料供给契约。",
+  "type": "object",
+  "required": ["task_goal", "current_state", "must_read_sources", "retrieval_manifest", "source_readback_status", "constraints", "conflicts", "missing_information", "decision_authority", "allowed_actions", "forbidden_actions", "next_input_for_codex"],
+  "properties": {
+    "task_goal": {"type": "string", "description": "任务目标。"},
+    "current_state": {"type": "string", "description": "当前状态。"},
+    "must_read_sources": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["source_path", "readback_status", "exact_relevant_snippets"], "properties": {"source_path": {"type": "string"}, "readback_status": {"const": "read_ok"}, "exact_relevant_snippets": {"type": "array", "minItems": 1, "items": {"type": "string"}}}}, "description": "含 source_path、readback_status 与 exact_relevant_snippets 的来源。"},
+    "retrieval_manifest": {"type": "array", "minItems": 1, "description": "来源检索清单。"},
+    "source_readback_status": {"const": "read_ok", "description": "原文件回读状态。"},
+    "conflicts": {"type": "array", "description": "来源冲突。"},
+    "second_opinion_trigger": {"type": "boolean", "description": "条件第二意见触发。"}
+  }
+}

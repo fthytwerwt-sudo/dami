@@ -1,0 +1,536 @@
+{
+  "component": "project_task_preflight",
+  "dry_run": false,
+  "error_codes": [],
+  "messages": [],
+  "output_write": "written",
+  "preflight": {
+    "engineering_depth": {
+      "engineering_line_layers": [
+        {
+          "id": 0,
+          "name": "project_goal_layer",
+          "中文用途": "项目目标层"
+        },
+        {
+          "id": 1,
+          "name": "current_task_awareness_layer",
+          "中文用途": "当前任务意识层"
+        },
+        {
+          "id": 2,
+          "name": "process_node_layer",
+          "中文用途": "流程节点层"
+        },
+        {
+          "id": 3,
+          "name": "cleaning_layer",
+          "中文用途": "清洗层"
+        },
+        {
+          "id": 4,
+          "name": "structuring_layer",
+          "中文用途": "结构化层"
+        },
+        {
+          "id": 5,
+          "name": "source_retrieval_layer",
+          "中文用途": "资料召回层"
+        },
+        {
+          "id": 6,
+          "name": "tool_connection_layer",
+          "中文用途": "工具连接层"
+        },
+        {
+          "id": 7,
+          "name": "execution_node_layer",
+          "中文用途": "执行节点层"
+        },
+        {
+          "id": 8,
+          "name": "evaluation_layer",
+          "中文用途": "判断评估层"
+        },
+        {
+          "id": 9,
+          "name": "failure_route_layer",
+          "中文用途": "失败路由层"
+        },
+        {
+          "id": 10,
+          "name": "human_fallback_layer",
+          "中文用途": "人工兜底层"
+        },
+        {
+          "id": 11,
+          "name": "state_record_layer",
+          "中文用途": "状态记录层"
+        },
+        {
+          "id": 12,
+          "name": "retrospective_iteration_layer",
+          "中文用途": "复盘迭代层"
+        }
+      ],
+      "five_questions": {
+        "到哪了": "collaboration_system_activation",
+        "吃什么资料": "当前正式文件、学习仓库基线和受保护迁移证据均已原文件回读。",
+        "留没留记录": "project_system/audit/",
+        "要什么": "将轻量协作系统 v1 升级为可执行、可验证、可同步的跨项目协作系统 v2。",
+        "错了去哪": "failure_route_resolver"
+      },
+      "reason": "本轮需要持续可运行的路由、工程深度、供料、验证、失败和 Git 收尾机制。",
+      "selected_depth": "L3_system_line",
+      "中文含义": "L3 系统工程线"
+    },
+    "human_gate_check": "pass",
+    "lane_decision": {
+      "integration_owner": "single_integrator",
+      "lane_recommendation": "explore_plus_integrate",
+      "lanes": [
+        {
+          "mode": "read_only",
+          "name": "learning_and_v1_audit",
+          "owner": "explorer"
+        },
+        {
+          "mode": "write",
+          "name": "single_integrator",
+          "owner": "single_integrator"
+        }
+      ],
+      "read_parallel_allowed": true,
+      "write_owner": "single_integrator"
+    },
+    "large_task_gate": {
+      "lane_recommendation": "explore_plus_integrate",
+      "reasons": [
+        "涉及 3 个以上正式文件",
+        "同时涉及规则、脚本、状态或日志中的 3 类以上",
+        "需要大量只读审计后统一写入",
+        "涉及多阶段、多角色或多状态",
+        "用户要求完整执行或并发"
+      ],
+      "triggered": true
+    },
+    "must_read_validation": "pass",
+    "per_file_plan_validation": "pass",
+    "process_boot": {
+      "current_state": "collaboration_system_activation",
+      "five_questions": {
+        "到哪了": "collaboration_system_activation",
+        "吃什么资料": "当前正式文件、学习仓库基线和受保护迁移证据均已原文件回读。",
+        "留没留记录": "project_system/audit/",
+        "要什么": "将轻量协作系统 v1 升级为可执行、可验证、可同步的跨项目协作系统 v2。",
+        "错了去哪": "failure_route_resolver"
+      },
+      "must_read_sources": [
+        {
+          "path": "AGENTS.md",
+          "read_status": "read_ok"
+        },
+        {
+          "path": "project_system/current/CURRENT_PROJECT_STATE.md",
+          "read_status": "read_ok"
+        },
+        {
+          "path": "project_system/current/CURRENT_FORMAL_FACTS.md",
+          "read_status": "read_ok"
+        },
+        {
+          "path": "project_system/current/CURRENT_DECISIONS.md",
+          "read_status": "read_ok"
+        },
+        {
+          "path": "project_system/current/LATEST_TASK_STATUS.md",
+          "read_status": "read_ok"
+        },
+        {
+          "path": "project_system/01_MECHANISM_REGISTRY.json",
+          "read_status": "read_ok"
+        },
+        {
+          "path": "project_system/02_跨项目操作习惯注册表_cross_project_operating_habits.json",
+          "read_status": "read_ok"
+        },
+        {
+          "path": "project_system/rules/09_ENGINEERING_DEPTH_AND_COLLABORATION_EFFECTIVENESS.md",
+          "read_status": "read_ok"
+        },
+        {
+          "path": "project_bootstrap/collaboration_mechanism_migration/02_mechanism_inventory.json",
+          "read_status": "read_ok"
+        }
+      ],
+      "prompt_role": "prompt_delta_only",
+      "task_goal": "将轻量协作系统 v1 升级为可执行、可验证、可同步的跨项目协作系统 v2。"
+    },
+    "route_decision": {
+      "allowed_changes": [
+        "AGENTS.md",
+        "project_system/",
+        "scripts/project_system/",
+        "gpt_project_sync/"
+      ],
+      "engineering_worth_question": {
+        "chosen_gate": "executable_runtime_kernel_with_schemas_and_fixtures",
+        "engineering_depth": "L3_system_line",
+        "not_chosen_gate": "L0_light_chat_or_L1_task_card",
+        "reason": "本轮需要持续可运行的路由、工程深度、供料、验证、失败和 Git 收尾机制。",
+        "worth_engineering": true
+      },
+      "execution_permission": "authorized_within_allowed_files",
+      "external_actions": "none",
+      "forbidden_changes": [
+        "project_bootstrap/collaboration_mechanism_migration/",
+        ".DS_Store",
+        ".omx/",
+        ".env",
+        ".env.*",
+        "project_local/",
+        "foreign_trade_low_gi_plan/",
+        "secrets/",
+        "private/"
+      ],
+      "human_gates": [
+        "业务、合规、市场、渠道、价格与外部动作均不在本轮授权范围"
+      ],
+      "must_read_files": [
+        {
+          "path": "AGENTS.md",
+          "read_status": "read_ok"
+        },
+        {
+          "path": "project_system/current/CURRENT_PROJECT_STATE.md",
+          "read_status": "read_ok"
+        },
+        {
+          "path": "project_system/current/CURRENT_FORMAL_FACTS.md",
+          "read_status": "read_ok"
+        },
+        {
+          "path": "project_system/current/CURRENT_DECISIONS.md",
+          "read_status": "read_ok"
+        },
+        {
+          "path": "project_system/current/LATEST_TASK_STATUS.md",
+          "read_status": "read_ok"
+        },
+        {
+          "path": "project_system/01_MECHANISM_REGISTRY.json",
+          "read_status": "read_ok"
+        },
+        {
+          "path": "project_system/02_跨项目操作习惯注册表_cross_project_operating_habits.json",
+          "read_status": "read_ok"
+        },
+        {
+          "path": "project_system/rules/09_ENGINEERING_DEPTH_AND_COLLABORATION_EFFECTIVENESS.md",
+          "read_status": "read_ok"
+        },
+        {
+          "path": "project_bootstrap/collaboration_mechanism_migration/02_mechanism_inventory.json",
+          "read_status": "read_ok"
+        }
+      ],
+      "planned_files": [
+        "AGENTS.md",
+        "project_system/00_PROJECT_SYSTEM_INDEX.md",
+        "project_system/01_MECHANISM_REGISTRY.md",
+        "project_system/01_MECHANISM_REGISTRY.json",
+        "project_system/02_跨项目操作习惯注册表_cross_project_operating_habits.md",
+        "project_system/02_跨项目操作习惯注册表_cross_project_operating_habits.json",
+        "project_system/rules/03_REQUIREMENT_ALIGNMENT_AND_IMPLEMENTATION_DESIGN.md",
+        "project_system/rules/04_TASK_ROUTING_AND_STATE_MACHINE.md",
+        "project_system/rules/06_COMPLETION_TRUTH_AND_RELAY.md",
+        "project_system/rules/08_GIT_AND_SYNC_TRUTH.md",
+        "project_system/rules/09_ENGINEERING_DEPTH_AND_COLLABORATION_EFFECTIVENESS.md",
+        "project_system/rules/10_跨项目操作习惯_cross_project_operating_habits.md",
+        "project_system/rules/11_路由判断与流程启动_route_decision_and_process_boot.md",
+        "project_system/rules/12_完整工程线_engineering_line.md",
+        "project_system/rules/13_大任务与执行车道_large_task_and_execution_lanes.md",
+        "project_system/rules/14_供料与执行中补料_supply_and_mid_task_supply.md",
+        "project_system/rules/15_单文件细节方案_per_file_detail_plan.md",
+        "project_system/rules/16_完成接力与失败路由_completion_relay_and_failure_routes.md",
+        "project_system/rules/17_语言命名与中文注释_language_naming_and_chinese_annotations.md",
+        "project_system/rules/18_单工作区与路径治理_single_workspace_and_path_governance.md",
+        "project_system/templates/CODEX_TASK_REQUEST_TEMPLATE.md",
+        "project_system/templates/CODEX_COMPLETION_REPORT_TEMPLATE.md",
+        "scripts/project_system/_common.py",
+        "scripts/project_system/route_decision_builder.py",
+        "scripts/project_system/engineering_depth_router.py",
+        "scripts/project_system/large_task_gate.py",
+        "scripts/project_system/lane_parallel_router.py",
+        "scripts/project_system/process_boot_builder.py",
+        "scripts/project_system/mechanism_trigger_router.py",
+        "scripts/project_system/failure_route_resolver.py",
+        "scripts/project_system/fixture_runner.py",
+        "scripts/project_system/task_request_validator.py",
+        "scripts/project_system/per_file_plan_validator.py",
+        "scripts/project_system/source_supply_pack_builder.py",
+        "scripts/project_system/mid_task_supply_builder.py",
+        "scripts/project_system/state_transition_validator.py",
+        "scripts/project_system/completion_relay_validator.py",
+        "scripts/project_system/git_closeout_validator.py",
+        "scripts/project_system/gpt_sync_package_builder.py",
+        "scripts/project_system/project_task_preflight.py",
+        "scripts/project_system/project_task_closeout.py",
+        "project_system/schemas/route_decision.schema.json",
+        "project_system/schemas/engineering_depth.schema.json",
+        "project_system/schemas/process_boot_report.schema.json",
+        "project_system/schemas/task_request.schema.json",
+        "project_system/schemas/per_file_plan.schema.json",
+        "project_system/schemas/pre_task_supply_pack.schema.json",
+        "project_system/schemas/mid_task_supply_pack.schema.json",
+        "project_system/schemas/state_transition.schema.json",
+        "project_system/schemas/completion_relay.schema.json",
+        "project_system/schemas/failure_route.schema.json",
+        "project_system/schemas/git_closeout.schema.json",
+        "project_system/fixtures/01_L0简单解释_l0_simple_explanation.json",
+        "project_system/fixtures/02_L1小文件修改_l1_small_file_change.json",
+        "project_system/fixtures/03_L2稳定节点_l2_stable_node.json",
+        "project_system/fixtures/04_L3多节点系统_l3_multi_node_system.json",
+        "project_system/fixtures/05_缺必读文件_missing_must_read.json",
+        "project_system/fixtures/06_来源冲突_source_conflict.json",
+        "project_system/fixtures/07_Public敏感写入_public_sensitive_write.json",
+        "project_system/fixtures/08_未授权外部动作_unauthorized_external_action.json",
+        "project_system/fixtures/09_多车道写入冲突_multi_lane_write_conflict.json",
+        "project_system/fixtures/10_本地完成未推送_local_complete_not_pushed.json",
+        "project_system/fixtures/11_远端SHA不一致_remote_sha_mismatch.json",
+        "project_system/fixtures/12_完成声明越级_overclaimed_completion.json",
+        "project_system/fixtures/13_合格完整任务_qualified_complete_task.json",
+        "project_system/fixtures/14_合格阻断任务_qualified_blocked_task.json",
+        "project_system/fixtures/15_统一预检通过与阻断_unified_preflight_pass_and_block.json",
+        "project_system/fixtures/16_统一收尾通过与阻断_unified_closeout_pass_and_block.json",
+        "project_system/fixtures/17_单工作区阻断_single_workspace_block.json",
+        "project_system/fixtures/18_统一收尾阻断_unified_closeout_block.json",
+        "project_system/current/CURRENT_PROJECT_STATE.md",
+        "project_system/current/CURRENT_FORMAL_FACTS.md",
+        "project_system/current/CURRENT_DECISIONS.md",
+        "project_system/current/LATEST_TASK_STATUS.md",
+        "project_system/audit/v2_激活影响面检查_v2_activation_impact_check.md",
+        "project_system/audit/v2_单文件细节方案_v2_per_file_detail_plan.json",
+        "project_system/audit/v2_任务请求_v2_task_request.json",
+        "project_system/audit/v2_预检报告_v2_preflight_report.json",
+        "project_system/audit/v2_收尾输入_v2_closeout_input.json",
+        "project_system/audit/v2_收尾报告_v2_closeout_report.json",
+        "project_system/audit/v2_运行内核验证_v2_runtime_kernel_validation.json",
+        "project_system/audit/v2_远端回读_v2_remote_readback.md",
+        "gpt_project_sync/latest/00_UPLOAD_MANIFEST.md",
+        "gpt_project_sync/latest/01_GPT_PROJECT_INSTRUCTIONS.md",
+        "gpt_project_sync/latest/02_PROJECT_COLLABORATION_SYSTEM.md",
+        "gpt_project_sync/latest/03_SOURCE_OF_TRUTH_AND_HUMAN_GATES.md",
+        "gpt_project_sync/latest/04_CURRENT_PROJECT_STATE_SNAPSHOT.md",
+        "gpt_project_sync/latest/05_CODEX_HANDOFF_CONTRACT.md",
+        "gpt_project_sync/latest/00_上传说明_UPLOAD_MANIFEST.md",
+        "gpt_project_sync/latest/01_GPT项目完整指令_GPT_PROJECT_INSTRUCTIONS.md",
+        "gpt_project_sync/latest/02_跨项目操作习惯_cross_project_operating_habits.md",
+        "gpt_project_sync/latest/03_工程线与任务路由_engineering_line_and_task_routing.md",
+        "gpt_project_sync/latest/04_事实源与人工闸门_source_of_truth_and_human_gates.md",
+        "gpt_project_sync/latest/05_当前项目状态快照_current_project_state_snapshot.md",
+        "gpt_project_sync/latest/06_Codex交接契约_codex_handoff_contract.md",
+        "gpt_project_sync/latest/07_Codex回报复审契约_codex_report_review_contract.md",
+        "gpt_project_sync/latest/package_manifest.json",
+        "gpt_project_sync/archive/v2_20260712/00_上传说明_UPLOAD_MANIFEST.md",
+        "gpt_project_sync/archive/v2_20260712/01_GPT项目完整指令_GPT_PROJECT_INSTRUCTIONS.md",
+        "gpt_project_sync/archive/v2_20260712/02_跨项目操作习惯_cross_project_operating_habits.md",
+        "gpt_project_sync/archive/v2_20260712/03_工程线与任务路由_engineering_line_and_task_routing.md",
+        "gpt_project_sync/archive/v2_20260712/04_事实源与人工闸门_source_of_truth_and_human_gates.md",
+        "gpt_project_sync/archive/v2_20260712/05_当前项目状态快照_current_project_state_snapshot.md",
+        "gpt_project_sync/archive/v2_20260712/06_Codex交接契约_codex_handoff_contract.md",
+        "gpt_project_sync/archive/v2_20260712/07_Codex回报复审契约_codex_report_review_contract.md",
+        "gpt_project_sync/archive/v2_20260712/package_manifest.json"
+      ],
+      "responsibility_layer": [
+        "engineering_design_layer",
+        "execution_layer",
+        "validation_layer",
+        "sync_layer"
+      ],
+      "task_type": [
+        "mechanism_or_route_fix",
+        "project_file_change",
+        "runtime_kernel_implementation",
+        "gpt_project_sync"
+      ]
+    },
+    "scope_validation": "pass",
+    "supply_check": {
+      "allowed_actions": [
+        "规则、脚本、Schema、Fixture、current 和 GPT package 写入"
+      ],
+      "conflicts": [],
+      "constraints": [
+        "无敏感数据",
+        "无外部动作",
+        "受保护历史包不改"
+      ],
+      "current_state": "collaboration_system_activation",
+      "decision_authority": "execution_authority",
+      "external_research_needed": false,
+      "forbidden_actions": [
+        "业务决定",
+        "外部动作",
+        "秘密读取"
+      ],
+      "missing_information": [],
+      "must_read_sources": [
+        {
+          "exact_relevant_snippets": [
+            "唯一入口、启动顺序、权限、Git 边界"
+          ],
+          "readback_status": "read_ok",
+          "source_path": "AGENTS.md"
+        },
+        {
+          "exact_relevant_snippets": [
+            "v1 状态、事实、决定和任务交接"
+          ],
+          "readback_status": "read_ok",
+          "source_path": "project_system/current/"
+        },
+        {
+          "exact_relevant_snippets": [
+            "route、L0-L3、lane、supply、completion、failure、Git 习惯"
+          ],
+          "readback_status": "read_ok",
+          "source_path": "learning repository baseline"
+        }
+      ],
+      "next_input_for_codex": "按单文件方案实施后运行完整验证。",
+      "retrieval_manifest": [
+        {
+          "readback_status": "read_ok",
+          "source_path": "AGENTS.md"
+        },
+        {
+          "readback_status": "read_ok",
+          "source_path": "project_system/current/"
+        },
+        {
+          "readback_status": "read_ok",
+          "source_path": "learning repository baseline"
+        }
+      ],
+      "second_opinion_trigger": false,
+      "source_readback_status": "read_ok",
+      "task_goal": "完成跨项目协作系统 v2 正式激活。"
+    },
+    "workspace_check": {
+      "formal_output_paths": [
+        "AGENTS.md",
+        "project_system/00_PROJECT_SYSTEM_INDEX.md",
+        "project_system/01_MECHANISM_REGISTRY.md",
+        "project_system/01_MECHANISM_REGISTRY.json",
+        "project_system/02_跨项目操作习惯注册表_cross_project_operating_habits.md",
+        "project_system/02_跨项目操作习惯注册表_cross_project_operating_habits.json",
+        "project_system/rules/03_REQUIREMENT_ALIGNMENT_AND_IMPLEMENTATION_DESIGN.md",
+        "project_system/rules/04_TASK_ROUTING_AND_STATE_MACHINE.md",
+        "project_system/rules/06_COMPLETION_TRUTH_AND_RELAY.md",
+        "project_system/rules/08_GIT_AND_SYNC_TRUTH.md",
+        "project_system/rules/09_ENGINEERING_DEPTH_AND_COLLABORATION_EFFECTIVENESS.md",
+        "project_system/rules/10_跨项目操作习惯_cross_project_operating_habits.md",
+        "project_system/rules/11_路由判断与流程启动_route_decision_and_process_boot.md",
+        "project_system/rules/12_完整工程线_engineering_line.md",
+        "project_system/rules/13_大任务与执行车道_large_task_and_execution_lanes.md",
+        "project_system/rules/14_供料与执行中补料_supply_and_mid_task_supply.md",
+        "project_system/rules/15_单文件细节方案_per_file_detail_plan.md",
+        "project_system/rules/16_完成接力与失败路由_completion_relay_and_failure_routes.md",
+        "project_system/rules/17_语言命名与中文注释_language_naming_and_chinese_annotations.md",
+        "project_system/rules/18_单工作区与路径治理_single_workspace_and_path_governance.md",
+        "project_system/templates/CODEX_TASK_REQUEST_TEMPLATE.md",
+        "project_system/templates/CODEX_COMPLETION_REPORT_TEMPLATE.md",
+        "scripts/project_system/_common.py",
+        "scripts/project_system/route_decision_builder.py",
+        "scripts/project_system/engineering_depth_router.py",
+        "scripts/project_system/large_task_gate.py",
+        "scripts/project_system/lane_parallel_router.py",
+        "scripts/project_system/process_boot_builder.py",
+        "scripts/project_system/mechanism_trigger_router.py",
+        "scripts/project_system/failure_route_resolver.py",
+        "scripts/project_system/fixture_runner.py",
+        "scripts/project_system/task_request_validator.py",
+        "scripts/project_system/per_file_plan_validator.py",
+        "scripts/project_system/source_supply_pack_builder.py",
+        "scripts/project_system/mid_task_supply_builder.py",
+        "scripts/project_system/state_transition_validator.py",
+        "scripts/project_system/completion_relay_validator.py",
+        "scripts/project_system/git_closeout_validator.py",
+        "scripts/project_system/gpt_sync_package_builder.py",
+        "scripts/project_system/project_task_preflight.py",
+        "scripts/project_system/project_task_closeout.py",
+        "project_system/schemas/route_decision.schema.json",
+        "project_system/schemas/engineering_depth.schema.json",
+        "project_system/schemas/process_boot_report.schema.json",
+        "project_system/schemas/task_request.schema.json",
+        "project_system/schemas/per_file_plan.schema.json",
+        "project_system/schemas/pre_task_supply_pack.schema.json",
+        "project_system/schemas/mid_task_supply_pack.schema.json",
+        "project_system/schemas/state_transition.schema.json",
+        "project_system/schemas/completion_relay.schema.json",
+        "project_system/schemas/failure_route.schema.json",
+        "project_system/schemas/git_closeout.schema.json",
+        "project_system/fixtures/01_L0简单解释_l0_simple_explanation.json",
+        "project_system/fixtures/02_L1小文件修改_l1_small_file_change.json",
+        "project_system/fixtures/03_L2稳定节点_l2_stable_node.json",
+        "project_system/fixtures/04_L3多节点系统_l3_multi_node_system.json",
+        "project_system/fixtures/05_缺必读文件_missing_must_read.json",
+        "project_system/fixtures/06_来源冲突_source_conflict.json",
+        "project_system/fixtures/07_Public敏感写入_public_sensitive_write.json",
+        "project_system/fixtures/08_未授权外部动作_unauthorized_external_action.json",
+        "project_system/fixtures/09_多车道写入冲突_multi_lane_write_conflict.json",
+        "project_system/fixtures/10_本地完成未推送_local_complete_not_pushed.json",
+        "project_system/fixtures/11_远端SHA不一致_remote_sha_mismatch.json",
+        "project_system/fixtures/12_完成声明越级_overclaimed_completion.json",
+        "project_system/fixtures/13_合格完整任务_qualified_complete_task.json",
+        "project_system/fixtures/14_合格阻断任务_qualified_blocked_task.json",
+        "project_system/fixtures/15_统一预检通过与阻断_unified_preflight_pass_and_block.json",
+        "project_system/fixtures/16_统一收尾通过与阻断_unified_closeout_pass_and_block.json",
+        "project_system/fixtures/17_单工作区阻断_single_workspace_block.json",
+        "project_system/fixtures/18_统一收尾阻断_unified_closeout_block.json",
+        "project_system/current/CURRENT_PROJECT_STATE.md",
+        "project_system/current/CURRENT_FORMAL_FACTS.md",
+        "project_system/current/CURRENT_DECISIONS.md",
+        "project_system/current/LATEST_TASK_STATUS.md",
+        "project_system/audit/v2_激活影响面检查_v2_activation_impact_check.md",
+        "project_system/audit/v2_单文件细节方案_v2_per_file_detail_plan.json",
+        "project_system/audit/v2_任务请求_v2_task_request.json",
+        "project_system/audit/v2_预检报告_v2_preflight_report.json",
+        "project_system/audit/v2_收尾输入_v2_closeout_input.json",
+        "project_system/audit/v2_收尾报告_v2_closeout_report.json",
+        "project_system/audit/v2_运行内核验证_v2_runtime_kernel_validation.json",
+        "project_system/audit/v2_远端回读_v2_remote_readback.md",
+        "gpt_project_sync/latest/00_UPLOAD_MANIFEST.md",
+        "gpt_project_sync/latest/01_GPT_PROJECT_INSTRUCTIONS.md",
+        "gpt_project_sync/latest/02_PROJECT_COLLABORATION_SYSTEM.md",
+        "gpt_project_sync/latest/03_SOURCE_OF_TRUTH_AND_HUMAN_GATES.md",
+        "gpt_project_sync/latest/04_CURRENT_PROJECT_STATE_SNAPSHOT.md",
+        "gpt_project_sync/latest/05_CODEX_HANDOFF_CONTRACT.md",
+        "gpt_project_sync/latest/00_上传说明_UPLOAD_MANIFEST.md",
+        "gpt_project_sync/latest/01_GPT项目完整指令_GPT_PROJECT_INSTRUCTIONS.md",
+        "gpt_project_sync/latest/02_跨项目操作习惯_cross_project_operating_habits.md",
+        "gpt_project_sync/latest/03_工程线与任务路由_engineering_line_and_task_routing.md",
+        "gpt_project_sync/latest/04_事实源与人工闸门_source_of_truth_and_human_gates.md",
+        "gpt_project_sync/latest/05_当前项目状态快照_current_project_state_snapshot.md",
+        "gpt_project_sync/latest/06_Codex交接契约_codex_handoff_contract.md",
+        "gpt_project_sync/latest/07_Codex回报复审契约_codex_report_review_contract.md",
+        "gpt_project_sync/latest/package_manifest.json",
+        "gpt_project_sync/archive/v2_20260712/00_上传说明_UPLOAD_MANIFEST.md",
+        "gpt_project_sync/archive/v2_20260712/01_GPT项目完整指令_GPT_PROJECT_INSTRUCTIONS.md",
+        "gpt_project_sync/archive/v2_20260712/02_跨项目操作习惯_cross_project_operating_habits.md",
+        "gpt_project_sync/archive/v2_20260712/03_工程线与任务路由_engineering_line_and_task_routing.md",
+        "gpt_project_sync/archive/v2_20260712/04_事实源与人工闸门_source_of_truth_and_human_gates.md",
+        "gpt_project_sync/archive/v2_20260712/05_当前项目状态快照_current_project_state_snapshot.md",
+        "gpt_project_sync/archive/v2_20260712/06_Codex交接契约_codex_handoff_contract.md",
+        "gpt_project_sync/archive/v2_20260712/07_Codex回报复审契约_codex_report_review_contract.md",
+        "gpt_project_sync/archive/v2_20260712/package_manifest.json"
+      ],
+      "project_root_matches": true,
+      "single_formal_workspace": true,
+      "workspace_mode": "single_formal_workspace",
+      "worktree_count": 1
+    }
+  },
+  "status": "pass"
+}

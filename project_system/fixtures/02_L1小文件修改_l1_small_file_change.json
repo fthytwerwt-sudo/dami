@@ -1,0 +1,55 @@
+{
+  "case_id": "L1_small_file_change",
+  "description": "小范围正式文件修改具有完整路由、基线回读和单文件计划。",
+  "component_inputs": {
+    "task_request_validator": {
+      "goal": "修复一份非敏感规则的标题",
+      "context": "已读当前规则与 current 基线",
+      "source_of_truth": ["project_system/rules/"],
+      "constraints": ["不改业务事实"],
+      "allowed_files": ["project_system/rules/"],
+      "forbidden_files": ["project_bootstrap/"],
+      "external_actions": "none",
+      "human_gates": [],
+      "execution_steps": ["读取", "修改", "验证"],
+      "validation": ["diff check"],
+      "done_when": "标题更新并验证",
+      "blocked_if": "来源缺失",
+      "output": "report",
+      "task_type": ["project_file_change"],
+      "responsibility_layer": ["execution_layer", "validation_layer"],
+      "must_read_files": [
+        {"path": "AGENTS.md", "read_status": "read_ok"},
+        {"path": "project_system/current/CURRENT_PROJECT_STATE.md", "read_status": "read_ok"},
+        {"path": "project_system/current/CURRENT_FORMAL_FACTS.md", "read_status": "read_ok"},
+        {"path": "project_system/current/CURRENT_DECISIONS.md", "read_status": "read_ok"},
+        {"path": "project_system/current/LATEST_TASK_STATUS.md", "read_status": "read_ok"},
+        {"path": "project_system/rules/example.md", "read_status": "read_ok"}
+      ],
+      "repository_visibility": "Public",
+      "contains_sensitive_business_data": false,
+      "contains_personal_data": false,
+      "repository_write_requested": true,
+      "implementation_design": "fixture implementation",
+      "impact_check": "fixture impact check",
+      "supply_pack": "fixture supply",
+      "failure_routes": ["scope_repair"],
+      "rollback": "revert precise file",
+      "completion_relay": "fixture completion relay",
+      "git_closeout": "fixture git closeout",
+      "workspace_mode": "single_formal_workspace",
+      "external_workspace_required": false,
+      "worktree_requested": false,
+      "engineering_depth": "L1_task_card",
+      "per_file_plan": {"shared_policy": {"missing_info_policy": "block", "conflict_policy": "block", "blocked_if": "scope"}, "plan_groups": [{"paths": ["project_system/rules/example.md"], "purpose": "修复标题", "layer": "execution_layer", "inputs": ["旧标题"], "outputs": ["新标题"], "core_decisions": ["不改语义"], "trigger_conditions": ["标题错误"], "route_rules": ["L1"], "examples": ["示例"], "validation": ["diff"], "user_review_points": "无"}]}
+    },
+    "per_file_plan_validator": {
+      "shared_policy": {"missing_info_policy": "block", "conflict_policy": "block", "blocked_if": "scope"},
+      "plan_groups": [{"paths": ["project_system/rules/example.md"], "purpose": "修复标题", "layer": "execution_layer", "inputs": ["旧标题"], "outputs": ["新标题"], "core_decisions": ["不改语义"], "trigger_conditions": ["标题错误"], "route_rules": ["L1"], "examples": ["示例"], "validation": ["diff"], "user_review_points": "无"}]
+    }
+  },
+  "expected": {
+    "task_request_validator": {"status": "pass", "error_codes": []},
+    "per_file_plan_validator": {"status": "pass", "error_codes": []}
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "per_file_plan｜单文件细节方案",
+  "description": "每个待改文件必须继承或显式提供的实现方案字段。",
+  "type": "object",
+  "required": ["plan_groups"],
+  "properties": {
+    "shared_policy": {"type": "object", "description": "所有文件继承的缺信息、冲突、阻断和用户复审规则。"},
+    "plan_groups": {"type": "array", "minItems": 1, "description": "每个 group.paths 中的文件都继承该组完整方案。"}
+  }
+}

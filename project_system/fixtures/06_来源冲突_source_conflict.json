@@ -1,0 +1,12 @@
+{
+  "case_id": "source_conflict",
+  "description": "来源冲突必须进入供料或事实冲突修复，不可继续写入。",
+  "component_inputs": {
+    "source_supply_pack_builder": {"task_goal": "核对机制", "current_state": "collaboration_system_activation", "must_read_sources": [{"source_path": "a.md", "readback_status": "read_ok", "exact_relevant_snippets": ["A"]}], "constraints": ["original wins"], "source_conflicts": ["A 与 B 结论冲突"], "missing_information": [], "allowed_actions": ["audit"], "forbidden_actions": ["promote fact"]},
+    "mid_task_supply_builder": {"base_supply_pack": {"task_goal": "核对机制"}, "validation_failed": false, "missing_information": [], "source_conflicts": ["A/B"], "exact_relevant_snippets": ["A", "B"]}
+  },
+  "expected": {
+    "source_supply_pack_builder": {"status": "blocked", "error_codes": ["blocked_fact_conflict"]},
+    "mid_task_supply_builder": {"status": "blocked", "error_codes": ["blocked_fact_conflict"]}
+  }
+}

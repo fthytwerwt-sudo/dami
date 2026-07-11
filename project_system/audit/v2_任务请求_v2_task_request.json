@@ -1,0 +1,119 @@
+{
+  "goal": "将轻量协作系统 v1 升级为可执行、可验证、可同步的跨项目协作系统 v2。",
+  "context": "用户明确授权完整迁移机制、运行内核、Schema、Fixture、GPT Project v2 包和 Git 收尾；不得推进任何业务决定或外部动作。",
+  "source_of_truth": [
+    "用户本轮明确要求",
+    "fthytwerwt-sudo/dami current main",
+    "fthytwerwt-sudo/- current main at ebc420f7bf42bd8c6c1d9ed435fd889177aa452c",
+    "current formal files",
+    "protected migration evidence"
+  ],
+  "constraints": [
+    "Public 仓库不得写入商业敏感或个人数据",
+    "不得修改 project_bootstrap/collaboration_mechanism_migration/",
+    "不得新建 clone 或 worktree",
+    "不得执行外部业务动作",
+    "必须精确暂存并完成远端回读"
+  ],
+  "allowed_files": [
+    "AGENTS.md",
+    "project_system/",
+    "scripts/project_system/",
+    "gpt_project_sync/"
+  ],
+  "forbidden_files": [
+    "project_bootstrap/collaboration_mechanism_migration/",
+    ".DS_Store",
+    ".omx/",
+    ".env",
+    ".env.*",
+    "project_local/",
+    "foreign_trade_low_gi_plan/",
+    "secrets/",
+    "private/"
+  ],
+  "external_actions": "none",
+  "external_action_authorized": false,
+  "human_gates": ["业务、合规、市场、渠道、价格与外部动作均不在本轮授权范围"],
+  "execution_steps": ["预检", "更新规则与注册表", "实现运行内核", "执行验证", "重建 GPT 包", "Git 收尾"],
+  "validation": ["JSON 解析", "Schema 解析", "py_compile", "CLI help", "Fixture", "敏感信息扫描", "Git 三方 SHA 与远端回读"],
+  "done_when": "v2 运行内核、规则、注册表、当前状态和 GPT 包经验证、精确提交、推送和远端回读后落成。",
+  "blocked_if": "来源不可读、范围越界、敏感信息、无法隔离脏改、验证失败或远端回读失败。",
+  "output": "machine-readable reports plus truthful final handoff",
+  "repository_write_requested": true,
+  "implementation_design": "在既有唯一正式入口内更新规则、注册表、运行内核、Schema、Fixture、current 与 GPT 分发包；所有写入均由 single_integrator 完成。",
+  "impact_check": "先验证 root、branch、remote、Public 可见性、受保护迁移包、脏改隔离、计划路径与静态动态边界。",
+  "supply_pack": "使用当前正式文件、学习仓库基线与受保护迁移证据的原文件回读；具体来源见 supply_pack_input。",
+  "failure_routes": ["scope_repair", "supply_repair", "state_transition_repair", "completion_claim_repair", "git_closeout_repair"],
+  "rollback": "仅通过精确路径反向提交或人工审查后的恢复操作回滚；不得重写历史。",
+  "completion_relay": "required output inventory、child task graph、remaining work check 和 Git closeout 必须同时闭合。",
+  "git_closeout": "精确暂存、staged diff 检查、敏感扫描、commit、push、fetch、HEAD/origin/ls-remote 对读与远端文件回读。",
+  "workspace_mode": "single_formal_workspace",
+  "external_workspace_required": false,
+  "worktree_requested": false,
+  "per_file_plan_path": "project_system/audit/v2_单文件细节方案_v2_per_file_detail_plan.json",
+  "task_type": ["mechanism_or_route_fix", "project_file_change", "runtime_kernel_implementation", "gpt_project_sync"],
+  "responsibility_layer": ["engineering_design_layer", "execution_layer", "validation_layer", "sync_layer"],
+  "must_read_files": [
+    {"path": "AGENTS.md", "read_status": "read_ok"},
+    {"path": "project_system/current/CURRENT_PROJECT_STATE.md", "read_status": "read_ok"},
+    {"path": "project_system/current/CURRENT_FORMAL_FACTS.md", "read_status": "read_ok"},
+    {"path": "project_system/current/CURRENT_DECISIONS.md", "read_status": "read_ok"},
+    {"path": "project_system/current/LATEST_TASK_STATUS.md", "read_status": "read_ok"},
+    {"path": "project_system/01_MECHANISM_REGISTRY.json", "read_status": "read_ok"},
+    {"path": "project_system/02_跨项目操作习惯注册表_cross_project_operating_habits.json", "read_status": "read_ok"},
+    {"path": "project_system/rules/09_ENGINEERING_DEPTH_AND_COLLABORATION_EFFECTIVENESS.md", "read_status": "read_ok"},
+    {"path": "project_bootstrap/collaboration_mechanism_migration/02_mechanism_inventory.json", "read_status": "read_ok"}
+  ],
+  "repository_visibility": "Public",
+  "contains_sensitive_business_data": false,
+  "contains_personal_data": false,
+  "current_state": "collaboration_system_activation",
+  "formal_file_count": 60,
+  "affected_categories": ["rules", "scripts", "state", "logs"],
+  "large_readonly_audit": true,
+  "multi_stage_or_role": true,
+  "user_requests_complete_or_parallel": true,
+  "engineering_depth": "L3_system_line",
+  "engineering_worth_question": {
+    "worth_engineering": true,
+    "reason": "本轮需要持续可运行的路由、工程深度、供料、验证、失败和 Git 收尾机制。",
+    "engineering_depth": "L3_system_line",
+    "chosen_gate": "executable_runtime_kernel_with_schemas_and_fixtures",
+    "not_chosen_gate": "L0_light_chat_or_L1_task_card"
+  },
+  "engineering_signals": {
+    "has_state": true,
+    "multi_node": true,
+    "requires_tools": true,
+    "requires_evaluation": true,
+    "has_failure_route": true,
+    "long_running": true
+  },
+  "source_summary": "当前正式文件、学习仓库基线和受保护迁移证据均已原文件回读。",
+  "failure_route": "failure_route_resolver",
+  "record_location": "project_system/audit/",
+  "lane_recommendation": "explore_plus_integrate",
+  "lanes": [
+    {"name": "learning_and_v1_audit", "mode": "read_only", "owner": "explorer"},
+    {"name": "single_integrator", "mode": "write", "owner": "single_integrator"}
+  ],
+  "write_owner": "single_integrator",
+  "integration_owner": "single_integrator",
+  "supply_pack_input": {
+    "task_goal": "完成跨项目协作系统 v2 正式激活。",
+    "current_state": "collaboration_system_activation",
+    "must_read_sources": [
+      {"source_path": "AGENTS.md", "readback_status": "read_ok", "exact_relevant_snippets": ["唯一入口、启动顺序、权限、Git 边界"]},
+      {"source_path": "project_system/current/", "readback_status": "read_ok", "exact_relevant_snippets": ["v1 状态、事实、决定和任务交接"]},
+      {"source_path": "learning repository baseline", "readback_status": "read_ok", "exact_relevant_snippets": ["route、L0-L3、lane、supply、completion、failure、Git 习惯"]}
+    ],
+    "constraints": ["无敏感数据", "无外部动作", "受保护历史包不改"],
+    "source_conflicts": [],
+    "missing_information": [],
+    "decision_authority": "execution_authority",
+    "allowed_actions": ["规则、脚本、Schema、Fixture、current 和 GPT package 写入"],
+    "forbidden_actions": ["业务决定", "外部动作", "秘密读取"],
+    "next_input_for_codex": "按单文件方案实施后运行完整验证。"
+  }
+}

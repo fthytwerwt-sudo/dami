@@ -44,3 +44,9 @@ Not-tested
 - GPT Project 中的静态规则不能覆盖仓库正式当前事实；动态快照必须注明来源 commit、规范来源文件、生成时间和快照状态。
 - 用户完成上传并确认前，状态只能是 `gpt_project_sync_package_generated_pending_user_upload`。
 - `latest` 是当前分发入口；版本归档必须保留，不以 `latest` 覆盖历史。
+
+## v2 强制小闭环
+
+正式文件被修改时，默认顺序为：精确路径暂存 → `git diff --cached --check` → staged secret/sensitive scan → commit → 普通 push → fetch → 本地 `HEAD` / `origin/main` / `git ls-remote` 对读 → 远端关键文件回读。禁止 `git add .`、`git add -A`、`git commit -a`、强推和改写历史。
+
+`git_closeout_validator.py` 只验证传入证据，不拥有 Git 写入权限；它发现 staged path 越界、扫描失败、未 push、SHA 不一致或远端不可读时必须返回具体阻断。GPT package generated、Git synced、ChatGPT Project UI uploaded 继续严格分层。

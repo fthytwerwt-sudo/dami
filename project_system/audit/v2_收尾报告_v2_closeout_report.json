@@ -1,0 +1,30 @@
+{
+  "component": "project_task_closeout",
+  "evidence_scope": "precommit_readiness_only; not a completed Git-closeout assertion",
+  "status": "blocked",
+  "error_codes": [
+    "blocked_completion_claim_repair",
+    "blocked_git_closeout_repair",
+    "blocked_remote_readback_failed"
+  ],
+  "status_interpretation": "正确阻断：实现提交、push、三方 SHA 对读和必需远端文件回读尚未开始，不能将技术实现写成任务完成。",
+  "completion_truth": {
+    "required_output_inventory": "runtime kernel and precommit validation complete; implementation commit and remote readback pending",
+    "remaining_required": true,
+    "completion_status": "continue"
+  },
+  "state_transition": {
+    "technical_transition_contract": "schema-valid",
+    "promotion_withheld_until_git_closeout": true,
+    "business_execution_started": false
+  },
+  "git_closeout_readiness": {
+    "branch": "main",
+    "staged_paths": [],
+    "precise_stage_complete": false,
+    "push_succeeded": false,
+    "remote_match": false,
+    "required_remote_readback_complete": false
+  },
+  "next_safe_step": "执行精确暂存与首个 implementation commit；push/readback 后再写入真实证据。"
+}

@@ -1,0 +1,18 @@
+{
+  "case_id": "L0_simple_explanation",
+  "description": "L0 简单解释不进入文件写入或 L3。",
+  "component_inputs": {
+    "engineering_depth_router": {
+      "engineering_depth": "L0_light_chat",
+      "goal": "解释 route_decision 的中文含义",
+      "current_state": "cross_project_collaboration_system_v2_active",
+      "engineering_signals": {},
+      "formal_file_count": 0
+    },
+    "large_task_gate": {"formal_file_count": 0, "affected_categories": [], "lane_recommendation": "serial_only"}
+  },
+  "expected": {
+    "engineering_depth_router": {"status": "pass", "error_codes": []},
+    "large_task_gate": {"status": "pass", "error_codes": []}
+  }
+}

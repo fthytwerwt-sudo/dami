@@ -1,0 +1,12 @@
+{
+  "case_id": "multi_lane_write_conflict",
+  "description": "两个写入 lane 冲突时必须降级为单一写入 owner。",
+  "component_inputs": {
+    "lane_parallel_router": {"lane_recommendation": "true_multi_task_parallel", "lanes": [{"name": "writer_a", "mode": "write", "owner": "a"}, {"name": "writer_b", "mode": "write", "owner": "b"}], "write_owner": "a", "integration_owner": "a"},
+    "large_task_gate": {"formal_file_count": 4, "affected_categories": ["rules", "scripts", "state"], "lane_recommendation": "invalid_lane"}
+  },
+  "expected": {
+    "lane_parallel_router": {"status": "blocked", "error_codes": ["blocked_multi_lane_write_conflict"]},
+    "large_task_gate": {"status": "blocked", "error_codes": ["blocked_large_task_lane_missing"]}
+  }
+}

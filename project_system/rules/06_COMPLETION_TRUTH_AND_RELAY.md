@@ -50,3 +50,7 @@ remote_main
 7. 是否满足下一状态全部进入条件。
 
 只有全部适用检查通过，才可使用 `completed_verified`。等待人工判断时使用 `completed_pending_human_review`；部分目标成立时使用 `partial_completed`；关键条件不满足时使用具体 `blocked_*`。
+
+## v2 可执行收尾
+
+v2 将 Completion Relay 落为 `completion_relay_validator.py` 与 `project_task_closeout.py`。复杂任务必须保留 `required_output_inventory`、`child_task_graph`、`remaining_work_check`、`status_promotions`、`status_not_promoted` 和 `下一个目标`。若修改正式仓库文件，Git closeout 未通过时不得使用 `completed_verified`。

@@ -1,0 +1,95 @@
+{
+  "validation_version": "v2_20260712",
+  "scope": "cross_project_collaboration_system_v2_activation_precommit_validation",
+  "source_readback": {
+    "target_starting_sha": "c254cb5b0fe28b6ec9d50ce550de83a369f6361d",
+    "learning_repo_sha": "ebc420f7bf42bd8c6c1d9ed435fd889177aa452c",
+    "learning_main_changed_after_baseline": false,
+    "source_files_read": [
+      "target AGENTS.md and current files",
+      "target v1 rules, registry, templates and GPT package",
+      "learning AGENTS, project prompt, state router, engineering gate, execution lanes, supply, completion, failure and Git sources"
+    ]
+  },
+  "route_decision": {
+    "status": "pass",
+    "engineering_depth": "L3_system_line",
+    "large_task_gate": true,
+    "lane_recommendation": "explore_plus_integrate",
+    "write_owner": "single_integrator",
+    "execution_permission": "authorized_within_allowed_files",
+    "workspace_check": "pass"
+  },
+  "mechanisms": {
+    "total": 28,
+    "active_direct": 16,
+    "active_adapted": 9,
+    "deferred": 0,
+    "rejected_not_migrated": 3,
+    "m19_status": "ACTIVE_ADAPTED",
+    "m24_m26_status": "REJECTED_NOT_MIGRATED"
+  },
+  "operating_habits": {
+    "total": 20,
+    "active": 20,
+    "missing": [],
+    "registry": "project_system/02_跨项目操作习惯注册表_cross_project_operating_habits.json"
+  },
+  "runtime_kernel": {
+    "python_compile": "pass",
+    "cli_help": {"passed": 19, "failed": 0},
+    "fixture_runner": {"fixture_count": 18, "passed_count": 18, "blocked_count": 0},
+    "per_file_plan_validator": {"status": "pass", "planned_file_count": 106},
+    "preflight": {"status": "pass", "report": "project_system/audit/v2_预检报告_v2_preflight_report.json"},
+    "unified_closeout": {"status": "blocked_as_expected_before_commit", "report": "project_system/audit/v2_收尾报告_v2_closeout_report.json"},
+    "adversarial_gates": {
+      "unsafe_gpt_version_path": "blocked",
+      "forbidden_report_output": "blocked_without_write",
+      "windows_absolute_path_scan": "detected",
+      "nested_env_and_ds_store_paths": "blocked",
+      "fake_git_sha_live_readback": "blocked",
+      "code_debug_write_without_per_file_plan": "blocked",
+      "high_risk_second_opinion": "triggered"
+    }
+  },
+  "data_contracts": {
+    "json_parse": "pass",
+    "schema_parse": {"passed": 11, "failed": 0},
+    "schema_runtime_enforcement": "pass",
+    "schemas": [
+      "route_decision",
+      "engineering_depth",
+      "process_boot_report",
+      "task_request",
+      "per_file_plan",
+      "pre_task_supply_pack",
+      "mid_task_supply_pack",
+      "state_transition",
+      "completion_relay",
+      "failure_route",
+      "git_closeout"
+    ]
+  },
+  "gpt_project_sync": {
+    "version": "v2_20260712",
+    "latest_path": "gpt_project_sync/latest/",
+    "archive_path": "gpt_project_sync/archive/v2_20260712/",
+    "package_shape_and_hash_validation": "pass",
+    "source_commit_refresh_after_implementation_commit": "pending_required_before_evidence_commit",
+    "ui_uploaded": false
+  },
+  "safety": {
+    "repository_visibility": "Public",
+    "business_sensitive_git_write_blocked_while_repo_public": true,
+    "absolute_path_and_secret_scan": "precommit_pass; staged scan pending",
+    "symlink_scan": "pass",
+    "static_dynamic_separation": "pass",
+    "protected_migration_package_modified": false
+  },
+  "format": {
+    "git_diff_check": "pending_final_rerun",
+    "trailing_whitespace_scan": "pending_final_rerun",
+    "end_of_file_policy": "one standard newline at most"
+  },
+  "status_boundary": "Pre-commit technical validation passed. The closeout runner correctly remains blocked until precise staging, both commits, push, three-way SHA verification, and remote readback complete."
+}

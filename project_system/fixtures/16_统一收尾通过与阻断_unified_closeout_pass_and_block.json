@@ -1,0 +1,12 @@
+{
+  "case_id": "unified_closeout_pass",
+  "description": "统一收尾必须同时通过 Completion Relay、合法状态转换和严格 Git 证据。",
+  "component_inputs": {
+    "project_task_closeout": {
+      "completion_relay": {"required_output_inventory": [{"name": "runtime", "required": true, "status": "completed"}], "child_task_graph": ["implement", "verify", "sync"], "remaining_work_check": {"remaining_required": false}, "completion_status": "completed_verified", "git_closeout": {"remote_match": true}},
+      "state_transition": {"current_state": "collaboration_system_activation", "target_state": "cross_project_collaboration_system_v2_active", "required_evidence": [{"evidence_type": "fixture", "source_path": "fixture", "readback_status": "read_ok"}], "human_gate_required": false, "human_gate_satisfied": false, "business_execution_started": false},
+      "git_closeout": {"staged_paths": ["AGENTS.md"], "authorized_staged_paths": ["AGENTS.md"], "broad_stage_used": false, "diff_check_passed": true, "secret_scan_passed": true, "sensitive_scan_passed": true, "commit_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "push_succeeded": true, "local_head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "origin_main": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "ls_remote_main": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "branch": "main", "remote_readback": [{"path": "AGENTS.md", "read_status": "read_ok"}, {"path": "project_system/01_MECHANISM_REGISTRY.json", "read_status": "read_ok"}, {"path": "project_system/02_跨项目操作习惯注册表_cross_project_operating_habits.json", "read_status": "read_ok"}, {"path": "project_system/rules/12_完整工程线_engineering_line.md", "read_status": "read_ok"}, {"path": "gpt_project_sync/latest/package_manifest.json", "read_status": "read_ok"}], "repository_visibility": "Public", "contains_sensitive_business_data": false, "contains_personal_data": false}
+    }
+  },
+  "expected": {"project_task_closeout": {"status": "pass", "error_codes": []}}
+}

@@ -1,0 +1,25 @@
+{
+  "case_id": "public_sensitive_write",
+  "description": "Public 仓库含敏感商业数据必须阻断，即使 visibility 字段缺省也不放宽。",
+  "component_inputs": {
+    "task_request_validator": {
+      "goal": "写入敏感业务字段", "context": "Public", "source_of_truth": ["private"], "constraints": ["no sensitive"], "allowed_files": ["project_system/"], "forbidden_files": ["private/"], "external_actions": "none", "human_gates": [], "execution_steps": ["write"], "validation": ["scan"], "done_when": "blocked", "blocked_if": "public", "output": "report", "task_type": ["project_file_change"], "responsibility_layer": ["execution_layer"],
+      "must_read_files": [{"path": "AGENTS.md", "read_status": "read_ok"}, {"path": "project_system/current/CURRENT_PROJECT_STATE.md", "read_status": "read_ok"}, {"path": "project_system/current/CURRENT_FORMAL_FACTS.md", "read_status": "read_ok"}, {"path": "project_system/current/CURRENT_DECISIONS.md", "read_status": "read_ok"}, {"path": "project_system/current/LATEST_TASK_STATUS.md", "read_status": "read_ok"}],
+      "contains_sensitive_business_data": true,
+      "contains_personal_data": false,
+      "repository_write_requested": true,
+      "implementation_design": "fixture implementation",
+      "impact_check": "fixture impact check",
+      "supply_pack": "fixture supply",
+      "failure_routes": ["scope_repair"],
+      "rollback": "revert precise file",
+      "completion_relay": "fixture completion relay",
+      "git_closeout": "fixture git closeout",
+      "workspace_mode": "single_formal_workspace",
+      "external_workspace_required": false,
+      "worktree_requested": false,
+      "per_file_plan": {"shared_policy": {"missing_info_policy": "block", "conflict_policy": "block", "blocked_if": "scope"}, "plan_groups": [{"paths": ["project_system/rules/example.md"], "purpose": "x", "layer": "execution_layer", "inputs": ["x"], "outputs": ["x"], "core_decisions": ["x"], "trigger_conditions": ["x"], "route_rules": ["x"], "examples": ["x"], "validation": ["x"], "user_review_points": "x"}]}
+    }
+  },
+  "expected": {"task_request_validator": {"status": "blocked", "error_codes": ["blocked_repo_visibility_for_sensitive_data"]}}
+}

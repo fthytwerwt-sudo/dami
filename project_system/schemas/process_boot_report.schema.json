@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "process_boot_report｜流程启动报告",
+  "description": "执行前建立当前任务、来源和失败路由的报告。",
+  "type": "object",
+  "required": ["task_goal", "current_state", "must_read_sources", "five_questions", "prompt_role"],
+  "properties": {
+    "task_goal": {"type": "string", "description": "任务目标。"},
+    "current_state": {"type": "string", "description": "当前状态。"},
+    "must_read_sources": {"type": "array", "description": "必读来源。"},
+    "five_questions": {"type": "object", "description": "五问法答案。"},
+    "prompt_role": {"const": "prompt_delta_only", "description": "Prompt 仅是本轮增量。"}
+  }
+}

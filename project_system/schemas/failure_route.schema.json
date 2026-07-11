@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "failure_route｜失败路由",
+  "description": "失败条件到修复层、责任人和下一安全动作的映射。",
+  "type": "object",
+  "required": ["failure_condition", "repair_route", "owner", "next_safe_step"],
+  "properties": {
+    "failure_condition": {"type": "string", "description": "失败条件。"},
+    "repair_route": {"type": "string", "description": "修复路由。"},
+    "owner": {"type": "string", "description": "责任人。"},
+    "next_safe_step": {"type": "string", "description": "下一安全动作。"}
+  }
+}

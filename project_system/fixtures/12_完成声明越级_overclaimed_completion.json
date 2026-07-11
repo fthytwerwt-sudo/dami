@@ -1,0 +1,14 @@
+{
+  "case_id": "overclaimed_completion",
+  "description": "必交付未完成或远端未匹配时不能声明 completed_verified。",
+  "component_inputs": {
+    "completion_relay_validator": {"required_output_inventory": [{"name": "remote readback", "required": true, "status": "pending"}], "child_task_graph": ["git"], "remaining_work_check": {"remaining_required": true}, "completion_status": "completed_verified", "git_closeout": {"remote_match": false}},
+    "failure_route_resolver": {"failure_condition": "not_a_formal_route"},
+    "state_transition_validator": {"current_state": "collaboration_system_activation", "target_state": "unknown", "required_evidence": [{"evidence_type": "fixture", "source_path": "fixture", "readback_status": "read_ok"}], "human_gate_required": false, "human_gate_satisfied": false}
+  },
+  "expected": {
+    "completion_relay_validator": {"status": "blocked", "error_codes": ["blocked_completion_claim_repair"]},
+    "failure_route_resolver": {"status": "blocked", "error_codes": ["blocked_input_invalid"]},
+    "state_transition_validator": {"status": "blocked", "error_codes": ["blocked_state_transition_invalid"]}
+  }
+}

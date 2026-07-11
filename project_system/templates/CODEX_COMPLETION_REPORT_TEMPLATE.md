@@ -1,30 +1,45 @@
-# Codex Completion Report
+# Codex 完成回报模板（completion report template）
 
-```yaml
+```text
 task_result.status:
 goal_result:
-deliverables:
 source_of_truth_used:
+route_decision:
+engineering_depth:
+large_task_gate:
+lane_recommendation:
+
+deliverables:
 files_read:
 files_created:
 files_modified:
 files_not_touched:
+local_only_files:
 external_actions:
-tests_run:
-tests_passed:
-tests_failed:
-not_tested:
-blocked_items:
-assumptions:
-deviations:
+human_review_required:
+
+Tested:
+Not-tested:
+validation_results:
 status_promotions:
 status_not_promoted:
+blocked_items:
 remaining_work:
-next_safe_step:
-human_review_required:
-git_status:
-local_head:
-remote_main:
+assumptions:
+deviations:
+
+git_closeout:
+  staged_paths:
+  local_head:
+  origin_main:
+  ls_remote_main:
+  remote_readback:
+
+GPT Project sync:
+  package_generated:
+  ui_uploaded:
+
+下一个目标:
 ```
 
-Do not report a higher validation layer than the evidence supports.
+任何低层机器验证不得替代人工、合规、业务、外部动作、Git 同步或 GPT Project UI 上传。`project_task_closeout.py` 在完成声明前检查 inventory、状态、剩余工作和 Git 收尾。

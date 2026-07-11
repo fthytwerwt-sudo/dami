@@ -1,0 +1,13 @@
+{
+  "case_id": "unauthorized_external_action",
+  "description": "未经授权的外部动作只能被提案，不能执行。",
+  "component_inputs": {
+    "task_request_validator": {
+      "goal": "发送客户消息", "context": "外部动作", "source_of_truth": ["request"], "constraints": ["authorization"], "allowed_files": ["project_system/"], "forbidden_files": ["external"], "external_actions": ["send_message"], "human_gates": ["user approval"], "execution_steps": ["send"], "validation": ["none"], "done_when": "sent", "blocked_if": "not approved", "output": "report", "task_type": ["external_action_proposal"], "responsibility_layer": ["project_judgment_layer"],
+      "must_read_files": [{"path": "AGENTS.md", "read_status": "read_ok"}, {"path": "project_system/current/CURRENT_PROJECT_STATE.md", "read_status": "read_ok"}, {"path": "project_system/current/CURRENT_FORMAL_FACTS.md", "read_status": "read_ok"}, {"path": "project_system/current/CURRENT_DECISIONS.md", "read_status": "read_ok"}, {"path": "project_system/current/LATEST_TASK_STATUS.md", "read_status": "read_ok"}],
+      "external_action_authorized": false,
+      "per_file_plan": {"shared_policy": {"missing_info_policy": "block", "conflict_policy": "block", "blocked_if": "scope"}, "plan_groups": [{"paths": ["project_system/rules/example.md"], "purpose": "x", "layer": "execution_layer", "inputs": ["x"], "outputs": ["x"], "core_decisions": ["x"], "trigger_conditions": ["x"], "route_rules": ["x"], "examples": ["x"], "validation": ["x"], "user_review_points": "x"}]}
+    }
+  },
+  "expected": {"task_request_validator": {"status": "blocked", "error_codes": ["blocked_authorization_required"]}}
+}

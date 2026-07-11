@@ -1,0 +1,37 @@
+{
+  "case_id": "missing_must_read",
+  "description": "必读文件缺失时禁止写入，统一预检也必须 fail-closed。",
+  "component_inputs": {
+    "task_request_validator": {
+      "goal": "修改规则", "context": "来源缺失", "source_of_truth": ["rules"], "constraints": ["read first"], "allowed_files": ["project_system/"], "forbidden_files": ["project_bootstrap/"], "external_actions": "none", "human_gates": [], "execution_steps": ["read"], "validation": ["check"], "done_when": "never", "blocked_if": "missing", "output": "report", "task_type": ["project_file_change"], "responsibility_layer": ["execution_layer"],
+      "must_read_files": [
+        {"path": "AGENTS.md", "read_status": "read_ok"},
+        {"path": "project_system/current/CURRENT_PROJECT_STATE.md", "read_status": "read_ok"},
+        {"path": "project_system/current/CURRENT_FORMAL_FACTS.md", "read_status": "read_ok"},
+        {"path": "project_system/current/CURRENT_DECISIONS.md", "read_status": "missing"},
+        {"path": "project_system/current/LATEST_TASK_STATUS.md", "read_status": "read_ok"}
+      ],
+      "repository_visibility": "Public", "contains_sensitive_business_data": false, "contains_personal_data": false, "repository_write_requested": true,
+      "implementation_design": "fixture", "impact_check": "fixture", "supply_pack": "fixture", "failure_routes": ["supply_repair"], "rollback": "revert", "completion_relay": "fixture", "git_closeout": "fixture",
+      "workspace_mode": "single_formal_workspace", "external_workspace_required": false, "worktree_requested": false,
+      "per_file_plan": {"shared_policy": {"missing_info_policy": "block", "conflict_policy": "block", "blocked_if": "scope"}, "plan_groups": [{"paths": ["project_system/rules/example.md"], "purpose": "x", "layer": "execution_layer", "inputs": ["x"], "outputs": ["x"], "core_decisions": ["x"], "trigger_conditions": ["x"], "route_rules": ["x"], "examples": ["x"], "validation": ["x"], "user_review_points": "x"}]}
+    },
+    "per_file_plan_validator": {"plan_groups": [{"paths": ["x.md"], "purpose": "x"}]},
+    "engineering_depth_router": {"engineering_depth": "L3_system_line", "engineering_signals": {"has_state": true}, "formal_file_count": 4},
+    "project_task_preflight": {
+      "goal": "修改规则", "context": "来源缺失", "source_of_truth": ["rules"], "constraints": ["read first"], "allowed_files": ["project_system/"], "forbidden_files": ["project_bootstrap/"], "external_actions": "none", "human_gates": [], "execution_steps": ["read"], "validation": ["check"], "done_when": "never", "blocked_if": "missing", "output": "report", "task_type": ["project_file_change"], "responsibility_layer": ["execution_layer"],
+      "must_read_files": [{"path": "AGENTS.md", "read_status": "read_ok"}, {"path": "project_system/current/CURRENT_PROJECT_STATE.md", "read_status": "read_ok"}, {"path": "project_system/current/CURRENT_FORMAL_FACTS.md", "read_status": "read_ok"}, {"path": "project_system/current/CURRENT_DECISIONS.md", "read_status": "missing"}, {"path": "project_system/current/LATEST_TASK_STATUS.md", "read_status": "read_ok"}],
+      "repository_visibility": "Public", "contains_sensitive_business_data": false, "contains_personal_data": false, "repository_write_requested": true,
+      "implementation_design": "fixture", "impact_check": "fixture", "supply_pack": "fixture", "failure_routes": ["supply_repair"], "rollback": "revert", "completion_relay": "fixture", "git_closeout": "fixture",
+      "workspace_mode": "single_formal_workspace", "external_workspace_required": false, "worktree_requested": false,
+      "per_file_plan": {"shared_policy": {"missing_info_policy": "block", "conflict_policy": "block", "blocked_if": "scope"}, "plan_groups": [{"paths": ["project_system/rules/example.md"], "purpose": "x", "layer": "execution_layer", "inputs": ["x"], "outputs": ["x"], "core_decisions": ["x"], "trigger_conditions": ["x"], "route_rules": ["x"], "examples": ["x"], "validation": ["x"], "user_review_points": "x"}]},
+      "engineering_depth": "L1_task_card", "formal_file_count": 1, "affected_categories": ["rules"], "lane_recommendation": "serial_only", "lanes": [{"name": "writer", "mode": "write", "owner": "single_integrator"}], "write_owner": "single_integrator", "integration_owner": "single_integrator", "current_state": "collaboration_system_activation", "source_summary": "source missing", "failure_route": "supply_repair", "record_location": "project_system/audit/", "supply_pack_input": {"task_goal": "x", "current_state": "collaboration_system_activation", "must_read_sources": [{"source_path": "x", "readback_status": "read_ok", "exact_relevant_snippets": ["x"]}], "constraints": ["x"], "source_conflicts": [], "missing_information": [], "allowed_actions": ["x"], "forbidden_actions": ["x"]}
+    }
+  },
+  "expected": {
+    "task_request_validator": {"status": "blocked", "error_codes": ["blocked_source_missing"]},
+    "per_file_plan_validator": {"status": "blocked", "error_codes": ["blocked_per_file_plan_incomplete"]},
+    "engineering_depth_router": {"status": "blocked", "error_codes": ["blocked_engineering_depth_invalid"]},
+    "project_task_preflight": {"status": "blocked", "error_codes": ["blocked_source_missing", "blocked_task_contract_incomplete"]}
+  }
+}

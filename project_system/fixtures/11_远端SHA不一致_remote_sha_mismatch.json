@@ -1,0 +1,8 @@
+{
+  "case_id": "remote_sha_mismatch",
+  "description": "push 后三方 SHA 不一致时必须阻断远端收尾。",
+  "component_inputs": {
+    "git_closeout_validator": {"staged_paths": ["project_system/rules/10.md"], "authorized_staged_paths": ["project_system/rules/10.md"], "broad_stage_used": false, "diff_check_passed": true, "secret_scan_passed": true, "sensitive_scan_passed": true, "commit_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "push_succeeded": true, "local_head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "origin_main": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "ls_remote_main": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "branch": "main", "remote_readback": [{"path": "AGENTS.md", "read_status": "read_ok"}, {"path": "project_system/01_MECHANISM_REGISTRY.json", "read_status": "read_ok"}, {"path": "project_system/02_跨项目操作习惯注册表_cross_project_operating_habits.json", "read_status": "read_ok"}, {"path": "project_system/rules/12_完整工程线_engineering_line.md", "read_status": "read_ok"}, {"path": "gpt_project_sync/latest/package_manifest.json", "read_status": "read_ok"}], "repository_visibility": "Public", "contains_sensitive_business_data": false, "contains_personal_data": false}
+  },
+  "expected": {"git_closeout_validator": {"status": "blocked", "error_codes": ["blocked_remote_readback_failed"]}}
+}
