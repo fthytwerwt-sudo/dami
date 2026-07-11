@@ -21,6 +21,7 @@
 - Python 编译、全部项目 CLI `--help`、相关 JSON Schema/Fixture 解析、单文件方案 Validator 与 `git diff --check`：通过。
 - Fixture runner：`29/29` 通过。
 - staged diff secret/sensitive scan：通过；扫描器对其自身正则文本的 Windows 路径误报，以及 SHA-256 摘要内连续数字的电话号码误报，均已用独立回归断言消除；真实 Windows 盘符绝对路径与电话号码仍会命中。
+- live Git closeout Validator 以 `core.quotepath=false` 读取 Git 路径，中文文件名与精确单文件方案可稳定对读。
 - M01—M28 与 H01—H20 注册表未修改，计数保持 `28` 与 `20`；`AGENTS.md` 和单工作区规则未改。
 - GitHub 只读对读显示仓库为 Public；没有修改仓库可见性。
 

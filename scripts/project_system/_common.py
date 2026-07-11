@@ -1039,7 +1039,7 @@ def run_git_readonly(arguments: list[str]) -> tuple[int, str]:
 
     try:
         result = subprocess.run(
-            ["git", *arguments],
+            ["git", "-c", "core.quotepath=false", *arguments],
             cwd=project_root(),
             capture_output=True,
             text=True,
