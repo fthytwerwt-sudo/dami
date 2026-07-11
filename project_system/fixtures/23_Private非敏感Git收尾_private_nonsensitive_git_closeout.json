@@ -1,0 +1,14 @@
+{
+  "case_id": "private_nonsensitive_git_closeout",
+  "description": "Fixture mode 的 Private 正式状态允许普通脱敏 Git 收尾；覆盖不可把非 Public 当作通用阻断。",
+  "component_inputs": {
+    "git_closeout_validator": {
+      "staged_paths": ["project_system/fixtures/example.json"], "authorized_staged_paths": ["project_system/fixtures/example.json"], "broad_stage_used": false, "diff_check_passed": true, "secret_scan_passed": true, "sensitive_scan_passed": true,
+      "commit_sha": "cccccccccccccccccccccccccccccccccccccccc", "push_succeeded": true, "local_head": "cccccccccccccccccccccccccccccccccccccccc", "origin_main": "cccccccccccccccccccccccccccccccccccccccc", "ls_remote_main": "cccccccccccccccccccccccccccccccccccccccc", "branch": "main",
+      "remote_readback": [{"path": "AGENTS.md", "read_status": "read_ok"}, {"path": "project_system/01_MECHANISM_REGISTRY.json", "read_status": "read_ok"}, {"path": "project_system/02_跨项目操作习惯注册表_cross_project_operating_habits.json", "read_status": "read_ok"}, {"path": "project_system/rules/12_完整工程线_engineering_line.md", "read_status": "read_ok"}, {"path": "gpt_project_sync/latest/package_manifest.json", "read_status": "read_ok"}],
+      "repository_visibility": "Private", "contains_sensitive_business_data": false, "contains_personal_data": false,
+      "_fixture_repository_security_status": {"repository_visibility": "Private", "business_sensitive_git_write_blocked": false, "security_source": "fixture://private", "readback_status": "read_ok"}
+    }
+  },
+  "expected": {"git_closeout_validator": {"status": "pass", "error_codes": []}}
+}

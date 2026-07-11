@@ -1,0 +1,43 @@
+{
+  "case_id": "readonly_parallel_task",
+  "description": "只读大任务可使用 read_parallel，且不要求唯一写入车道。",
+  "component_inputs": {
+    "project_task_preflight": {
+      "goal": "并行盘点产品事实来源",
+      "context": "只读大任务审核",
+      "source_of_truth": ["正式 current"],
+      "constraints": ["不写入仓库"],
+      "allowed_files": ["project_system/audit/"],
+      "forbidden_files": ["private/"],
+      "external_actions": "none",
+      "human_gates": [],
+      "execution_steps": ["read parallel"],
+      "validation": ["source readback"],
+      "done_when": "read-only report",
+      "blocked_if": "source missing",
+      "output": "read-only report",
+      "task_type": ["product_fact_intake", "audit"],
+      "responsibility_layer": ["validation_layer"],
+      "must_read_files": [{"path": "AGENTS.md", "read_status": "read_ok"}],
+      "workspace_mode": "single_formal_workspace",
+      "external_workspace_required": false,
+      "worktree_requested": false,
+      "formal_file_count": 4,
+      "affected_categories": ["rules", "state", "logs"],
+      "large_readonly_audit": true,
+      "lane_recommendation": "read_parallel",
+      "lanes": [{"name": "facts", "mode": "read_only", "owner": "analyst_a"}, {"name": "evidence", "mode": "read_only", "owner": "analyst_b"}],
+      "engineering_depth": "L1_task_card",
+      "engineering_worth_question": {"worth_engineering": true, "reason": "只读大任务", "engineering_depth": "L1_task_card", "chosen_gate": "large_task", "not_chosen_gate": "write"},
+      "repository_visibility": "Public",
+      "contains_sensitive_business_data": false,
+      "contains_personal_data": false,
+      "current_state": "cross_project_collaboration_system_v2_active",
+      "source_summary": "正式 current 已回读",
+      "failure_route": "product_fact_collection",
+      "record_location": "project_system/audit/",
+      "supply_pack_input": {"task_goal": "并行盘点产品事实来源", "current_state": "cross_project_collaboration_system_v2_active", "must_read_sources": [{"source_path": "AGENTS.md", "readback_status": "read_ok", "exact_relevant_snippets": ["read parallel"]}], "constraints": ["no write"], "source_conflicts": [], "missing_information": [], "allowed_actions": ["read"], "forbidden_actions": ["write"]}
+    }
+  },
+  "expected": {"project_task_preflight": {"status": "pass", "error_codes": []}}
+}

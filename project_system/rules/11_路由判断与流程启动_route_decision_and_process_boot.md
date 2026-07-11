@@ -20,7 +20,7 @@ human_gates
 execution_permission
 ```
 
-`read_status` 只能为 `read_ok`、`missing`、`unreadable`、`not_applicable`。必读来源 `missing` 或 `unreadable`、允许范围不清、外部动作未授权、Public 仓库敏感资料、或责任层不明时，禁止写入并进入相应失败路由。
+`read_status` 只能为 `read_ok`、`missing`、`unreadable`、`not_applicable`。仓库可见性必须由 `project_system/current/REPOSITORY_SECURITY_STATUS.md` 读取；任务输入中的 `repository_visibility` 只可用于一致性校验。正式状态缺失或不可解析时返回 `blocked_repository_visibility_unknown`，与任务输入冲突时返回 `blocked_repository_visibility_conflict`。必读来源 `missing` 或 `unreadable`、允许范围不清、外部动作未授权、Public 仓库商业敏感资料、任何可见性下的密钥/个人信息或 Private 未授权敏感资料、或责任层不明时，禁止写入并进入相应失败路由。
 
 ## process_boot_report
 

@@ -1,9 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "route_decision｜路由判断",
-  "description": "仓库写入前的路由判断数据契约。",
+  "description": "只读或写入任务在执行前使用的路由判断数据契约。",
   "type": "object",
-  "required": ["task_type", "responsibility_layer", "must_read_files", "allowed_changes", "forbidden_changes", "external_actions", "human_gates", "engineering_worth_question", "planned_files", "execution_permission"],
+  "required": ["task_type", "responsibility_layer", "must_read_files", "allowed_changes", "forbidden_changes", "external_actions", "human_gates", "engineering_worth_question", "planned_files", "write_required", "repository_security_status", "execution_permission"],
   "properties": {
     "task_type": {"type": "array", "minItems": 1, "items": {"type": "string"}, "description": "任务类型。"},
     "responsibility_layer": {"type": "array", "minItems": 1, "items": {"type": "string"}, "description": "责任层级。"},
@@ -13,7 +13,9 @@
     "external_actions": {"description": "外部动作权限。"},
     "human_gates": {"type": "array", "description": "人工闸门。"},
     "engineering_worth_question": {"type": "object", "required": ["worth_engineering", "reason", "engineering_depth", "chosen_gate", "not_chosen_gate"], "properties": {"worth_engineering": {"type": "boolean"}, "reason": {"type": "string"}, "engineering_depth": {"type": "string"}, "chosen_gate": {"type": "string"}, "not_chosen_gate": {"type": "string"}}},
-    "planned_files": {"type": "array", "minItems": 1, "items": {"type": "string"}, "description": "经单文件方案授权的精确待改路径。"},
+    "planned_files": {"type": "array", "items": {"type": "string"}, "description": "经单文件方案授权的精确待改路径；只读任务可以为空。"},
+    "write_required": {"type": "boolean", "description": "由统一分类器计算的仓库写入需求。"},
+    "repository_security_status": {"type": "object", "required": ["repository_visibility", "security_source", "business_sensitive_git_write_blocked", "readback_status"], "properties": {"repository_visibility": {"enum": ["Public", "Private", "Unknown"]}, "security_source": {"type": "string"}, "business_sensitive_git_write_blocked": {"type": "boolean"}, "readback_status": {"enum": ["read_ok", "blocked"]}}, "description": "从正式安全状态文件读取的只读结果。"},
     "execution_permission": {"type": "string", "description": "本轮执行权限结论。"}
   }
 }

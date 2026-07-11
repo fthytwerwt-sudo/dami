@@ -17,9 +17,11 @@
     "ls_remote_main": {"type": "string", "description": "git ls-remote main。"},
     "branch": {"const": "main", "description": "正式主分支。"},
     "per_file_plan_path": {"type": "string", "description": "正式 live Git 收尾所回读的单文件方案路径。"},
-    "repository_visibility": {"const": "Public", "description": "本仓库当前可见性；Public 时必须保持脱敏。"},
-    "contains_sensitive_business_data": {"const": false, "description": "不得包含商业敏感数据。"},
-    "contains_personal_data": {"const": false, "description": "不得包含个人信息。"},
+    "repository_visibility": {"enum": ["Public", "Private"], "description": "任务声明；运行内核必须与正式安全状态对读。"},
+    "contains_sensitive_business_data": {"type": "boolean", "description": "是否包含商业敏感数据；Public 或 Private 未授权时必须阻断。"},
+    "contains_personal_data": {"type": "boolean", "description": "是否包含个人信息；任何可见性下均必须阻断。"},
+    "contains_secret": {"type": "boolean", "description": "是否包含密钥或认证材料；任何可见性下均必须阻断。"},
+    "sensitive_data_authorized": {"type": "boolean", "description": "Private 仓库商业敏感数据是否已获明确授权。"},
     "remote_readback": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["path", "read_status"], "properties": {"path": {"type": "string"}, "read_status": {"const": "read_ok"}}}, "description": "远端关键文件可回读。"}
   }
 }

@@ -17,6 +17,7 @@ from _common import (
     build_route_decision,
     build_supply_pack,
     build_workspace_governance,
+    determine_write_required,
     enforce_component_schema,
     load_json,
     load_schema,
@@ -41,11 +42,8 @@ def build_preflight(task: dict) -> dict:
     depth = enforce_component_schema("engineering_depth_router", build_engineering_depth(task))
     large = build_large_task_gate(task)
     lane_input = {
-        "lane_recommendation": task.get("lane_recommendation"),
-        "lanes": task.get("lanes", []),
-        "write_owner": task.get("write_owner", "single_integrator"),
-        "integration_owner": task.get("integration_owner", "single_integrator"),
-        "write_required": True,
+        **task,
+        "write_required": determine_write_required(task),
     }
     lane = build_lane_decision(lane_input)
     workspace = build_workspace_governance(task, route.get("route_decision", {}).get("planned_files", []))

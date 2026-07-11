@@ -1,0 +1,134 @@
+{
+  "shared_policy": {
+    "missing_info_policy": "block",
+    "conflict_policy": "block",
+    "blocked_if": "正式安全状态不可读/不可解析、任务输入与正式状态冲突、Fixture 回归、越出授权路径或远端回读失败",
+    "user_review_points": "GPT Project UI 上传仍需用户确认；业务状态不在本轮修改范围内"
+  },
+  "plan_groups": [
+    {
+      "paths": [
+        "scripts/project_system/_common.py",
+        "scripts/project_system/project_task_preflight.py",
+        "scripts/project_system/project_task_closeout.py"
+      ],
+      "purpose": "以单一 write_required 判断和正式安全状态解析取代固定写入/Public 假设。",
+      "layer": "execution_layer",
+      "inputs": ["task contract", "project_system/current/REPOSITORY_SECURITY_STATUS.md", "Git closeout evidence"],
+      "outputs": ["read-only lane decision", "write lane enforcement", "dynamic visibility safety report"],
+      "core_decisions": ["只读任务不强制 write lane 或 Git closeout", "写入任务保留唯一 write owner", "可见性输入只与正式来源对读"],
+      "trigger_conditions": ["task type、repository_write_requested、will_modify_files 或 per_file_plan 出现实际写入路径"],
+      "route_rules": ["route_decision", "large_task_gate", "lane_parallel_router", "completion relay"],
+      "examples": ["read_parallel product fact gap inventory", "Private non-sensitive write", "Public sensitive write block"],
+      "validation": ["新增与既有 Fixture", "py_compile", "CLI help", "Git closeout live readback"]
+    },
+    {
+      "paths": [
+        "project_system/schemas/task_request.schema.json",
+        "project_system/schemas/route_decision.schema.json",
+        "project_system/schemas/git_closeout.schema.json"
+      ],
+      "purpose": "使正式 JSON 契约表达动态可见性、写入信号与安全扫描字段。",
+      "layer": "engineering_design_layer",
+      "inputs": ["运行内核输出"],
+      "outputs": ["可解析且与内核一致的 Schema"],
+      "core_decisions": ["不再用 Public const 伪造权威来源", "保留敏感与个人数据扫描字段"],
+      "trigger_conditions": ["运行内核字段变化"],
+      "route_rules": ["schema validation"],
+      "examples": ["Public", "Private", "Unknown source"],
+      "validation": ["JSON parse", "Fixture runner"]
+    },
+    {
+      "paths": [
+        "project_system/fixtures/08_未授权外部动作_unauthorized_external_action.json",
+        "project_system/fixtures/19_只读串行任务_readonly_serial_task.json",
+        "project_system/fixtures/20_只读并行任务_readonly_parallel_task.json",
+        "project_system/fixtures/21_写入缺车道_write_missing_lane.json",
+        "project_system/fixtures/22_Public非敏感Git收尾_public_nonsensitive_git_closeout.json",
+        "project_system/fixtures/23_Private非敏感Git收尾_private_nonsensitive_git_closeout.json",
+        "project_system/fixtures/24_Public敏感Git收尾_public_sensitive_git_closeout.json",
+        "project_system/fixtures/25_Private未授权敏感Git收尾_private_unauthorized_sensitive_git_closeout.json",
+        "project_system/fixtures/26_仓库可见性未知_repository_visibility_unknown.json",
+        "project_system/fixtures/27_仓库可见性冲突_repository_visibility_conflict.json",
+        "project_system/fixtures/28_写入拥有者不一致_write_owner_mismatch.json",
+        "project_system/fixtures/29_只读收尾无需Git_readonly_closeout_no_git.json"
+      ],
+      "purpose": "锁定只读分流、唯一写车道与 Public/Private/Unknown/冲突的防回归行为。",
+      "layer": "validation_layer",
+      "inputs": ["脱敏 task contract", "fixture-only formal security status override"],
+      "outputs": ["fixture runner pass/blocked assertions"],
+      "core_decisions": ["测试覆盖不放宽生产任务对正式安全来源的依赖", "fixture override 仅由既有 fixture-mode Git validator 使用"],
+      "trigger_conditions": ["内核行为修复"],
+      "route_rules": ["fixture_runner dry-run"],
+      "examples": ["read-only without write lane", "Private ordinary write", "visibility conflict"],
+      "validation": ["全量 Fixture runner"]
+    },
+    {
+      "paths": [
+        "project_system/rules/11_路由判断与流程启动_route_decision_and_process_boot.md",
+        "project_system/rules/13_大任务与执行车道_large_task_and_execution_lanes.md"
+      ],
+      "purpose": "仅消除与动态安全状态和只读车道直接冲突的规则表述。",
+      "layer": "engineering_design_layer",
+      "inputs": ["修复后内核行为"],
+      "outputs": ["最小规则澄清"],
+      "core_decisions": ["不改 Rule 18", "不重写机制或习惯注册表"],
+      "trigger_conditions": ["现有规则与修复行为直接冲突"],
+      "route_rules": ["rule consistency"],
+      "examples": ["只读 large task", "Private ordinary write"],
+      "validation": ["diff review", "GPT package scan"]
+    },
+    {
+      "paths": [
+        "project_system/current/CURRENT_PROJECT_STATE.md",
+        "project_system/current/CURRENT_FORMAL_FACTS.md",
+        "project_system/current/CURRENT_DECISIONS.md",
+        "project_system/current/LATEST_TASK_STATUS.md",
+        "project_system/audit/v2_运行内核窄修复验证报告_v2_runtime_narrow_fix_validation.md",
+        "gpt_project_sync/latest/00_上传说明_UPLOAD_MANIFEST.md",
+        "gpt_project_sync/latest/01_GPT项目完整指令_GPT_PROJECT_INSTRUCTIONS.md",
+        "gpt_project_sync/latest/02_跨项目操作习惯_cross_project_operating_habits.md",
+        "gpt_project_sync/latest/03_工程线与任务路由_engineering_line_and_task_routing.md",
+        "gpt_project_sync/latest/04_事实源与人工闸门_source_of_truth_and_human_gates.md",
+        "gpt_project_sync/latest/05_当前项目状态快照_current_project_state_snapshot.md",
+        "gpt_project_sync/latest/06_Codex交接契约_codex_handoff_contract.md",
+        "gpt_project_sync/latest/07_Codex回报复审契约_codex_report_review_contract.md",
+        "gpt_project_sync/latest/package_manifest.json",
+        "gpt_project_sync/archive/v2_20260712_r1/00_上传说明_UPLOAD_MANIFEST.md",
+        "gpt_project_sync/archive/v2_20260712_r1/01_GPT项目完整指令_GPT_PROJECT_INSTRUCTIONS.md",
+        "gpt_project_sync/archive/v2_20260712_r1/02_跨项目操作习惯_cross_project_operating_habits.md",
+        "gpt_project_sync/archive/v2_20260712_r1/03_工程线与任务路由_engineering_line_and_task_routing.md",
+        "gpt_project_sync/archive/v2_20260712_r1/04_事实源与人工闸门_source_of_truth_and_human_gates.md",
+        "gpt_project_sync/archive/v2_20260712_r1/05_当前项目状态快照_current_project_state_snapshot.md",
+        "gpt_project_sync/archive/v2_20260712_r1/06_Codex交接契约_codex_handoff_contract.md",
+        "gpt_project_sync/archive/v2_20260712_r1/07_Codex回报复审契约_codex_report_review_contract.md",
+        "gpt_project_sync/archive/v2_20260712_r1/package_manifest.json"
+      ],
+      "purpose": "在首次修复提交的远端证据成立后，记录窄修复验证并由 builder 生成唯一 r1 静态同步包。",
+      "layer": "sync_layer",
+      "inputs": ["首次提交 SHA", "远端三方 SHA/readback", "更新后的 current 文件"],
+      "outputs": ["准确 current 状态", "latest 与 r1 archive 完全一致", "验证报告"],
+      "core_decisions": ["不覆盖旧 archive", "gpt_project_synced/ui_uploaded/business_execution_started 均保持 false"],
+      "trigger_conditions": ["首次提交已 push 且远端回读通过"],
+      "route_rules": ["Git closeout", "GPT sync builder"],
+      "examples": ["git_sync_verified_for_source_commit"],
+      "validation": ["manifest SHA-256", "byte equality", "package scan", "remote readback"]
+    },
+    {
+      "paths": [
+        "project_system/audit/v2_运行内核窄修复影响面_v2_runtime_narrow_fix_impact.md",
+        "project_system/audit/v2_运行内核窄修复供料_v2_runtime_narrow_fix_supply.json",
+        "project_system/audit/v2_运行内核窄修复单文件方案_v2_runtime_narrow_fix_per_file_plan.json"
+      ],
+      "purpose": "记录实施前影响、供料和精确单文件范围。",
+      "layer": "validation_layer",
+      "inputs": ["正式 current、运行内核、远端起始状态"],
+      "outputs": ["可审计的实施前证据"],
+      "core_decisions": ["隔离授权范围", "不使用聊天记忆替代仓库来源"],
+      "trigger_conditions": ["实施开始前"],
+      "route_rules": ["impact check", "supply pack", "per-file plan"],
+      "examples": ["起始 SHA 三方一致"],
+      "validation": ["per_file_plan validator", "JSON parse"]
+    }
+  ]
+}

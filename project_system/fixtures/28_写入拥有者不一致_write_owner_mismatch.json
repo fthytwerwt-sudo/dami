@@ -1,0 +1,14 @@
+{
+  "case_id": "write_owner_integration_owner_mismatch",
+  "description": "唯一 write lane 的 owner 与 integration_owner 不一致时仍必须阻断。",
+  "component_inputs": {
+    "lane_parallel_router": {
+      "task_type": ["project_file_change"],
+      "lane_recommendation": "explore_plus_integrate",
+      "lanes": [{"name": "explore", "mode": "read_only", "owner": "analyst"}, {"name": "write", "mode": "write", "owner": "writer"}],
+      "write_owner": "writer",
+      "integration_owner": "other_integrator"
+    }
+  },
+  "expected": {"lane_parallel_router": {"status": "blocked", "error_codes": ["blocked_multi_lane_write_conflict"]}}
+}

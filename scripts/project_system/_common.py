@@ -22,6 +22,7 @@ EXIT_OK = 0
 EXIT_BLOCKED = 2
 
 VALID_TASK_TYPES = {
+    "code_or_automation",
     "project_file_change",
     "mechanism_or_route_fix",
     "research",
@@ -54,7 +55,9 @@ VALID_READ_STATUSES = {"read_ok", "missing", "unreadable", "not_applicable"}
 VALID_DEPTHS = {"L0_light_chat", "L1_task_card", "L2_node_contract", "L3_system_line"}
 VALID_LANE_RECOMMENDATIONS = {"serial_only", "read_parallel", "explore_plus_integrate", "true_multi_task_parallel"}
 VALID_LANE_MODES = {"read_only", "write"}
-WRITE_TASK_TYPES = {"project_file_change", "mechanism_or_route_fix", "runtime_kernel_implementation", "gpt_project_sync"}
+WRITE_TASK_TYPES = {"code_or_automation", "project_file_change", "mechanism_or_route_fix", "runtime_kernel_implementation", "gpt_project_sync"}
+VALID_REPOSITORY_VISIBILITIES = {"Public", "Private"}
+REPOSITORY_SECURITY_STATUS_RELATIVE_PATH = "project_system/current/REPOSITORY_SECURITY_STATUS.md"
 SHA_PATTERN = re.compile(r"^[0-9a-f]{40}(?:[0-9a-f]{24})?$")
 REQUIRED_REMOTE_READBACK_PATHS = {
     "AGENTS.md",
@@ -76,7 +79,7 @@ GIT_SECRET_PATTERNS = {
     "common_api_key": r"(?:sk-[A-Za-z0-9_-]{20,}|sk_(?:live|proj)_[A-Za-z0-9_-]{16,}|rk_(?:live|test)_[A-Za-z0-9_-]{16,}|pk_(?:live|test)_[A-Za-z0-9_-]{16,})",
 }
 GIT_SENSITIVE_PATTERNS = {
-    "absolute_path": r"(?:/(?:Users|private|Volumes|home)/|[A-Za-z]:\\)",
+    "absolute_path": r"(?:/(?:Users|private|Volumes|home)/|(?<![A-Za-z0-9_])[A-Za-z]:\\)",
     "email_address": r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b",
     # 保守匹配国际号码、中文手机号和带分段的北美号码，避免把日期或机制编号误判为个人电话。
     "phone_number": r"(?:\+[1-9]\d{7,14}|(?:\+?86[- ]?)?1[3-9]\d{9}|\(?\d{3}\)?[- ]\d{3}[- ]\d{4})",
@@ -291,7 +294,10 @@ def error_message(code: str) -> str:
         "blocked_unknown_task_type": "任务类型不在正式枚举中。",
         "blocked_unknown_responsibility_layer": "责任层级不在正式枚举中。",
         "blocked_source_missing": "必读来源缺失或不可读。",
-        "blocked_repo_visibility_for_sensitive_data": "Public 仓库不能写入敏感商业或个人数据。",
+        "blocked_repo_visibility_for_sensitive_data": "当前可见性与授权边界下不得写入敏感商业、个人或认证数据。",
+        "blocked_repository_visibility_unknown": "正式仓库安全状态缺失、不可读或无法确认可见性。",
+        "blocked_repository_visibility_conflict": "任务输入的仓库可见性与正式安全状态不一致。",
+        "blocked_read_write_classification_conflict": "任务的只读/写入分类与其声明的车道不一致。",
         "blocked_authorization_required": "外部动作或重大决定缺少授权。",
         "blocked_engineering_depth_invalid": "工程深度选择不符合任务信号。",
         "blocked_large_task_lane_missing": "大任务缺少可执行的车道选择。",
@@ -317,16 +323,6 @@ def list_value(value: Any) -> list[Any]:
     if value is None:
         return []
     return [value]
-
-
-def has_sensitive_flag(payload: dict[str, Any]) -> bool:
-    """只依据显式脱敏标记判断，避免把规则文本中的敏感词误判为真实敏感数据。"""
-
-    return bool(
-        payload.get("contains_sensitive_business_data")
-        or payload.get("sensitive_data_detected")
-        or payload.get("contains_personal_data")
-    )
 
 
 def safe_nonnegative_int(value: Any) -> int | None:
@@ -374,7 +370,81 @@ def load_per_file_plan_from_task(payload: dict[str, Any]) -> tuple[dict[str, Any
     return plan if isinstance(plan, dict) else None, [] if isinstance(plan, dict) else ["blocked_per_file_plan_incomplete"]
 
 
-def task_request_details(payload: dict[str, Any]) -> tuple[list[str], list[str]]:
+def determine_write_required(task: dict[str, Any]) -> bool:
+    """根据正式四类信号统一判断任务是否真的需要仓库写入。"""
+
+    if not isinstance(task, dict):
+        return False
+    task_types = list_value(task.get("task_type"))
+    direct_paths = list_value(task.get("will_modify_files"))
+    plan, _ = load_per_file_plan_from_task(task)
+    plan_paths = plan_paths_from_document(plan) if plan is not None else []
+    return bool(
+        set(task_types).intersection(WRITE_TASK_TYPES)
+        or task.get("repository_write_requested") is True
+        or direct_paths
+        or plan_paths
+    )
+
+
+def resolve_repository_security_status(status_override: dict[str, Any] | None = None) -> dict[str, Any]:
+    """只读解析正式安全状态；测试替身只能由 fixture-mode 调用者显式传入。"""
+
+    source = REPOSITORY_SECURITY_STATUS_RELATIVE_PATH
+    raw_visibility: Any = None
+    raw_blocked: Any = None
+    readback_status = "blocked"
+    if status_override is not None:
+        raw_visibility = status_override.get("repository_visibility")
+        raw_blocked = status_override.get("business_sensitive_git_write_blocked")
+        source = str(status_override.get("security_source") or "fixture://repository-security-status")
+        readback_status = str(status_override.get("readback_status") or "blocked")
+    else:
+        try:
+            text = (project_root() / REPOSITORY_SECURITY_STATUS_RELATIVE_PATH).read_text(encoding="utf-8")
+        except OSError:
+            text = ""
+        visibility_match = re.search(r"(?m)^repository_visibility:\s*`?([A-Za-z]+)`?\s*$", text)
+        blocked_match = re.search(r"(?m)^business_sensitive_git_write_blocked_while_repo_public:\s*`?(true|false)`?\s*$", text)
+        if visibility_match and blocked_match:
+            raw_visibility = visibility_match.group(1)
+            raw_blocked = blocked_match.group(1) == "true"
+            readback_status = "read_ok"
+
+    visibility = raw_visibility if raw_visibility in VALID_REPOSITORY_VISIBILITIES else "Unknown"
+    valid = readback_status == "read_ok" and visibility in VALID_REPOSITORY_VISIBILITIES and isinstance(raw_blocked, bool)
+    return {
+        "repository_visibility": visibility,
+        "security_source": source,
+        "business_sensitive_git_write_blocked": bool(raw_blocked) if valid else True,
+        "readback_status": "read_ok" if valid else "blocked",
+        "error_codes": [] if valid else ["blocked_repository_visibility_unknown"],
+    }
+
+
+def repository_security_errors(payload: dict[str, Any], security_status: dict[str, Any]) -> list[str]:
+    """将任务声明与正式安全状态对读，并保持 Public/Private 的不同安全边界。"""
+
+    errors = list_value(security_status.get("error_codes"))
+    visibility = security_status.get("repository_visibility")
+    if errors:
+        return [code for code in errors if isinstance(code, str)]
+    declared_visibility = payload.get("repository_visibility")
+    if declared_visibility is not None and declared_visibility != visibility:
+        errors.append("blocked_repository_visibility_conflict")
+    contains_secret = bool(payload.get("contains_secret") or payload.get("secret_detected"))
+    contains_personal = bool(payload.get("contains_personal_data"))
+    contains_business_sensitive = bool(payload.get("contains_sensitive_business_data") or payload.get("sensitive_data_detected"))
+    if contains_secret or contains_personal:
+        errors.append("blocked_repo_visibility_for_sensitive_data")
+    if contains_business_sensitive and (
+        visibility == "Public" or payload.get("sensitive_data_authorized") is not True
+    ):
+        errors.append("blocked_repo_visibility_for_sensitive_data")
+    return sorted(set(errors))
+
+
+def task_request_details(payload: dict[str, Any], security_status: dict[str, Any] | None = None) -> tuple[list[str], list[str]]:
     """校验任务交接并返回错误码与已授权的精确待改路径。"""
 
     errors: list[str] = []
@@ -420,13 +490,7 @@ def task_request_details(payload: dict[str, Any]) -> tuple[list[str], list[str]]
     repository_write_requested = payload.get("repository_write_requested")
     if repository_write_requested not in {None, True, False}:
         errors.append("blocked_task_contract_incomplete")
-    # 既有明确写入类型、显式写入标记和待改路径三者任一命中，都必须进入写入闸门；
-    # 不能让 code_debug 等任务类型通过遗漏标记绕开单文件方案。
-    write_requested = bool(
-        set(task_types).intersection(WRITE_TASK_TYPES)
-        or repository_write_requested is True
-        or direct_paths
-    )
+    write_requested = determine_write_required(payload)
     if write_requested and any(
         field not in payload or payload.get(field) is None or payload.get(field) == "" or payload.get(field) == [] or payload.get(field) == {}
         for field in WRITE_TASK_CONTRACT_FIELDS
@@ -472,16 +536,8 @@ def task_request_details(payload: dict[str, Any]) -> tuple[list[str], list[str]]
     external_requested = external_actions not in (None, "none", [], {"allowed": "none"})
     if external_requested and payload.get("external_action_authorized") is not True:
         errors.append("blocked_authorization_required")
-    # 本项目已确认 Public；写入契约必须显式承认可见性和脱敏结论，
-    # 缺省不作为放宽安全边界的理由。
-    if write_requested and (
-        payload.get("repository_visibility") != "Public"
-        or payload.get("contains_sensitive_business_data") is not False
-        or payload.get("contains_personal_data") is not False
-    ):
-        errors.append("blocked_repo_visibility_for_sensitive_data")
-    if has_sensitive_flag(payload):
-        errors.append("blocked_repo_visibility_for_sensitive_data")
+    resolved_security = security_status or resolve_repository_security_status()
+    errors.extend(repository_security_errors(payload, resolved_security))
     return sorted(set(errors)), normalized_planned
 
 
@@ -491,10 +547,11 @@ def validate_task_request(payload: dict[str, Any]) -> list[str]:
     return task_request_details(payload)[0]
 
 
-def build_route_decision(payload: dict[str, Any]) -> dict[str, Any]:
+def build_route_decision(payload: dict[str, Any], security_status: dict[str, Any] | None = None) -> dict[str, Any]:
     """生成写入前路由判断（route_decision）；缺必读或权限时 fail-closed。"""
 
-    errors, planned_files = task_request_details(payload)
+    resolved_security = security_status or resolve_repository_security_status()
+    errors, planned_files = task_request_details(payload, resolved_security)
     must_read = list_value(payload.get("must_read_files"))
     engineering_worth = payload.get("engineering_worth_question") or {}
     formal_count = safe_nonnegative_int(payload.get("formal_file_count", 0))
@@ -509,6 +566,13 @@ def build_route_decision(payload: dict[str, Any]) -> dict[str, Any]:
         "allowed_changes": list_value(payload.get("allowed_files")),
         "forbidden_changes": list_value(payload.get("forbidden_files")),
         "planned_files": planned_files,
+        "write_required": determine_write_required(payload),
+        "repository_security_status": {
+            "repository_visibility": resolved_security.get("repository_visibility"),
+            "security_source": resolved_security.get("security_source"),
+            "business_sensitive_git_write_blocked": resolved_security.get("business_sensitive_git_write_blocked"),
+            "readback_status": resolved_security.get("readback_status"),
+        },
         "external_actions": payload.get("external_actions"),
         "human_gates": list_value(payload.get("human_gates")),
         "engineering_worth_question": {
@@ -600,7 +664,12 @@ def build_large_task_gate(payload: dict[str, Any]) -> dict[str, Any]:
     return make_report(
         "large_task_gate",
         errors,
-        large_task_gate={"triggered": triggered, "reasons": reasons, "lane_recommendation": lane},
+        large_task_gate={
+            "triggered": triggered,
+            "reasons": reasons,
+            "lane_recommendation": lane,
+            "write_required": determine_write_required(payload),
+        },
     )
 
 
@@ -624,7 +693,12 @@ def build_lane_decision(payload: dict[str, Any]) -> dict[str, Any]:
         errors.append("blocked_multi_lane_write_conflict")
     if write_lanes and write_owner != payload.get("integration_owner"):
         errors.append("blocked_multi_lane_write_conflict")
-    if payload.get("write_required") and not write_lanes:
+    classification_fields = {"task_type", "repository_write_requested", "will_modify_files", "per_file_plan", "per_file_plan_path"}
+    has_task_classification = any(field in payload for field in classification_fields)
+    write_required = determine_write_required(payload) if has_task_classification else bool(payload.get("write_required"))
+    if has_task_classification and isinstance(payload.get("write_required"), bool) and payload.get("write_required") != write_required:
+        errors.append("blocked_read_write_classification_conflict")
+    if write_required and not write_lanes:
         errors.append("blocked_large_task_lane_missing")
     return make_report(
         "lane_parallel_router",
@@ -634,6 +708,7 @@ def build_lane_decision(payload: dict[str, Any]) -> dict[str, Any]:
             "lanes": lanes,
             "write_owner": write_owner,
             "integration_owner": payload.get("integration_owner"),
+            "write_required": write_required,
             "read_parallel_allowed": all(lane.get("mode") != "write" for lane in lanes[:-1] if isinstance(lane, dict)),
         },
     )
@@ -720,6 +795,7 @@ def build_mechanism_triggers(payload: dict[str, Any]) -> dict[str, Any]:
     """将任务类型映射到相关机制和习惯；它是选择器，不会强制所有机制运行。"""
 
     mapping = {
+        "code_or_automation": ["M07", "M08", "M17", "M19", "H05", "H06", "H09", "H14"],
         "project_file_change": ["M02", "M07", "M10", "M11", "M14", "M17", "M27", "H01", "H04", "H09", "H17"],
         "mechanism_or_route_fix": ["M04", "M10", "M19", "M21", "H01", "H05", "H06", "H10", "H11"],
         "runtime_kernel_implementation": ["M07", "M08", "M17", "M19", "M20", "H05", "H06", "H07", "H09", "H14"],
@@ -893,7 +969,9 @@ def validate_completion_relay(payload: dict[str, Any]) -> dict[str, Any]:
     remaining = payload.get("remaining_work_check") or {}
     claimed = payload.get("completion_status")
     final_claim = claimed not in {None, "blocked", "partial_completed", "continue"}
-    if incomplete or remaining.get("remaining_required") is not False or final_claim and payload.get("git_closeout", {}).get("remote_match") is not True:
+    task_request = payload.get("task_request")
+    write_required = determine_write_required(task_request) if isinstance(task_request, dict) else bool(payload.get("write_required", True))
+    if incomplete or remaining.get("remaining_required") is not False or final_claim and write_required and payload.get("git_closeout", {}).get("remote_match") is not True:
         errors.append("blocked_completion_claim_repair")
     return make_report(
         "completion_relay_validator",
@@ -904,6 +982,7 @@ def validate_completion_relay(payload: dict[str, Any]) -> dict[str, Any]:
             "remaining_work_check": remaining,
             "incomplete_outputs": incomplete,
             "completion_status": claimed,
+            "write_required": write_required,
             "git_closeout": payload.get("git_closeout", {}),
         },
     )
@@ -1070,7 +1149,9 @@ def live_git_evidence_errors(payload: dict[str, Any], staged_paths: list[str]) -
     return errors, evidence
 
 
-def validate_git_closeout(payload: dict[str, Any], *, fixture_mode: bool = False) -> dict[str, Any]:
+def validate_git_closeout(
+    payload: dict[str, Any], *, fixture_mode: bool = False, security_status: dict[str, Any] | None = None
+) -> dict[str, Any]:
     """验证 Git 收尾；正式调用回读真实 commit/远端，Fixture 才可使用脱敏模拟证据。"""
 
     errors: list[str] = []
@@ -1106,13 +1187,11 @@ def validate_git_closeout(payload: dict[str, Any], *, fixture_mode: bool = False
         or not REQUIRED_REMOTE_READBACK_PATHS.issubset(declared_remote_paths)
     ):
         errors.append("blocked_remote_readback_failed")
-    if (
-        payload.get("repository_visibility") != "Public"
-        or payload.get("contains_sensitive_business_data") is not False
-        or payload.get("contains_personal_data") is not False
-        or has_sensitive_flag(payload)
-    ):
-        errors.append("blocked_repo_visibility_for_sensitive_data")
+    fixture_override = payload.get("_fixture_repository_security_status") if fixture_mode else None
+    resolved_security = security_status or resolve_repository_security_status(
+        fixture_override if isinstance(fixture_override, dict) else None
+    )
+    errors.extend(repository_security_errors(payload, resolved_security))
 
     live_evidence: dict[str, Any] = {"mode": "fixture" if fixture_mode else "live_commit_readback"}
     if not fixture_mode:
@@ -1144,6 +1223,12 @@ def validate_git_closeout(payload: dict[str, Any], *, fixture_mode: bool = False
             "repository_visibility": payload.get("repository_visibility"),
             "contains_sensitive_business_data": payload.get("contains_sensitive_business_data"),
             "contains_personal_data": payload.get("contains_personal_data"),
+            "repository_security_status": {
+                "repository_visibility": resolved_security.get("repository_visibility"),
+                "security_source": resolved_security.get("security_source"),
+                "business_sensitive_git_write_blocked": resolved_security.get("business_sensitive_git_write_blocked"),
+                "readback_status": resolved_security.get("readback_status"),
+            },
             "live_evidence": live_evidence,
             "remote_match": not errors,
         },

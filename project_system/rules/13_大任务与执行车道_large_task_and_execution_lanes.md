@@ -14,3 +14,5 @@
 可选：`serial_only`、`read_parallel`、`explore_plus_integrate`、`true_multi_task_parallel`。只有对象、目标、验收、范围、依赖和 blocker 已锁定，且写入不重叠时才可并行。读取冲突、判断风险或写入重叠时降级串行。
 
 `explore_plus_integrate` 的 explorer 只读，唯一 integrator 拥有写权。`lane_parallel_router.py` 检出多个写入 owner 时返回 `blocked_multi_lane_write_conflict`。
+
+运行内核以任务类型、`repository_write_requested`、`will_modify_files` 和单文件方案中的实际路径统一计算 `write_required`。纯读取、研究、审核和事实缺口盘点不因触发大任务而自动需要 write lane、commit 或 push；它们可使用 `serial_only` 或 `read_parallel`。真实写入任务仍必须有唯一且与 `integration_owner` 一致的 write owner。

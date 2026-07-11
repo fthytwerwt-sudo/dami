@@ -1,0 +1,38 @@
+{
+  "task_goal": "修复只读/写入分类和仓库可见性解析，并在首次修复提交远端验证后刷新 GPT Project v2 状态快照。",
+  "current_state": "cross_project_collaboration_system_v2_active",
+  "must_read_sources": [
+    {"source_path": "AGENTS.md", "readback_status": "read_ok"},
+    {"source_path": "project_system/current/CURRENT_PROJECT_STATE.md", "readback_status": "read_ok"},
+    {"source_path": "project_system/current/CURRENT_FORMAL_FACTS.md", "readback_status": "read_ok"},
+    {"source_path": "project_system/current/CURRENT_DECISIONS.md", "readback_status": "read_ok"},
+    {"source_path": "project_system/current/LATEST_TASK_STATUS.md", "readback_status": "read_ok"},
+    {"source_path": "project_system/current/REPOSITORY_SECURITY_STATUS.md", "readback_status": "read_ok"}
+  ],
+  "exact_relevant_snippets": [
+    {"source_path": "scripts/project_system/project_task_preflight.py", "snippet": "lane_input 固定写入 write_required: True。"},
+    {"source_path": "scripts/project_system/_common.py", "snippet": "任务交接与 Git 收尾以 repository_visibility != Public 作为阻断条件。"},
+    {"source_path": "gpt_project_sync/latest/05_当前项目状态快照_current_project_state_snapshot.md", "snippet": "仍包含 git_closeout_status: pending_precise_stage_and_push 与仅本地工作树激活表述。"}
+  ],
+  "constraints": [
+    "只修改用户授权路径。",
+    "不读取或输出 secrets、Token、.env 或认证材料。",
+    "正式安全状态文件是可见性的唯一权威；任务输入只做一致性校验。",
+    "不覆盖 archive/v2_20260712 或任何 v1 archive。",
+    "严格精确暂存；不使用 git add .、git add -A、强推或重写历史。"
+  ],
+  "conflicts": [
+    "现有运行内核固定 Public，与动态权威状态和 Private 非敏感写入规则冲突。",
+    "现有统一预检固定写入需求，与纯只读任务分流规则冲突。"
+  ],
+  "missing_information": [],
+  "allowed_actions": [
+    "修改授权的运行内核、Schema、Fixture、必要规则、current、audit 与新 GPT 包。",
+    "普通 git fetch、push、远端只读回读。"
+  ],
+  "forbidden_actions": [
+    "修改仓库可见性、业务事实、旧 archive 或 ChatGPT Project UI。",
+    "外部业务动作、付费 API、客户触达、平台写入。"
+  ],
+  "next_input_for_codex": "先以新增 Fixture 产生失败基线，再在公共内核集中实现 write_required 与 repository security status 解析；首次提交远端验证后才构建 r1 包。"
+}

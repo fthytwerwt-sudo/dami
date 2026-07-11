@@ -1,0 +1,42 @@
+{
+  "case_id": "readonly_serial_task",
+  "description": "纯产品事实缺口盘点不修改仓库时，可使用没有 write lane 的 serial_only。",
+  "component_inputs": {
+    "project_task_preflight": {
+      "goal": "盘点产品事实缺口",
+      "context": "只读审核",
+      "source_of_truth": ["正式 current"],
+      "constraints": ["不写入仓库"],
+      "allowed_files": ["project_system/audit/"],
+      "forbidden_files": ["private/"],
+      "external_actions": "none",
+      "human_gates": [],
+      "execution_steps": ["read"],
+      "validation": ["source readback"],
+      "done_when": "gap report in memory only",
+      "blocked_if": "source missing",
+      "output": "read-only report",
+      "task_type": ["product_fact_intake"],
+      "responsibility_layer": ["validation_layer"],
+      "must_read_files": [{"path": "AGENTS.md", "read_status": "read_ok"}],
+      "workspace_mode": "single_formal_workspace",
+      "external_workspace_required": false,
+      "worktree_requested": false,
+      "formal_file_count": 1,
+      "affected_categories": ["state"],
+      "lane_recommendation": "serial_only",
+      "lanes": [{"name": "reader", "mode": "read_only", "owner": "analyst"}],
+      "engineering_depth": "L1_task_card",
+      "engineering_worth_question": {"worth_engineering": false, "reason": "只读盘点", "engineering_depth": "L1_task_card", "chosen_gate": "route", "not_chosen_gate": "L3"},
+      "repository_visibility": "Public",
+      "contains_sensitive_business_data": false,
+      "contains_personal_data": false,
+      "current_state": "cross_project_collaboration_system_v2_active",
+      "source_summary": "正式 current 已回读",
+      "failure_route": "product_fact_collection",
+      "record_location": "project_system/audit/",
+      "supply_pack_input": {"task_goal": "盘点产品事实缺口", "current_state": "cross_project_collaboration_system_v2_active", "must_read_sources": [{"source_path": "AGENTS.md", "readback_status": "read_ok", "exact_relevant_snippets": ["read-only"]}], "constraints": ["no write"], "source_conflicts": [], "missing_information": [], "allowed_actions": ["read"], "forbidden_actions": ["write"]}
+    }
+  },
+  "expected": {"project_task_preflight": {"status": "pass", "error_codes": []}}
+}

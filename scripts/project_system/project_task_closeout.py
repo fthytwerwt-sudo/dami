@@ -11,6 +11,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import (
     enforce_component_schema,
+    determine_write_required,
     load_json,
     make_report,
     output_report,
@@ -23,9 +24,20 @@ from _common import (
 def build_closeout(payload: dict, *, fixture_mode: bool = False) -> dict:
     """以纯函数方式检查完成接力、状态转换和 Git 证据；CLI 默认真实回读。"""
 
-    completion = enforce_component_schema("completion_relay_validator", validate_completion_relay(payload.get("completion_relay") or {}))
+    task_request = payload.get("task_request")
+    write_required = determine_write_required(task_request) if isinstance(task_request, dict) else True
+    completion_payload = {**(payload.get("completion_relay") or {}), "write_required": write_required}
+    if isinstance(task_request, dict):
+        completion_payload["task_request"] = task_request
+    completion = enforce_component_schema("completion_relay_validator", validate_completion_relay(completion_payload))
     state = enforce_component_schema("state_transition_validator", validate_state_transition(payload.get("state_transition") or {}))
-    git = enforce_component_schema("git_closeout_validator", validate_git_closeout(payload.get("git_closeout") or {}, fixture_mode=fixture_mode))
+    if write_required:
+        git = enforce_component_schema("git_closeout_validator", validate_git_closeout(payload.get("git_closeout") or {}, fixture_mode=fixture_mode))
+    else:
+        git = make_report(
+            "git_closeout_validator",
+            git_closeout={"required": False, "remote_match": None, "reason": "read-only task does not require commit or push"},
+        )
     subreports = {"completion_relay": completion, "state_transition": state, "git_closeout": git}
     errors = sorted({code for report in subreports.values() for code in report.get("error_codes", [])})
     return make_report(
@@ -36,6 +48,7 @@ def build_closeout(payload: dict, *, fixture_mode: bool = False) -> dict:
             "state_transition": state.get("state_transition"),
             "completion_truth": completion.get("completion_relay"),
             "remaining_work": completion.get("completion_relay", {}).get("remaining_work_check", {}),
+            "write_required": write_required,
             "git_closeout_readiness": git.get("git_closeout"),
         },
     )

@@ -1,0 +1,14 @@
+{
+  "case_id": "private_unauthorized_sensitive_git_closeout",
+  "description": "Private 状态仍不得提交未授权商业敏感数据。",
+  "component_inputs": {
+    "git_closeout_validator": {
+      "staged_paths": ["project_system/fixtures/example.json"], "authorized_staged_paths": ["project_system/fixtures/example.json"], "broad_stage_used": false, "diff_check_passed": true, "secret_scan_passed": true, "sensitive_scan_passed": true,
+      "commit_sha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", "push_succeeded": true, "local_head": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", "origin_main": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", "ls_remote_main": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", "branch": "main",
+      "remote_readback": [{"path": "AGENTS.md", "read_status": "read_ok"}, {"path": "project_system/01_MECHANISM_REGISTRY.json", "read_status": "read_ok"}, {"path": "project_system/02_跨项目操作习惯注册表_cross_project_operating_habits.json", "read_status": "read_ok"}, {"path": "project_system/rules/12_完整工程线_engineering_line.md", "read_status": "read_ok"}, {"path": "gpt_project_sync/latest/package_manifest.json", "read_status": "read_ok"}],
+      "repository_visibility": "Private", "contains_sensitive_business_data": true, "contains_personal_data": false, "sensitive_data_authorized": false,
+      "_fixture_repository_security_status": {"repository_visibility": "Private", "business_sensitive_git_write_blocked": false, "security_source": "fixture://private", "readback_status": "read_ok"}
+    }
+  },
+  "expected": {"git_closeout_validator": {"status": "blocked", "error_codes": ["blocked_repo_visibility_for_sensitive_data"]}}
+}

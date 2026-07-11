@@ -1,0 +1,12 @@
+{
+  "case_id": "readonly_closeout_no_git",
+  "description": "只读任务的完成接力不要求 commit、push 或 Git closeout 证据。",
+  "component_inputs": {
+    "project_task_closeout": {
+      "task_request": {"task_type": ["product_fact_intake"], "repository_write_requested": false, "will_modify_files": []},
+      "completion_relay": {"required_output_inventory": [{"name": "read-only audit", "required": true, "status": "completed"}], "child_task_graph": ["read", "review"], "remaining_work_check": {"remaining_required": false}, "completion_status": "completed_verified", "git_closeout": {"remote_match": false}},
+      "state_transition": {"current_state": "cross_project_collaboration_system_v2_active", "target_state": "product_fact_collection", "required_evidence": [{"evidence_type": "fixture", "source_path": "fixture", "readback_status": "read_ok"}], "human_gate_required": false, "human_gate_satisfied": false, "business_execution_started": false}
+    }
+  },
+  "expected": {"project_task_closeout": {"status": "pass", "error_codes": []}}
+}
