@@ -39,24 +39,25 @@
 
 ## Git 提交与推送
 
-- pre-commit status：`blocked_git_diff_check_failed_requires_content_change`
+- pre-commit status：`passed_after_user_authorized_format_only_cleanup`
 - staged scope：`22 files; all under project_bootstrap/collaboration_mechanism_migration/`
-- `git diff --cached --check`：`failed`
-- initial commit SHA：`not_created`
-- initial push：`not_attempted`
-- initial remote readback：`not_applicable_remote_still_empty`
-- evidence commit SHA：`not_created`
-- final push：`not_attempted`
-- final local HEAD：`unborn_main_no_commit`
-- final origin/main：`not_created`
-- final ls-remote main：`no_refs`
-- final remote tree：`empty`
+- `git diff --cached --check`：`passed`
+- initial commit SHA：`51dd61ee14edd355806f9fb443f5da302f6b755b`
+- initial push：`passed`
+- initial remote readback：`local HEAD = origin/main = ls-remote main = 51dd61ee14edd355806f9fb443f5da302f6b755b`
+- initial remote tree：`22 files; allowed directory only`
+- evidence commit SHA：`the commit containing this evidence update; resolve with git log -1 --format=%H -- project_bootstrap/collaboration_mechanism_migration/16_github_initial_push_report.md`
+- final push/readback：`verified immediately after the evidence commit; authoritative SHA and tree result are returned in the task completion report`
 
 ## 阻断详情
 
 - `01_source_evidence_map.md`：1 处 trailing whitespace。
 - `03_新项目协作机制总览.md`、`04_ChatGPT_Project项目指令_候选版.md`、`05_AGENTS候选版_仅供评审.md`、`06_当前正式事实模板.md`、`07_任务路由与状态机.md`、`09_事实源与冲突裁决规则.md`、`10_Codex任务执行单模板.md`、`11_Codex任务结束回报模板.md`、`12_人工确认与AI自动执行边界.md`、`13_禁止迁移清单.md`、`14_旧机制到新机制差异报告.md`、`15_启动后第一阶段建议.md`：各有 1 个 EOF 多余空行。
 - 附件要求候选内容不得为推送而修改，因此本轮没有自动清理这些格式问题。
+- 用户随后明确授权仅删除 trailing whitespace、EOF 多余空行并规范为一个结尾换行符。
+- 13 个变更文件的非空白内容 SHA-256 前后一致：`nonwhitespace_mismatches=0`。
+- `git diff --ignore-blank-lines --ignore-space-at-eol`：`passed`。
+- EOF 换行违规：`0`；剩余 trailing whitespace：`0`。
 
 ## Tested
 
@@ -65,10 +66,13 @@
 - 允许目录文件范围、类型、大小、空文件和软链接。
 - JSON 解析。
 - 凭据、个人数据和商业敏感内容模式扫描及关键词上下文复核。
+- 格式修复前后非空白内容哈希与 whitespace-only diff。
+- `git diff --cached --check`、精确暂存路径与首次提交范围。
+- 首次 push 后本地 HEAD、`origin/main`、`ls-remote` 和远端完整树回读。
 
 ## Not-tested
 
-- 推送后的远端 HEAD 与远端树，等待首次 push 后回读。
+- 第二个证据提交 push 后的最终 SHA 与远端树，需在该提交完成后立即回读。
 - 用户对候选机制的审核。
 - ChatGPT Project 上传或同步。
 - AGENTS 候选版激活。
@@ -82,4 +86,4 @@
 - AGENTS 候选版未正式启用。
 - 正式事实未批准。
 - 项目未声明可全面执行业务。
-- 本轮未创建 commit，未向远端推送任何内容。
+- 候选文件的文字、字段、标题、结构、顺序、语义和结论均未修改。
