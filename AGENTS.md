@@ -81,7 +81,7 @@ formal_system_version: `v2`
 
 ## 6. 完成接力、失败路由与状态真实性
 
-收到“完整执行、不要只做一半、多文件补全”等任务时，先生成 `required_output_inventory`、`child_task_graph` 和 `remaining_work_check`。结束时逐项检查：用户要求是否齐全、是否需要 current 回写、是否有人工复审、是否完成 Git 收尾、能否安全进入下一状态。
+收到“完整执行、不要只做一半、多文件补全”等任务时，先生成 `Completion Relay（完成接力）`：`required_output_inventory`、`child_task_graph` 和 `remaining_work_check`。结束时逐项检查：用户要求是否齐全、是否需要 current 回写、是否有人工复审、是否完成 Git 收尾、能否安全进入下一状态。
 
 失败必须路由，而不是笼统 retry：
 
