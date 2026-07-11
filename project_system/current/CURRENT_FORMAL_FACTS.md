@@ -9,8 +9,10 @@ last_updated: `2026-07-12`
 - Canonical repository: `fthytwerwt-sudo/dami`.
 - Cross-project collaboration system v2 is established in the repository.
 - The v2 system has a route-decision gate, L0-L3 depth router, available 13-layer engineering line, large-task/lane router, supply packs, state/completion/failure/Git validators, and H01-H20 registry.
+- Runtime narrow repairs are verified: read-only tasks no longer require a write lane or Git closeout, and repository visibility is resolved from the formal security-status file rather than task input.
+- The source commit for the verified runtime narrow repairs is `cdb9bae4b679f2c49aebc9a3bdceb6eae0be0bb4`; local HEAD, origin/main and ls-remote matched after remote readback.
 - M19 is `ACTIVE_ADAPTED`; M24-M26 remain `REJECTED_NOT_MIGRATED`.
-- GPT Project v2 package is generated in the repository; GPT Project UI synchronization is not confirmed.
+- GPT Project v2 revision `v2_20260712_r1` is generated in the repository; GPT Project UI synchronization is not confirmed.
 - The migration package remains protected evidence and is not the runtime entry.
 - No target country or market is formally selected.
 - No channel or platform is formally selected.

@@ -84,6 +84,7 @@ GIT_SENSITIVE_PATTERNS = {
     # 保守匹配国际号码、中文手机号和带分段的北美号码，避免把日期或机制编号误判为个人电话。
     "phone_number": r"(?:\+[1-9]\d{7,14}|(?:\+?86[- ]?)?1[3-9]\d{9}|\(?\d{3}\)?[- ]\d{3}[- ]\d{4})",
 }
+SHA256_TEXT_PATTERN = re.compile(r"(?<![0-9a-f])[0-9a-f]{64}(?![0-9a-f])")
 VALID_STATES = {
     "collaboration_system_activation",
     "product_fact_collection",
@@ -1052,8 +1053,9 @@ def run_git_readonly(arguments: list[str]) -> tuple[int, str]:
 def scan_git_diff_text(text: str) -> tuple[list[str], list[str]]:
     """扫描已提交 diff 的秘密与个人信息迹象；报告只给类别和计数。"""
 
-    secret_findings = [label for label, pattern in GIT_SECRET_PATTERNS.items() if re.search(pattern, text)]
-    sensitive_findings = [label for label, pattern in GIT_SENSITIVE_PATTERNS.items() if re.search(pattern, text)]
+    scan_text = SHA256_TEXT_PATTERN.sub("sha256_digest", text)
+    secret_findings = [label for label, pattern in GIT_SECRET_PATTERNS.items() if re.search(pattern, scan_text)]
+    sensitive_findings = [label for label, pattern in GIT_SENSITIVE_PATTERNS.items() if re.search(pattern, scan_text)]
     return secret_findings, sensitive_findings
 
 

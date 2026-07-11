@@ -37,3 +37,19 @@
   - platform or channel
   - price, MOQ, delivery, agency, compliance, customer, or offer
   - any external business action
+
+## D-20260712-002 — Verify v2 runtime narrow repair and refresh static GPT snapshot
+
+- decision_authority: `user`
+- status: `approved`
+- scope: read/write routing, formal repository-security resolution, non-sensitive Schema/Fixture coverage, current status records, GPT Project package revision, and Git closeout only
+- decisions:
+  - Compute `write_required` from task type, explicit repository write request, direct planned files, or actual paths in a per-file plan.
+  - Use `project_system/current/REPOSITORY_SECURITY_STATUS.md` as the repository-visibility authority; task input is only a consistency check.
+  - Permit ordinary non-sensitive Private-repository writes in the runtime contract while retaining blocks for secrets, personal information, and unauthorized sensitive data.
+  - Generate the unique static package revision `v2_20260712_r1` after the runtime source commit is pushed and remotely verified.
+  - Keep `gpt_project_synced: false`, `ui_uploaded: false`, and business execution unstarted until separate evidence and authorization exist.
+- excluded_decisions:
+  - repository visibility change
+  - ChatGPT Project UI upload
+  - target market, channel, product, price, MOQ, delivery, agency, compliance, customer, offer, or any external business action
