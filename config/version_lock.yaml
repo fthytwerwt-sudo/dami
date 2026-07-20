@@ -1,0 +1,27 @@
+schema_version: 1
+verified_on: 2026-07-21
+python:
+  version: 3.12.13
+  source: Codex bundled workspace runtime
+direct_dependencies:
+  jsonschema: 4.26.0
+  langgraph: 1.2.9
+  langgraph-checkpoint-sqlite: 3.1.0
+  playwright_python: 1.61.0
+  pyyaml: 6.0.3
+dev_dependencies:
+  pytest: 9.1.1
+  pytest-asyncio: 1.4.0
+browser:
+  playwright_chromium_revision: 1228
+  chrome_for_testing: 149.0.7827.55
+upstream_research_snapshot:
+  playwright_github_release: v1.61.1
+  langgraph_github_release: 1.2.9
+  crawl4ai_reference_release: v0.9.2
+  opentelemetry_python_reference_release: v1.36.0
+lock_policy:
+  python_packages: exact_version
+  containers: digest_required_if_added
+  git_dependencies: commit_sha_required_if_added
+  branch_or_latest: forbidden

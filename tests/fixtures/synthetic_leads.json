@@ -1,0 +1,38 @@
+[
+  {
+    "company_name_raw": " SYNTHETIC Harbor Foods Ltd. ",
+    "country": "TEST_COUNTRY",
+    "buyer_type_candidate": "synthetic_distributor",
+    "root_domain": "harbor.synthetic.example",
+    "source_url": "https://harbor.synthetic.example/about",
+    "source_type": "official_company_site",
+    "category_evidence": "synthetic_rice_and_grains",
+    "import_distribution_evidence": "synthetic_distribution_statement",
+    "channel_fit_evidence": "synthetic_retail_channel",
+    "public_contact_type": "official_contact_form"
+  },
+  {
+    "company_name_raw": "SYNTHETIC Harbor Foods Limited",
+    "country": "TEST_COUNTRY",
+    "buyer_type_candidate": "synthetic_distributor",
+    "root_domain": "harbor.synthetic.example",
+    "source_url": "https://harbor.synthetic.example/contact",
+    "source_type": "official_company_site",
+    "category_evidence": "synthetic_rice_and_grains",
+    "import_distribution_evidence": "",
+    "channel_fit_evidence": "synthetic_retail_channel",
+    "public_contact_type": "official_contact_form"
+  },
+  {
+    "company_name_raw": "SYNTHETIC Wrong Country",
+    "country": "OTHER_TEST_COUNTRY",
+    "buyer_type_candidate": "synthetic_distributor",
+    "root_domain": "wrong.synthetic.example",
+    "source_url": "https://wrong.synthetic.example/about",
+    "source_type": "official_company_site",
+    "category_evidence": "synthetic_rice_and_grains",
+    "import_distribution_evidence": "synthetic_distribution_statement",
+    "channel_fit_evidence": "synthetic_retail_channel",
+    "public_contact_type": "official_contact_form"
+  }
+]

@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools==82.0.1", "wheel==0.46.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dami-web-agent-toolkit"
+version = "0.1.0"
+description = "大米低 GI 跨境项目的网页获客与知识驱动草稿沙箱"
+requires-python = ">=3.12,<3.14"
+license = { text = "MIT" }
+dependencies = [
+  "jsonschema==4.26.0",
+  "langgraph==1.2.9",
+  "langgraph-checkpoint-sqlite==3.1.0",
+  "playwright==1.61.0",
+  "PyYAML==6.0.3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest==9.1.1",
+  "pytest-asyncio==1.4.0",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+pythonpath = ["src"]

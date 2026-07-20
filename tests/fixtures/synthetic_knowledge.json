@@ -1,0 +1,50 @@
+[
+  {
+    "knowledge_id": "K-SAFE-001",
+    "domain": "product_fact",
+    "statement": "SYNTHETIC product information is available only as a test fixture.",
+    "source_url": "https://knowledge.synthetic.example/product/K-SAFE-001",
+    "source_date": "2026-07-21",
+    "scope": "sandbox_only",
+    "status": "active",
+    "confidence": 1.0,
+    "conflict_group": null,
+    "keywords": "product synthetic fixture information"
+  },
+  {
+    "knowledge_id": "K-PRICE-001",
+    "domain": "commercial_term",
+    "statement": "SYNTHETIC price requires human approval.",
+    "source_url": "https://knowledge.synthetic.example/commercial/K-PRICE-001",
+    "source_date": "2026-07-21",
+    "scope": "sandbox_only",
+    "status": "active",
+    "confidence": 1.0,
+    "conflict_group": null,
+    "keywords": "price quotation commercial"
+  },
+  {
+    "knowledge_id": "K-CONFLICT-001A",
+    "domain": "delivery",
+    "statement": "SYNTHETIC delivery is 10 days.",
+    "source_url": "https://knowledge.synthetic.example/conflict/K-CONFLICT-001A",
+    "source_date": "2026-07-20",
+    "scope": "sandbox_only",
+    "status": "active",
+    "confidence": 0.8,
+    "conflict_group": "delivery-window",
+    "keywords": "delivery conflict"
+  },
+  {
+    "knowledge_id": "K-CONFLICT-001B",
+    "domain": "delivery",
+    "statement": "SYNTHETIC delivery is 20 days.",
+    "source_url": "https://knowledge.synthetic.example/conflict/K-CONFLICT-001B",
+    "source_date": "2026-07-21",
+    "scope": "sandbox_only",
+    "status": "active",
+    "confidence": 0.8,
+    "conflict_group": "delivery-window",
+    "keywords": "delivery conflict"
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.local/lead_record.schema.json",
+  "title": "潜客记录 Lead Record",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "company_name": {"type": "string", "minLength": 1, "description": "规范化企业名称，不含常见公司后缀。"},
+    "country": {"type": "string", "minLength": 1, "description": "证据指向的国家或地区。"},
+    "buyer_type_candidate": {"type": "string", "minLength": 1, "description": "候选买家类型，仍需业务人工确认。"},
+    "root_domain": {"type": "string", "minLength": 1, "description": "用于去重的规范化根域名。"},
+    "evidence_urls": {"type": "array", "minItems": 1, "items": {"type": "string", "format": "uri"}, "description": "支持该记录的公开来源链接列表。"},
+    "score": {"type": "integer", "minimum": 0, "maximum": 100, "description": "基于显式规则计算的候选分数。"},
+    "decision": {"enum": ["qualified", "needs_review", "rejected"], "description": "技术筛选状态，不等于业务接受。"}
+  },
+  "required": ["company_name", "country", "buyer_type_candidate", "root_domain", "evidence_urls", "decision"]
+}

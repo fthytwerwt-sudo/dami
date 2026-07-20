@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.local/tool_action.schema.json",
+  "title": "工具动作 Tool Action",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "action": {"enum": ["CRAWL", "EXTRACT", "DOM_FILL", "SUBMIT_MESSAGE"], "description": "标准化工具动作名称。"},
+    "status": {"enum": ["SUCCEEDED", "FILLED_PENDING_SUBMIT", "BLOCK_SEND", "FAILED"], "description": "动作结果，填表和发送必须使用不同状态。"},
+    "details": {"type": "object", "description": "不含秘密或个人信息的结构化动作证据。"}
+  },
+  "required": ["action", "status", "details"]
+}

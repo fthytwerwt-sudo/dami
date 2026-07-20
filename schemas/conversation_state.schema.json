@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.local/conversation_state.schema.json",
+  "title": "会话状态 Conversation State",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "thread_id": {"type": "string", "minLength": 1, "description": "用于中断恢复的稳定会话标识。"},
+    "message": {"type": "string", "minLength": 1, "description": "纯合成或经授权的客户输入。"},
+    "runtime_mode": {"const": "draft_only", "description": "当前唯一允许的运行模式，只生成待审草稿。"},
+    "stage": {"type": "string", "minLength": 1, "description": "当前流程节点和人工闸门状态。"},
+    "send_status": {"enum": ["NOT_SENT", "BLOCKED", "UNKNOWN"], "description": "消息发送状态，本底座不可出现已发送。"},
+    "knowledge": {"type": "object", "description": "本轮召回的知识结果快照。"},
+    "draft": {"type": "object", "description": "带来源且等待人工复核的草稿。"},
+    "approval": {"type": "object", "description": "模拟人工审批的决定和记录。"},
+    "dom_action": {"type": "object", "description": "只填不提交的 DOM 动作结果。"}
+  },
+  "required": ["thread_id", "runtime_mode", "stage", "send_status"]
+}

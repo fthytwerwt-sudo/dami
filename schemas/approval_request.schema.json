@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.local/approval_request.schema.json",
+  "title": "人工审批请求 Approval Request",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "type": {"const": "SYNTHETIC_HUMAN_APPROVAL", "description": "审批类型，明确当前只是合成模拟。"},
+    "thread_id": {"type": "string", "minLength": 1, "description": "关联 checkpoint 的会话标识。"},
+    "draft": {"type": "object", "description": "等待人工复核的来源约束草稿。"},
+    "allowed_actions": {"type": "array", "items": {"enum": ["approve", "reject"]}, "description": "人工可选择的有限动作集合。"},
+    "approved": {"type": ["boolean", "null"], "description": "审批决定，未决定时为 null。"}
+  },
+  "required": ["type", "thread_id", "draft", "allowed_actions"]
+}

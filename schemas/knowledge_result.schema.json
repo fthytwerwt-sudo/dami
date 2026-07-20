@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.local/knowledge_result.schema.json",
+  "title": "知识召回结果 Knowledge Result",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "query": {"type": "string", "minLength": 1, "description": "本次知识召回的原始问题。"},
+    "scope": {"type": "string", "minLength": 1, "description": "知识允许使用的范围。"},
+    "status": {"enum": ["FOUND", "MISSING", "CONFLICT"], "description": "召回状态，缺失或冲突时必须关闭自动回答。"},
+    "items": {"type": "array", "description": "带来源、日期、范围和置信度的知识项。", "items": {"type": "object"}},
+    "conflicts": {"type": "array", "description": "冲突分组及其全部原始证据。", "items": {"type": "object"}},
+    "requires_human": {"type": "boolean", "description": "是否必须转人工复核。"}
+  },
+  "required": ["query", "scope", "status", "items", "conflicts", "requires_human"]
+}

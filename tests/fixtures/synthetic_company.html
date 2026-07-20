@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>SYNTHETIC 公司测试页</title>
+</head>
+<body>
+  <main>
+    <h1 data-testid="company-name">SYNTHETIC Harbor Foods</h1>
+    <p data-testid="country">TEST_COUNTRY</p>
+    <p data-testid="business-type">synthetic_distributor</p>
+    <p data-testid="category">synthetic_rice_and_grains</p>
+    <p data-testid="evidence">This is a synthetic fixture and not a real company.</p>
+    <form id="contact-form">
+      <label for="message">Message</label>
+      <textarea id="message" name="message"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+    <output id="submit-count">0</output>
+  </main>
+  <script>
+    window.__submitCount = 0;
+    document.getElementById('contact-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      window.__submitCount += 1;
+      document.getElementById('submit-count').textContent = String(window.__submitCount);
+    });
+  </script>
+</body>
+</html>

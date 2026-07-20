@@ -1,0 +1,58 @@
+schema_version: 1
+project_id: dami_web_agent_toolkit
+runtime_mode_enabled: draft_only
+tools:
+  - tool_id: playwright_web
+    中文用途: localhost 网页读取和基于 label/test-id 的 DOM 填入
+    adapter: web_agent_toolkit.web.PlaywrightWebAdapter
+    adoption_mode: package_dependency
+    status: adopted_for_synthetic_sandbox
+    input: localhost_url_and_dom_contract
+    output: page_evidence_or_tool_action
+    replacement: implement_WebAdapter_protocol
+    hard_boundaries: [localhost_only, no_login, no_captcha_bypass, no_stealth, no_submit]
+  - tool_id: sqlite_knowledge
+    中文用途: 带来源、范围和冲突的轻量知识召回
+    adapter: web_agent_toolkit.knowledge.SQLiteKnowledgeAdapter
+    adoption_mode: custom_build_last_resort
+    status: adopted_minimal_glue
+    input: structured_knowledge_records
+    output: knowledge_result
+    replacement: implement_KnowledgeAdapter_protocol
+    hard_boundaries: [source_required, missing_blocks, conflict_escalates]
+  - tool_id: deterministic_policy
+    中文用途: 在模型之外执行商业和合规敏感词硬闸门
+    adapter: web_agent_toolkit.policy.DeterministicPolicyGate
+    adoption_mode: custom_build_last_resort
+    status: adopted_minimal_business_boundary
+    input: message_and_knowledge_result
+    output: policy_result
+    replacement: compatible_policy_adapter
+    hard_boundaries: [rules_override_model, review_sensitive_terms, block_missing_facts]
+  - tool_id: langgraph_workflow
+    中文用途: 人工中断、条件分支和恢复流程
+    adapter: web_agent_toolkit.workflow.build_conversation_graph
+    adoption_mode: package_dependency
+    status: adopted_for_minimal_required_skeleton
+    input: conversation_state
+    output: checkpointed_state
+    replacement: compatible_state_graph_runtime
+    hard_boundaries: [thread_id_required, human_interrupt, no_platform_dependency]
+  - tool_id: sqlite_runtime
+    中文用途: 业务可读 checkpoint、事件和 LangGraph SQLite 持久化
+    adapter: web_agent_toolkit.runtime.SQLiteRuntimeStore
+    adoption_mode: adapter_only
+    status: adopted
+    input: thread_id_and_state
+    output: durable_local_state
+    replacement: implement_RuntimeAdapter_protocol
+    hard_boundaries: [local_only, no_customer_data_in_demo, stop_is_recoverable]
+  - tool_id: jsonl_trace
+    中文用途: 无平台依赖的节点 Trace 记录
+    adapter: web_agent_toolkit.runtime.JsonlTraceRecorder
+    adoption_mode: adapter_only
+    status: adopted
+    input: node_event
+    output: jsonl_trace
+    replacement: OpenTelemetry_adapter
+    hard_boundaries: [no_secrets, no_real_contact_data]
