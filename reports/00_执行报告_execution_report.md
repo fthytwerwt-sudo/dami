@@ -234,10 +234,12 @@ Explorer A-F 只读官方证据
 
 ## 7. Git closeout
 
-- 本地新仓库：已建立 `main`，待精确暂存和 Lore commit。
+- 本地新仓库：`main` 已完成 Lore commit；实现提交为 `6dde4f65a7a6b98fd07f926a6caee90beaff49ea`，提交后工作区对读为 clean。
 - 目标远端：`fthytwerwt-sudo/dami-web-agent-toolkit` Private。
 - 阻断：`gh` keyring token 无效；GitHub Connector 无创建仓库能力；可用 in-app Browser 未登录。
+- 已配置预期 `origin` 并尝试普通 push；GitHub 返回 `Repository not found`，与“远端尚未创建/当前凭证不可访问”一致。
 - `origin/main`、`git ls-remote`、远端关键文件回读：均因目标远端尚未创建而未验证。
+- 本地关键文件回读：commit 中 README 与工作区 SHA-256 均为 `73108a4c9b656f9b4d34c2035d90cb4a13b774d9a4f53cf460503bba8212997e`。
 - 原 `dami` 仓库 current 未修改；独立工具仓库不成为业务事实源。
 
 ## 8. blocked_items 与 remaining_work
