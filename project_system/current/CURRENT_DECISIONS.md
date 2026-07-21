@@ -53,3 +53,28 @@
   - repository visibility change
   - ChatGPT Project UI upload
   - target market, channel, product, price, MOQ, delivery, agency, compliance, customer, offer, or any external business action
+
+## D-20260722-001 — Activate single repository and multi-branch governance
+
+- decision_authority: `user`
+- status: `approved`
+- scope: repository governance, branch responsibility, open-source reuse route, Public repository safety, and Git closeout truth only
+- decisions:
+  - Fix the only project repository as `fthytwerwt-sudo/dami`.
+  - Do not automatically create any other GitHub repository for this project.
+  - Upload future Codex-generated code, tools, planning records, and deliverables through branches in the same repository.
+  - Keep formal rules, formal decisions, current status, approved stable code, and approved formal deliverables on `main`.
+  - Use `codex/*` branches for tool development, sandbox experiments, pending-review code, technical validation, and outputs not yet approved for `main`.
+  - Create all new `codex/*` branches from current `origin/main`; do not create new orphan branches or branches without shared `main` history.
+  - Treat existing `codex/dami-web-agent-toolkit` as a historical exception only; do not merge it, rewrite it, or use it as a future branch template without a separate formal task.
+  - Prefer third-party open-source reuse through fixed package dependencies, fixed container dependencies, pinned commits, or adapter-only integration.
+  - Do not automatically create third-party Fork repositories; route true Fork needs to `human_decision_required`.
+  - Apply Public repository safety rules to all branches, commits, tags, PRs, and complete Git history.
+  - Keep branch push, PR created, PR merged, and `main` effective as separate status claims.
+- excluded_decisions:
+  - merging `codex/dami-web-agent-toolkit` into `main`
+  - repository visibility change
+  - target market or country
+  - B2B/B2C allocation
+  - platform or channel
+  - price, MOQ, delivery, agency, compliance, customer, offer, or any external business action

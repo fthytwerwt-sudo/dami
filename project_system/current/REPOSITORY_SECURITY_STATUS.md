@@ -3,6 +3,18 @@
 repository_visibility: `Public`
 business_sensitive_git_write_blocked_while_repo_public: `true`
 
+## Scope
+
+Public repository safety applies to:
+
+- all branches, including `main` and `codex/*`
+- all Commit history
+- all Tag references
+- all PR content and review artifacts
+- the complete Git history reachable from this repository
+
+Branch isolation is not privacy isolation. `codex/*` branches are not private storage and must not contain sensitive business, personal, authentication, certification, testing, contract, pricing, cost, or customer/supplier material.
+
 ## Allowed
 
 - Static collaboration rules.

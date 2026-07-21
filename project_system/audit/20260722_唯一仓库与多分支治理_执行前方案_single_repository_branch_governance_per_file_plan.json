@@ -1,0 +1,256 @@
+{
+  "task": "single_repository_and_branch_governance_activation",
+  "task_identity": "single_repository_and_branch_governance",
+  "created_on": "2026-07-22",
+  "starting_main_sha": "95bb18bbdd34742dac3138508274e448d4713671",
+  "route_decision_record": {
+    "status": "pass",
+    "task_type": [
+      "mechanism_or_route_fix",
+      "project_file_change",
+      "local_file_governance",
+      "audit"
+    ],
+    "responsibility_layer": [
+      "mechanism_fix_layer",
+      "execution_layer",
+      "validation_layer",
+      "sync_layer"
+    ],
+    "engineering_worth_question": {
+      "worth_engineering": true,
+      "reason": "Governance change touches the formal entry, current state, security scope, and Git closeout behavior.",
+      "engineering_depth": "L2_node_contract"
+    },
+    "execution_permission": "authorized_within_allowed_files",
+    "external_actions": "none",
+    "human_gates": [
+      "No market, channel, customer, compliance, business execution, repository visibility, PR, or branch merge decision is authorized."
+    ]
+  },
+  "pre_task_supply_pack_record": {
+    "status": "pass",
+    "task_goal": "Enable the single-repository and multi-branch governance rule on dami/main.",
+    "current_state": "cross_project_collaboration_system_v2_active",
+    "source_readback_status": "read_ok",
+    "source_conflicts": [],
+    "external_research_needed": false,
+    "second_opinion_trigger": false,
+    "must_read_sources": [
+      {
+        "source_path": "user_task_attachment",
+        "readback_status": "read_ok",
+        "exact_relevant_snippets": [
+          "Target repository is fthytwerwt-sudo/dami and target branch is main.",
+          "New codex/* branches must be created from origin/main.",
+          "Public repository safety applies to all branches."
+        ]
+      },
+      {
+        "source_path": "AGENTS.md",
+        "readback_status": "read_ok",
+        "exact_relevant_snippets": [
+          "Root AGENTS.md is the sole formal Codex entry.",
+          "Repository writes require route_decision and Git closeout."
+        ]
+      },
+      {
+        "source_path": "project_system/current/CURRENT_PROJECT_STATE.md",
+        "readback_status": "read_ok",
+        "exact_relevant_snippets": [
+          "Business execution, market, channel, B2B/B2C, and compliance states remain false."
+        ]
+      },
+      {
+        "source_path": "project_system/current/CURRENT_FORMAL_FACTS.md",
+        "readback_status": "read_ok",
+        "exact_relevant_snippets": [
+          "Canonical repository is fthytwerwt-sudo/dami.",
+          "No target country, market, channel, price, MOQ, delivery term, agency policy, or business model is formally approved."
+        ]
+      },
+      {
+        "source_path": "project_system/current/CURRENT_DECISIONS.md",
+        "readback_status": "read_ok",
+        "exact_relevant_snippets": [
+          "Previous decisions did not yet record the single-repository and multi-branch governance decision."
+        ]
+      },
+      {
+        "source_path": "project_system/current/LATEST_TASK_STATUS.md",
+        "readback_status": "read_ok",
+        "exact_relevant_snippets": [
+          "Previous latest task was v2_runtime_narrow_fix_and_gpt_project_snapshot_refresh."
+        ]
+      },
+      {
+        "source_path": "project_system/current/REPOSITORY_SECURITY_STATUS.md",
+        "readback_status": "read_ok",
+        "exact_relevant_snippets": [
+          "repository_visibility is Public.",
+          "business_sensitive_git_write_blocked_while_repo_public is true."
+        ]
+      },
+      {
+        "source_path": "project_system/rules/08_GIT_AND_SYNC_TRUTH.md",
+        "readback_status": "read_ok",
+        "exact_relevant_snippets": [
+          "Formal changes require precise staging, diff check, scans, commit, push, three-way readback, and remote file readback."
+        ]
+      },
+      {
+        "source_path": "project_system/rules/11_路由判断与流程启动_route_decision_and_process_boot.md",
+        "readback_status": "read_ok",
+        "exact_relevant_snippets": [
+          "Any repository write, commit, or push requires a passing route_decision."
+        ]
+      },
+      {
+        "source_path": "project_system/rules/14_供料与执行中补料_supply_and_mid_task_supply.md",
+        "readback_status": "read_ok",
+        "exact_relevant_snippets": [
+          "pre_task_supply_pack requires source_path, readback_status, and exact relevant snippets."
+        ]
+      },
+      {
+        "source_path": "project_system/rules/15_单文件细节方案_per_file_detail_plan.md",
+        "readback_status": "read_ok",
+        "exact_relevant_snippets": [
+          "Every modified file must be listed in a per_file_plan."
+        ]
+      },
+      {
+        "source_path": "project_system/rules/18_单工作区与路径治理_single_workspace_and_path_governance.md",
+        "readback_status": "read_ok",
+        "exact_relevant_snippets": [
+          "The current repository root is the only formal workspace."
+        ]
+      }
+    ],
+    "allowed_actions": [
+      "Edit planned files.",
+      "Commit to main.",
+      "Push to origin/main.",
+      "Read back remote files."
+    ],
+    "forbidden_actions": [
+      "Create a new repository.",
+      "Create a new clone or worktree.",
+      "Create an orphan branch.",
+      "Merge or rewrite the existing tool branch.",
+      "Create a PR.",
+      "Change repository visibility.",
+      "Advance market, customer, compliance, or external business status."
+    ]
+  },
+  "impact_check": {
+    "existing_single_workspace_rule_conflict": false,
+    "allows_new_project_repository": false,
+    "git_closeout_fixed_only_to_origin_main": false,
+    "public_security_all_branches": true,
+    "new_codex_branches_from_origin_main": true,
+    "existing_tool_branch_merge_approved": false,
+    "business_status_advanced": false,
+    "gpt_project_static_package_regenerated_this_round": false,
+    "english_or_field_only_user_text": false,
+    "tool_code_changes_included": false
+  },
+  "completion_relay": {
+    "required_output_inventory": [
+      "AGENTS.md P0 governance rule",
+      "CURRENT_DECISIONS.md user decision",
+      "CURRENT_PROJECT_STATE.md governance state flags",
+      "LATEST_TASK_STATUS.md latest task record",
+      "REPOSITORY_SECURITY_STATUS.md all-branch Public safety scope",
+      "Git commit, push, three-way SHA match, and remote readback"
+    ],
+    "child_task_graph": [
+      "single_integrator"
+    ],
+    "remaining_work_check": {
+      "historical_tool_branch_migration": "separate future formal task",
+      "gpt_project_static_package_refresh": "not regenerated in this governance-only round",
+      "business_execution": "not started"
+    }
+  },
+  "shared_policy": {
+    "missing_info_policy": "Block if required repository, branch, source, or remote readback evidence is missing.",
+    "conflict_policy": "Block on repository mismatch, branch mismatch, main divergence, policy conflict, unrelated changes, or sensitive data findings.",
+    "blocked_if": "blocked_wrong_repository_or_branch, blocked_main_not_synchronized, repository_policy_conflict, blocked_repo_visibility_for_sensitive_data, blocked_unrelated_changes, git_closeout_repair, remote_readback_failed",
+    "user_review_points": "This task activates repository governance only; it does not approve market, channel, product, compliance, customer outreach, PR creation, branch merge, or repository visibility changes."
+  },
+  "plan_groups": [
+    {
+      "paths": [
+        "AGENTS.md",
+        "project_system/current/CURRENT_DECISIONS.md",
+        "project_system/current/CURRENT_PROJECT_STATE.md",
+        "project_system/current/LATEST_TASK_STATUS.md",
+        "project_system/current/REPOSITORY_SECURITY_STATUS.md",
+        "project_system/audit/20260722_唯一仓库与多分支治理_执行前方案_single_repository_branch_governance_per_file_plan.json"
+      ],
+      "purpose": "Write the single-repository and multi-branch governance rule into the formal entry and current records.",
+      "layer": "mechanism_fix_layer / execution_layer / validation_layer / sync_layer",
+      "inputs": [
+        "user_task_attachment",
+        "origin/main readback",
+        "AGENTS.md",
+        "project_system/current/*",
+        "project_system/rules/08_GIT_AND_SYNC_TRUTH.md",
+        "project_system/rules/11_路由判断与流程启动_route_decision_and_process_boot.md",
+        "project_system/rules/14_供料与执行中补料_supply_and_mid_task_supply.md",
+        "project_system/rules/15_单文件细节方案_per_file_detail_plan.md",
+        "project_system/rules/18_单工作区与路径治理_single_workspace_and_path_governance.md"
+      ],
+      "outputs": [
+        "P0 governance rule",
+        "approved current decision",
+        "governance state flags",
+        "latest task status",
+        "all-branch Public security clarification",
+        "per-file plan audit record"
+      ],
+      "core_decisions": [
+        "canonical repository remains fthytwerwt-sudo/dami",
+        "main stores formal rules, current records, approved stable code, and approved formal outputs",
+        "new codex/* branches start from origin/main",
+        "existing codex/dami-web-agent-toolkit branch is a historical exception only",
+        "branch isolation is not privacy isolation",
+        "third-party Fork creation requires human_decision_required"
+      ],
+      "trigger_conditions": [
+        "repository write requested for main governance update",
+        "task identity is single_repository_and_branch_governance",
+        "current branch is main",
+        "origin resolves to fthytwerwt-sudo/dami"
+      ],
+      "route_rules": [
+        "mechanism_or_route_fix",
+        "project_file_change",
+        "local_file_governance",
+        "serial_only",
+        "single_integrator",
+        "dami_main_governance_update_only"
+      ],
+      "missing_info_policy": "Block if any required source is missing or unreadable.",
+      "conflict_policy": "Block if local main and origin/main diverge, if rules conflict, or if staged content contains secrets or sensitive data.",
+      "blocked_if": "blocked_wrong_repository_or_branch, blocked_main_not_synchronized, repository_policy_conflict, blocked_repo_visibility_for_sensitive_data, blocked_unrelated_changes, git_closeout_repair, remote_readback_failed",
+      "examples": [
+        "main effective requires local HEAD = origin/main = git ls-remote origin refs/heads/main.",
+        "codex/<task-slug> push is branch pushed, not main effective.",
+        "A true third-party Fork request routes to human_decision_required."
+      ],
+      "validation": [
+        "per_file_plan_validator pass",
+        "project_task_preflight pass",
+        "git diff --cached --check",
+        "staged secret scan",
+        "staged sensitive scan",
+        "fixture_runner pass",
+        "three-way SHA match",
+        "remote readback for AGENTS.md and current files"
+      ],
+      "user_review_points": "Review only the repository governance rule and current metadata. Business, market, customer, compliance, PR, merge, and visibility decisions are excluded."
+    }
+  ]
+}
