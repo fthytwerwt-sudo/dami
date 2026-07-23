@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MessageDraft",
+  "type": "object",
+  "required": ["subject", "body", "knowledge_source_ids", "status"],
+  "properties": {
+    "subject": { "type": "string", "minLength": 1 },
+    "body": { "type": "string", "minLength": 1 },
+    "knowledge_source_ids": { "type": "array", "items": { "type": "string" } },
+    "status": { "enum": ["DRAFT_READY", "BLOCKED_MISSING_KNOWLEDGE", "BLOCKED_CONFLICTING_KNOWLEDGE"] },
+    "risk_items": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": false
+}

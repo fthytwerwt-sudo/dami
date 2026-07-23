@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "KnowledgeResult",
+  "type": "object",
+  "required": ["status", "items", "missing_topics", "conflicts"],
+  "properties": {
+    "status": { "enum": ["FOUND", "MISSING", "CONFLICT"] },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source_id", "topic", "statement"],
+        "properties": {
+          "source_id": { "type": "string" },
+          "topic": { "type": "string" },
+          "statement": { "type": "string" },
+          "scope": { "type": "string" },
+          "conflict_group": { "type": "string" }
+        }
+      }
+    },
+    "missing_topics": { "type": "array", "items": { "type": "string" } },
+    "conflicts": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": false
+}

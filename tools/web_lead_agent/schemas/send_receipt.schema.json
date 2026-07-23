@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SendReceipt",
+  "type": "object",
+  "required": ["status", "http_status", "target_url", "idempotency_key"],
+  "properties": {
+    "status": { "enum": ["SUCCESS", "FAILED", "UNKNOWN", "BLOCKED"] },
+    "http_status": { "type": ["integer", "null"] },
+    "target_url": { "type": "string" },
+    "idempotency_key": { "type": "string" },
+    "reason": { "type": "string" },
+    "retry_scheduled": { "const": false }
+  },
+  "additionalProperties": true
+}

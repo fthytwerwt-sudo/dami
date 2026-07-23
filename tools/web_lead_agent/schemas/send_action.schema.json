@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SendAction",
+  "type": "object",
+  "required": ["target_domain", "channel", "action", "send_limit", "idempotency_key"],
+  "properties": {
+    "target_domain": { "type": "string" },
+    "channel": { "const": "website_contact_form" },
+    "action": { "const": "submit_once" },
+    "send_limit": { "const": 1 },
+    "idempotency_key": { "type": "string", "minLength": 16 }
+  },
+  "additionalProperties": true
+}

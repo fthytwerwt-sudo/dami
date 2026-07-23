@@ -1,0 +1,17 @@
+allowed_domains:
+  - domain: localhost
+    reason: synthetic fixture only
+    allowed_for:
+      - crawl
+      - supervised_single_send
+  - domain: 127.0.0.1
+    reason: synthetic fixture only
+    allowed_for:
+      - crawl
+      - supervised_single_send
+blocked_keywords:
+  - login
+  - captcha
+  - password
+  - checkout
+  - payment

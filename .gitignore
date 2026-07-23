@@ -6,3 +6,12 @@ secrets/
 private/
 project_local/
 foreign_trade_low_gi_plan/
+.private_runtime/
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+*.pyo
+*.sqlite
+*.sqlite3

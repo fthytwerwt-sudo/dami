@@ -1,0 +1,62 @@
+{
+  "status": "pass",
+  "branch": "codex/web-lead-minimal-loop-v1",
+  "verification": {
+    "pytest": {
+      "command": ".private_runtime/web_lead_minimal_loop/.venv/bin/python -m pytest tools/web_lead_agent/tests -q",
+      "result": "23 passed"
+    },
+    "compileall": {
+      "command": ".private_runtime/web_lead_minimal_loop/.venv/bin/python -m compileall -q tools/web_lead_agent/src tools/web_lead_agent/tests",
+      "result": "pass"
+    },
+    "pip_check": {
+      "command": ".private_runtime/web_lead_minimal_loop/.venv/bin/python -m pip check",
+      "result": "No broken requirements found."
+    },
+    "cli_synthetic": {
+      "command": ".private_runtime/web_lead_minimal_loop/.venv/bin/python -m web_lead_agent.cli run-synthetic --workspace .private_runtime/web_lead_minimal_loop/cli_synthetic_final2 --synthetic-approve",
+      "result": "COMPLETED_SYNTHETIC_SUPERVISED_SEND",
+      "receipt_status": "SUCCESS"
+    }
+  },
+  "e2e_metrics": {
+    "synthetic_pages_crawled": 1,
+    "synthetic_company_records_extracted": 1,
+    "deduped_leads": 1,
+    "qualified_leads": 1,
+    "drafts_generated": 1,
+    "policy_result": "ALLOW_DRAFT",
+    "approval_gate": "interrupt_resume_tested",
+    "synthetic_supervised_submits": 1,
+    "real_external_sends": 0,
+    "retry_on_unknown": false
+  },
+  "covered_boundaries": [
+    "domain allowlist",
+    "external subresource block",
+    "company field extraction",
+    "dedupe",
+    "scoring",
+    "missing knowledge block",
+    "conflicting knowledge escalation",
+    "restricted term review",
+    "unapproved submit block",
+    "real_send_enabled false block",
+    "one send per run",
+    "idempotency duplicate block",
+    "failed receipt saved",
+    "unknown receipt no retry",
+    "runtime reopen resume",
+    "LangGraph SQLite checkpoint interrupt resume",
+    "source safety scan"
+  ],
+  "not_tested": [
+    "real external website crawl",
+    "real platform account send",
+    "real product fact approval",
+    "customer response handling",
+    "browser-only or JavaScript-heavy contact forms"
+  ],
+  "final_status": "completed_code_ready_pending_real_target_authorization"
+}

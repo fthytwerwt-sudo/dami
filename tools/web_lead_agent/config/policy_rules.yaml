@@ -1,0 +1,40 @@
+policy:
+  modes:
+    default: draft_only
+    allowed:
+      - draft_only
+      - supervised_single_send
+    forbidden:
+      - bounded_autonomy
+  restricted_terms:
+    - price
+    - quotation
+    - quote
+    - MOQ
+    - delivery
+    - payment
+    - exclusive
+    - contract
+    - refund
+    - complaint
+    - sample
+    - health
+    - medical
+    - low GI
+    - 低 GI
+    - 低GI
+    - 价格
+    - 报价
+    - 交期
+    - 付款
+    - 样品
+    - 代理
+    - 合同
+    - 认证
+    - 检测
+    - 效果承诺
+  send:
+    require_human_approval: true
+    require_send_limit: 1
+    retry_on_unknown: false
+    max_send_per_run: 1

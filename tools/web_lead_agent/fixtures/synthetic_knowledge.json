@@ -1,0 +1,23 @@
+[
+  {
+    "source_id": "public-positioning-001",
+    "topic": "product_positioning",
+    "statement": "A specialty rice export project for importers evaluating differentiated pantry staples.",
+    "scope": "general",
+    "conflict_group": "positioning"
+  },
+  {
+    "source_id": "business-intent-001",
+    "topic": "business_intent",
+    "statement": "We are checking whether qualified import or wholesale teams are open to a human follow-up conversation.",
+    "scope": "general",
+    "conflict_group": "intent"
+  },
+  {
+    "source_id": "cta-001",
+    "topic": "approved_cta",
+    "statement": "If this is relevant to your category, may a human operator follow up with a short introductory note?",
+    "scope": "general",
+    "conflict_group": "cta"
+  }
+]

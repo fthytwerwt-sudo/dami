@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LeadRecord",
+  "type": "object",
+  "required": ["company_name", "domain", "source_url", "contact_url"],
+  "properties": {
+    "company_name": { "type": "string", "minLength": 1 },
+    "domain": { "type": "string", "minLength": 1 },
+    "source_url": { "type": "string", "format": "uri" },
+    "contact_url": { "type": "string", "format": "uri" },
+    "country": { "type": "string" },
+    "business_type": { "type": "string" },
+    "evidence": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ApprovalRequest",
+  "type": "object",
+  "required": ["target_domain", "channel", "message", "send_limit", "policy_status"],
+  "properties": {
+    "target_domain": { "type": "string" },
+    "channel": { "type": "string" },
+    "message": { "type": "string" },
+    "send_limit": { "const": 1 },
+    "policy_status": { "type": "string" },
+    "risk_items": { "type": "array", "items": { "type": "string" } },
+    "knowledge_source_ids": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,11 @@
+product_scope:
+  project: low_gi_rice_crossborder
+  approved_claims_only: true
+  prohibited_without_evidence:
+    - low_gi_claim
+    - health_or_medical_effect
+    - certification_claim
+    - price
+    - moq
+    - delivery_time
+  default_cta: ask_if_the_company_handles imported rice and whether a human follow up is welcome

@@ -1,0 +1,14 @@
+channels:
+  website_contact_form:
+    enabled: true
+    adapter: web_lead_agent.channels.website_contact_form.WebsiteContactFormAdapter
+    mode_allowlist:
+      - draft_only
+      - supervised_single_send
+    max_send_per_run: 1
+    requires:
+      - allowed_domain
+      - public_page
+      - human_approval
+      - send_limit_1
+      - idempotency_key

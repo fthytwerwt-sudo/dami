@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "web-lead-agent"
+version = "0.1.0"
+description = "Supervised web lead minimal loop for the low-GI rice cross-border project."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+dependencies = [
+  "langgraph==1.2.9",
+  "langgraph-checkpoint-sqlite==3.1.0",
+  "jsonschema==4.26.0",
+  "PyYAML==6.0.3"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest==9.1.1"
+]
+
+[project.scripts]
+web-lead-agent = "web_lead_agent.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/web_lead_agent"]

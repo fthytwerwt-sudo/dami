@@ -1,0 +1,254 @@
+{
+  "task": "web_lead_minimal_loop_v1",
+  "task_identity": "real_web_lead_minimal_loop_v1",
+  "target_branch": "codex/web-lead-minimal-loop-v1",
+  "base_ref": "origin/main",
+  "base_sha": "231d0148b60711735ad4fa57d3d63240746ecc25",
+  "route_decision": {
+    "status": "pass",
+    "task_type": [
+      "code_or_automation",
+      "project_file_change",
+      "local_file_governance",
+      "audit"
+    ],
+    "responsibility_layer": [
+      "engineering_design_layer",
+      "execution_layer",
+      "validation_layer",
+      "sync_layer"
+    ],
+    "engineering_depth": "L3_system_line",
+    "execution_lane": "explore_plus_integrate",
+    "write_owner": "single_integrator",
+    "integration_owner": "single_integrator",
+    "execution_permission": "codex_branch_only_web_lead_agent_v1",
+    "allowed_changes": [
+      ".gitignore",
+      "tools/web_lead_agent/"
+    ],
+    "forbidden_changes": [
+      "AGENTS.md",
+      "project_system/current/",
+      "project_system/rules/",
+      "project_system/schemas/",
+      "gpt_project_sync/",
+      "project_bootstrap/",
+      "history branch commits",
+      "main branch history"
+    ],
+    "external_actions": {
+      "real_external_send_allowed": false,
+      "real_readonly_probe_allowed_without_target": false,
+      "login_allowed": false,
+      "account_creation_allowed": false,
+      "paid_api_allowed": false
+    },
+    "human_gates": [
+      "target_market",
+      "customer_source_site",
+      "target_company",
+      "platform_account",
+      "product_facts",
+      "low_gi_or_health_claims",
+      "final_message",
+      "this_run_real_send"
+    ]
+  },
+  "pre_task_supply_pack": {
+    "status": "pass",
+    "source_readback_status": "read_ok",
+    "source_conflicts": [],
+    "external_research_needed": true,
+    "second_opinion_trigger": false,
+    "must_read_sources": [
+      {
+        "source_path": "user_task_attachment",
+        "readback_status": "read_ok",
+        "exact_relevant_snippets": [
+          "Default mode is draft_only.",
+          "supervised_single_send is allowed only after all approval flags and send_limit=1.",
+          "bounded_autonomy is forbidden."
+        ]
+      },
+      {
+        "source_path": "AGENTS.md",
+        "readback_status": "read_ok",
+        "exact_relevant_snippets": [
+          "New codex/* branches must start from origin/main.",
+          "Public safety applies to all branches."
+        ]
+      },
+      {
+        "source_path": "project_system/current/*.md",
+        "readback_status": "read_ok",
+        "exact_relevant_snippets": [
+          "No market, channel, B2B/B2C, compliance, or external execution is approved."
+        ]
+      },
+      {
+        "source_path": "origin/codex/dami-web-agent-toolkit:README.md and docs/",
+        "readback_status": "read_ok",
+        "exact_relevant_snippets": [
+          "Historical branch is draft_only and fake-send only.",
+          "It can supply design patterns but cannot become this branch history."
+        ]
+      },
+      {
+        "source_path": "official dependency docs and licenses",
+        "readback_status": "read_ok",
+        "exact_relevant_snippets": [
+          "LangGraph interrupt and persistence docs support human-in-the-loop pause/resume.",
+          "jsonschema, PyYAML, pytest, and LangGraph license sources were checked."
+        ]
+      }
+    ],
+    "allowed_actions": [
+      "Implement non-sensitive code under tools/web_lead_agent.",
+      "Run synthetic tests.",
+      "Push codex/web-lead-minimal-loop-v1."
+    ],
+    "forbidden_actions": [
+      "Send a real message.",
+      "Read real customer data.",
+      "Login to external accounts.",
+      "Create a PR.",
+      "Merge the historical tool branch.",
+      "Modify main."
+    ]
+  },
+  "completion_relay": {
+    "required_output_inventory": [
+      "new branch from origin/main",
+      "tools/web_lead_agent package",
+      "WebsiteContactFormAdapter",
+      "TemplateDraftAdapter",
+      "LangGraph interrupt workflow",
+      "idempotency and receipt store",
+      "synthetic end-to-end test",
+      "default real_send_enabled=false",
+      "Git closeout on codex/web-lead-minimal-loop-v1"
+    ],
+    "child_task_graph": [
+      "single_integrator"
+    ],
+    "remaining_work_check": {
+      "real_target_authorization": "required before any real send",
+      "account_permission": "required before any platform or website submission",
+      "product_fact_approval": "required before low-GI, health, price, MOQ, delivery, payment, sample, agency, contract, or certification claims"
+    }
+  },
+  "shared_policy": {
+    "missing_info_policy": "Block or keep draft_only if target, account, product fact, message, or approval evidence is missing.",
+    "conflict_policy": "Knowledge conflict escalates to human and prevents a sendable message.",
+    "blocked_if": "blocked_historical_migration_conflict, blocked_platform_terms_unverified, ready_pending_real_target_authorization, blocked_account_permission, blocked_captcha_or_manual_verification, blocked_dom_contract_changed, blocked_human_approval_missing, blocked_duplicate_send, send_result_unknown, blocked_public_repo_sensitive_data",
+    "user_review_points": "Review code and synthetic evidence only. Real target, final message, account, and send approval remain outside this branch."
+  },
+  "plan_groups": [
+    {
+      "paths": [
+        ".gitignore",
+        "tools/web_lead_agent/README.md",
+        "tools/web_lead_agent/pyproject.toml",
+        "tools/web_lead_agent/config/channel_registry.example.yaml",
+        "tools/web_lead_agent/config/allowed_domains.example.yaml",
+        "tools/web_lead_agent/config/product_scope.example.yaml",
+        "tools/web_lead_agent/config/policy_rules.yaml",
+        "tools/web_lead_agent/schemas/lead_record.schema.json",
+        "tools/web_lead_agent/schemas/knowledge_result.schema.json",
+        "tools/web_lead_agent/schemas/message_draft.schema.json",
+        "tools/web_lead_agent/schemas/approval_request.schema.json",
+        "tools/web_lead_agent/schemas/send_action.schema.json",
+        "tools/web_lead_agent/schemas/send_receipt.schema.json",
+        "tools/web_lead_agent/src/web_lead_agent/__init__.py",
+        "tools/web_lead_agent/src/web_lead_agent/contracts.py",
+        "tools/web_lead_agent/src/web_lead_agent/discovery.py",
+        "tools/web_lead_agent/src/web_lead_agent/extract.py",
+        "tools/web_lead_agent/src/web_lead_agent/normalize.py",
+        "tools/web_lead_agent/src/web_lead_agent/scoring.py",
+        "tools/web_lead_agent/src/web_lead_agent/knowledge.py",
+        "tools/web_lead_agent/src/web_lead_agent/drafting.py",
+        "tools/web_lead_agent/src/web_lead_agent/policy.py",
+        "tools/web_lead_agent/src/web_lead_agent/approval.py",
+        "tools/web_lead_agent/src/web_lead_agent/runtime.py",
+        "tools/web_lead_agent/src/web_lead_agent/idempotency.py",
+        "tools/web_lead_agent/src/web_lead_agent/receipts.py",
+        "tools/web_lead_agent/src/web_lead_agent/workflow.py",
+        "tools/web_lead_agent/src/web_lead_agent/cli.py",
+        "tools/web_lead_agent/src/web_lead_agent/channels/__init__.py",
+        "tools/web_lead_agent/src/web_lead_agent/channels/base.py",
+        "tools/web_lead_agent/src/web_lead_agent/channels/fake_channel.py",
+        "tools/web_lead_agent/src/web_lead_agent/channels/website_contact_form.py",
+        "tools/web_lead_agent/fixtures/synthetic_site/index.html",
+        "tools/web_lead_agent/fixtures/synthetic_site/contact.html",
+        "tools/web_lead_agent/fixtures/synthetic_site/external_subresource.html",
+        "tools/web_lead_agent/fixtures/synthetic_site/robots.txt",
+        "tools/web_lead_agent/fixtures/synthetic_knowledge.json",
+        "tools/web_lead_agent/fixtures/synthetic_leads.json",
+        "tools/web_lead_agent/tests/conftest.py",
+        "tools/web_lead_agent/tests/test_config_schema_static.py",
+        "tools/web_lead_agent/tests/test_extract_normalize_scoring.py",
+        "tools/web_lead_agent/tests/test_knowledge_drafting_policy.py",
+        "tools/web_lead_agent/tests/test_approval_idempotency_runtime.py",
+        "tools/web_lead_agent/tests/test_website_contact_form_adapter.py",
+        "tools/web_lead_agent/tests/test_workflow_e2e.py",
+        "tools/web_lead_agent/tests/test_security_boundaries.py",
+        "tools/web_lead_agent/reports/00_route_decision_and_per_file_plan.json",
+        "tools/web_lead_agent/reports/01_implementation_report.md",
+        "tools/web_lead_agent/reports/02_validation_summary.json"
+      ],
+      "purpose": "Implement a code-ready V1 supervised web lead minimal loop with synthetic end-to-end validation and no real external send.",
+      "layer": "engineering_design_layer / execution_layer / validation_layer / sync_layer",
+      "inputs": [
+        "user task request",
+        "main AGENTS.md and current files",
+        "historical branch docs and selected code patterns",
+        "official dependency docs and licenses"
+      ],
+      "outputs": [
+        "Python package under tools/web_lead_agent",
+        "schemas, config examples, fixtures, tests, reports",
+        "synthetic loop result",
+        "branch Git closeout evidence"
+      ],
+      "core_decisions": [
+        "default runtime remains draft_only",
+        "supervised_single_send is code-supported but gated by explicit approval",
+        "bounded_autonomy remains unavailable",
+        "WebsiteContactFormAdapter uses allowlist, idempotency, receipt capture, and max-one send",
+        "real website or account actions are not executed in this round"
+      ],
+      "trigger_conditions": [
+        "user requested real lead minimal loop V1",
+        "branch created from origin/main",
+        "historical branch used only as read-only supply"
+      ],
+      "route_rules": [
+        "L3_system_line",
+        "explore_plus_integrate",
+        "single_integrator",
+        "codex branch only"
+      ],
+      "missing_info_policy": "If no real target authorization exists, complete code and synthetic validation only.",
+      "conflict_policy": "Knowledge conflicts or DOM uncertainty escalate to human and do not send.",
+      "blocked_if": "Unauthorized external send, credentials, real customer data, or duplicate idempotency key are detected.",
+      "examples": [
+        "real_send_enabled=false blocks submit even with human approval",
+        "one approved synthetic POST records one receipt and then stops",
+        "the same idempotency key cannot be used twice"
+      ],
+      "validation": [
+        "pytest",
+        "schema validation",
+        "YAML parse",
+        "compileall",
+        "pip check",
+        "synthetic end-to-end",
+        "idempotency and send-limit tests",
+        "credential and customer-data scans",
+        "Git closeout"
+      ],
+      "user_review_points": "User must later choose target website, account, product facts, final message, and explicit real-send approval."
+    }
+  ]
+}
